@@ -11,6 +11,7 @@ public class PapillonView extends JFrame {
 	private JPanel sidesPanel;
 	private JPanel entreesPanel;
 	private JPanel dessertsPanel;
+	private JPanel managementPanel;
 
 	private Font font;
 
@@ -46,20 +47,6 @@ public class PapillonView extends JFrame {
 			
 		}
 
-		drinksPanel = new JPanel();
-		add(drinksPanel, BorderLayout.CENTER);
-		drinksPanel.setLayout(new GridLayout(5, 4, 7, 7));
-		drinksPanel.setBackground(Color.GREEN);
-
-		String[] drinks = { "Coke", "Diet Coke", "Sprite", "Fanta", "Sweet Tea", "Bottled Water", "Ramune",
-				"Ginger Ale", "Cumcumber Saketini", "Gingertini", "Mojito", "Backberry Smash", "Kiri Ichiban",
-				"Sapporo Premium", "Shiner Bock", "Stella Artois", "White wine", "Red Whine", "Sparkling Wine",
-				"Sake Sampler" };
-
-		for (String s : drinks) {
-			drinksPanel.add(new JButton(s));
-		}
-
 		sidesPanel = new JPanel();
 		add(sidesPanel, BorderLayout.CENTER); 
 		sidesPanel.setLayout(new GridLayout(4,4,7,7));
@@ -81,8 +68,8 @@ public class PapillonView extends JFrame {
 		entreesPanel.setBackground(Color.ORANGE);
 		
 		String[] entrees = {"Tonkotsu Ramen", "Shoyu Ramen", "Veggie Ramen", "Tsukemen", 
-							"Miso Ramen", "Shoyu Ramen", "Shashu Don", "Gyo Don", 
-							"Oyako Don", "Unagi Don", "Kushi Agge", "Chicken Yakitori", 
+							"Miso Ramen", "Shoyu Ramen", "Shashu Don", "Gyu Don", 
+							"Oyako Don", "Unagi Don", "Kushi Age", "Chicken Yakitori", 
 							"Beef Negimaki", "Yakisoba", "Yakiudon", "Sashimi Sampler"
 							};
 		
@@ -104,7 +91,30 @@ public class PapillonView extends JFrame {
 			dessertsPanel.add(new JButton(s)); 
 		}
 
+		managementPanel = new JPanel();
+		add(managementPanel, BorderLayout.SOUTH);
+		managementPanel.setBackground(Color.WHITE);
+
+		String[] managementChoices = { "Tip Adjust", "Manager View" };
+
+		for (String s : managementChoices) {
+			JButton mgmtButtons = new JButton(s);
+			managementPanel.add(mgmtButtons);
+		}
 		
+		drinksPanel = new JPanel();
+		add(drinksPanel, BorderLayout.CENTER);
+		drinksPanel.setLayout(new GridLayout(5, 4, 7, 7));
+		drinksPanel.setBackground(Color.GREEN);
+
+		String[] drinks = { "Coke", "Diet Coke", "Sprite", "Fanta", "Sweet Tea", "Bottled Water", "Ramune",
+				"Ginger Ale", "Cucumber Saketini", "Gingertini", "Mojito", "Blackberry Smash", "Kirin Ichiban",
+				"Sapporo Premium", "Shiner Bock", "Stella Artois", "White Wine", "Red Wine", "Sparkling Wine",
+				"Sake Sampler" };
+
+		for (String s : drinks) {
+			drinksPanel.add(new JButton(s));
+		}
 		
 	}
 
@@ -157,6 +167,15 @@ public class PapillonView extends JFrame {
 		}
 		
 		components = dessertsPanel.getComponents();
+		for (Component component : components) {
+			if (component instanceof AbstractButton) {
+				AbstractButton button = (AbstractButton) component;
+				button.addActionListener(controller);
+				button.setFont(font);
+			}
+		}
+		
+		components = managementPanel.getComponents();
 		for (Component component : components) {
 			if (component instanceof AbstractButton) {
 				AbstractButton button = (AbstractButton) component;

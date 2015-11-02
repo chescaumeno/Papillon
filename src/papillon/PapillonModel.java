@@ -5,7 +5,7 @@ public class PapillonModel {
 	private int panel;
 
 	public PapillonModel() {
-		panel = 1; // default panel to display is the drinks menu
+		panel = 1; // default panel to display is the Drinks menu
 	}
 
 	public int whichPanel() {
@@ -14,7 +14,6 @@ public class PapillonModel {
 
 	public void menuSwitcher(int i) {
 		panel = i; 
-		
 	}
 
 }
