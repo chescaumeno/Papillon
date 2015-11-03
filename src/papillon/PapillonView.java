@@ -2,6 +2,7 @@ package papillon;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 public class PapillonView extends JFrame {
 
@@ -13,6 +14,22 @@ public class PapillonView extends JFrame {
 	private JPanel dessertsPanel;
 	private JPanel managementPanel;
 
+	private String[] menuCategories = { "Drinks", "Appetizers", "Sides", "Entreés", "Desserts" };
+	private String[] drinks = { "Coke", "Diet Coke", "Sprite", "Fanta", "Sweet Tea", "Bottled Water", "Ramune",
+			"Ginger Ale", "Cucumber Saketini", "Gingertini", "Mojito", "Blackberry Smash", "Kirin Ichiban",
+			"Sapporo Premium", "Shiner Bock", "Stella Artois", "White Wine", "Red Wine", "Sparkling Wine",
+			"Sake Sampler" };
+	private String[] appetizers = { "Edamame", "Spicy Edamame", "Pork Gyoza", "Veggie Gyoza", "Beef Sashimi",
+			"Agedashi Tofu", "Shishito Peppers", "Beef Sashimi", "Crunchy Roll", "Dragon Roll", "Rainbow Roll",
+			"Tuna Roll", "Texas Roll", "Tuna Sashimi", "Salmon Sashimi", "Shrimp Shumai" };
+	private String[] sides = { "Miso Soup", "Tori Zosui", "Sukiyaki Udon", "Tempura Udon", "Squid Salad",
+			"Seaweed Salad", "Curry Rice", "Chashu Rice", "Negi Rice", "Brussel Sprouts", "Daikon Salad",
+			"Okonomiyaki fries", "Takoyaki", "Kimchi", "Broccoli", "Garlic Bread" };
+	private String[] entrees = { "Tonkotsu Ramen", "Shoyu Ramen", "Veggie Ramen", "Tsukemen", "Miso Ramen",
+			"Shoyu Ramen", "Shashu Don", "Gyu Don", "Oyako Don", "Unagi Don", "Kushi Age", "Chicken Yakitori",
+			"Beef Negimaki", "Yakisoba", "Yakiudon", "Sashimi Sampler" };
+	private String[] desserts = { "Green tea mochi", "Red Bean Mochi", "Black Sesame Mochi", "Chocolate Mochi",
+			"Strawberry Mochi", "Coffee Mochi", "Oreo Tempura", "Banana Tempura", "Cheesecake" };
 	private Font font;
 
 	public PapillonView() {
@@ -22,9 +39,6 @@ public class PapillonView extends JFrame {
 
 		categoryPanel = new JPanel();
 		add(categoryPanel, BorderLayout.NORTH);
-		categoryPanel.setBackground(Color.BLUE);
-
-		String[] menuCategories = { "Drinks", "Appetizers", "Sides", "Entreés", "Desserts" };
 
 		for (String s : menuCategories) {
 			JButton newButton = new JButton(s);
@@ -33,56 +47,19 @@ public class PapillonView extends JFrame {
 
 		appetizersPanel = new JPanel();
 		add(appetizersPanel, BorderLayout.CENTER);
-		appetizersPanel.setLayout(new GridLayout(4, 4, 7, 7));
-		appetizersPanel.setBackground(Color.ORANGE);
-
-		String[] appetizers = { "Edamame", "Spicy Edamame", "Pork Gyoza", "Veggie Gyoza", "Beef Sashimi",
-				"Agedashi Tofu", "Shishito Peppers", "Beef Sashimi", "Crunchy Roll", "Dragon Roll", "Rainbow Roll",
-				"Tuna Roll", "Texas Roll", "Tuna Sashimi", "Salmon Sashimi", "Shrimp Shumai" };
-
-		for (String s : appetizers) {
-			JButton button = new JButton(s);
-			appetizersPanel.add(button);
-
-		}
+		appetizersPanel = itemsPanelMaker(appetizersPanel, appetizers);
 
 		sidesPanel = new JPanel();
-		add(sidesPanel, BorderLayout.CENTER);
-		sidesPanel.setLayout(new GridLayout(4, 4, 7, 7));
-		sidesPanel.setBackground(Color.ORANGE);
-
-		String[] sides = { "Miso Soup", "Tori Zosui", "Sukiyaki Udon", "Tempura Udon", "Squid Salad", "Seaweed Salad",
-				"Curry Rice", "Chashu Rice", "Negi Rice", "Brussel Sprouts", "Daikon Salad", "Okonomiyaki fries",
-				"Takoyaki", "Kimchi", "Broccoli", "Garlic Bread" };
-
-		for (String s : sides) {
-			sidesPanel.add(new JButton(s));
-		}
+		sidesPanel = itemsPanelMaker(sidesPanel, sides);
 
 		entreesPanel = new JPanel();
-		add(entreesPanel, BorderLayout.CENTER);
-		entreesPanel.setLayout(new GridLayout(4, 4, 7, 7));
-		entreesPanel.setBackground(Color.ORANGE);
-
-		String[] entrees = { "Tonkotsu Ramen", "Shoyu Ramen", "Veggie Ramen", "Tsukemen", "Miso Ramen", "Shoyu Ramen",
-				"Shashu Don", "Gyu Don", "Oyako Don", "Unagi Don", "Kushi Age", "Chicken Yakitori", "Beef Negimaki",
-				"Yakisoba", "Yakiudon", "Sashimi Sampler" };
-
-		for (String s : entrees) {
-			entreesPanel.add(new JButton(s));
-		}
+		entreesPanel = itemsPanelMaker(entreesPanel, entrees);
 
 		dessertsPanel = new JPanel();
-		add(dessertsPanel, BorderLayout.CENTER);
-		dessertsPanel.setLayout(new GridLayout(3, 3, 7, 7));
-		dessertsPanel.setBackground(Color.PINK);
+		dessertsPanel = itemsPanelMaker(dessertsPanel, desserts);
 
-		String[] desserts = { "Green tea mochi", "Red Bean Mochi", "Black Sesame Mochi", "Chocolate Mochi",
-				"Strawberry Mochi", "Coffee Mochi", "Oreo Tempura", "Banana Tempura", "Cheesecake" };
-
-		for (String s : desserts) {
-			dessertsPanel.add(new JButton(s));
-		}
+		drinksPanel = new JPanel();
+		drinksPanel = itemsPanelMaker(drinksPanel, drinks);
 
 		managementPanel = new JPanel();
 		add(managementPanel, BorderLayout.SOUTH);
@@ -93,46 +70,6 @@ public class PapillonView extends JFrame {
 		for (String s : managementChoices) {
 			JButton mgmtButtons = new JButton(s);
 			managementPanel.add(mgmtButtons);
-		}
-
-		drinksPanel = new JPanel();
-		add(drinksPanel, BorderLayout.CENTER);
-		drinksPanel.setLayout(new GridLayout(5, 4, 7, 7));
-
-		String[] drinks = { "Coke", "Diet Coke", "Sprite", "Fanta", "Sweet Tea", "Bottled Water", "Ramune",
-				"Ginger Ale", "Cucumber Saketini", "Gingertini", "Mojito", "Blackberry Smash", "Kirin Ichiban",
-				"Sapporo Premium", "Shiner Bock", "Stella Artois", "White Wine", "Red Wine", "Sparkling Wine",
-				"Sake Sampler" };
-
-		for (String s : drinks) {
-			
-			JButton button = new JButton(); 
-			Icon color = new ImageIcon(getClass().getResource("pink.jpg")); 
-			button.setIcon(color);
-			
-			if (s.contains(" ")) {
-				String[] tokens = s.split(" ", 2);
-				JLabel label1 = new JLabel(tokens[0]);
-				label1.setFont(font);
-				label1.setHorizontalAlignment(SwingConstants.CENTER);
-				JLabel label2 = new JLabel(tokens[1]);
-				label2.setFont(font);
-				label2.setHorizontalAlignment(SwingConstants.CENTER);
-				button.setLayout(new BorderLayout());  
-				button.setBackground(Color.BLUE);
-				button.add(BorderLayout.NORTH, label1);
-				button.add(BorderLayout.SOUTH, label2);
-				drinksPanel.add(button);
-
-			} else {
-
-				JLabel label = new JLabel(s);
-				label.setFont(font);
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				button.setLayout(new BorderLayout());
-				button.add(BorderLayout.CENTER, label);
-				drinksPanel.add(button);
-			}
 		}
 
 	}
@@ -223,6 +160,44 @@ public class PapillonView extends JFrame {
 		validate();
 		repaint();
 
+	}
+
+	public JPanel itemsPanelMaker(JPanel itemsPanel, String[] names) {
+
+		if (names.length == 9) {
+			itemsPanel.setLayout(new GridLayout(3, 3, 7, 7));
+		} else {
+			itemsPanel.setLayout(new GridLayout(4, 4, 7, 7));
+		}
+		JButton button;
+		// Icon color = new ImageIcon(getClass().getResource("pink.jpg"));
+		// button.setIcon(color);
+
+		for (String s : names) {
+			button = new JButton(s);
+			itemsPanel.add(button);
+		}
+
+		/*
+		 * for (String s : names) { if (s.contains(" ")) { String[] tokens =
+		 * s.split(" ", 2); JLabel label1 = new JLabel(tokens[0]);
+		 * label1.setFont(font);
+		 * label1.setHorizontalAlignment(SwingConstants.CENTER); JLabel label2 =
+		 * new JLabel(tokens[1]); label2.setFont(font);
+		 * label2.setHorizontalAlignment(SwingConstants.CENTER);
+		 * button.setLayout(new BorderLayout()); button.add(BorderLayout.NORTH,
+		 * label1); button.add(BorderLayout.SOUTH, label2);
+		 * itemsPanel.add(button);
+		 * 
+		 * } else {
+		 * 
+		 * JLabel label = new JLabel(s); label.setFont(font);
+		 * label.setHorizontalAlignment(SwingConstants.CENTER);
+		 * button.setLayout(new BorderLayout()); button.add(BorderLayout.CENTER,
+		 * label); itemsPanel.add(button); } }
+		 */
+
+		return itemsPanel;
 	}
 
 }
