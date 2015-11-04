@@ -3,11 +3,14 @@ package papillon;
 import java.util.ArrayList;
 
 /**
- * Abstract class for the subclasses Drinks Appetizers, Entrees, Desserts, and Sides.
+ * Abstract class for the subclasses Drinks, Appetizers, Entrees, Desserts, and Sides.
  * Uses the ItemData class for each menu item.
  */
 public abstract class Item {
-
+	
+	/**
+	 * An array list to hold the menu items for each category(i.e. subclass)
+	 */
 	private ArrayList<ItemData> items = new ArrayList<ItemData>();
 	
 	/**
