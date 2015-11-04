@@ -46,7 +46,6 @@ public class PapillonView extends JFrame {
 		}
 
 		appetizersPanel = new JPanel();
-		add(appetizersPanel, BorderLayout.CENTER);
 		appetizersPanel = itemsPanelMaker(appetizersPanel, appetizers);
 
 		sidesPanel = new JPanel();
@@ -59,6 +58,7 @@ public class PapillonView extends JFrame {
 		dessertsPanel = itemsPanelMaker(dessertsPanel, desserts);
 
 		drinksPanel = new JPanel();
+		add(drinksPanel, BorderLayout.CENTER); //makes the drinks panel the default on screen
 		drinksPanel = itemsPanelMaker(drinksPanel, drinks);
 
 		managementPanel = new JPanel();
