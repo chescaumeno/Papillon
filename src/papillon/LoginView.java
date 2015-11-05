@@ -44,7 +44,7 @@ public class LoginView extends JFrame {
 		
 		//Will display papillon logo on login screen
 		logoPanel = new JPanel();      
-		logoPanel.add(new JLabel(new ImageIcon(getClass().getClassLoader().getResource("logo.jpg"))));
+		logoPanel.add(new JLabel(new ImageIcon(getClass().getResource("images/logo.jpg"))));
 		add(logoPanel, BorderLayout.NORTH);
 		
 		//Create display that will show hashed pin entered
