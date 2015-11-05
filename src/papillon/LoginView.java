@@ -7,7 +7,7 @@ import javax.swing.*;
 
 /**
  * This class manages the login view GUI layout
- * @author Anna Umeno, Lymari Montijo
+ * @author Anna Umeno, Lymari Montijo, Caleb Mussulman, Matt New, Nanette Springer
  *
  */
 public class LoginView extends JFrame {
@@ -32,8 +32,7 @@ public class LoginView extends JFrame {
 	private int digits;
 
 	/**
-	 * Initialize the login window frame
-	 * @throws IOException 
+	 * Constructor - Initialize the login window frame
 	 */
 	public LoginView() {
 		setTitle("Papillon POS System");

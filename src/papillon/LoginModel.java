@@ -2,7 +2,7 @@ package papillon;
 
 /**
  * This is the model for the login portion of the program.
- * @author Anna F. Umeno
+ * @author Anna Umeno, Lymari Montijo, Caleb Mussulman, Matt New, Nanette Springer
  *
  */
 public class LoginModel {
@@ -15,7 +15,7 @@ public class LoginModel {
 	private boolean start; //True if next digit entered starts a new value
 	
 	/**
-	 * Initializes the LoginModel instance variables
+	 * Constructor - Initializes the LoginModel instance variables
 	 */
 	public LoginModel(){
 		//value = 0;
