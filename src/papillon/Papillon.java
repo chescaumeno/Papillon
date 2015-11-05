@@ -1,15 +1,20 @@
 package papillon;
+
+
 import javax.swing.JFrame;
 
 public class Papillon {
 
 	public static void main(String[] args) {
-		
+		LoginModel loginModel = new LoginModel();
+		LoginView loginView = new LoginView();
+		LoginController loginController = new LoginController(loginModel, loginView);
 		PapillonModel model = new PapillonModel(); 
 		PapillonView view = new PapillonView(); 
 		PapillonController controller = new PapillonController(model, view); 
 		
-		view.registerListener(controller); 
+		loginView.registerListener(loginController);
+		view.registerListener(controller);
 		
 		
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

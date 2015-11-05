@@ -2,7 +2,6 @@ package papillon;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 public class PapillonView extends JFrame {
 
@@ -14,6 +13,7 @@ public class PapillonView extends JFrame {
 	private JPanel dessertsPanel;
 	private JPanel managementPanel;
 
+	
 	private String[] menuCategories = { "Drinks", "Appetizers", "Sides", "Entreés", "Desserts" };
 	private String[] drinks = { "Coke", "Diet Coke", "Sprite", "Fanta", "Sweet Tea", "Bottled Water", "Ramune",
 			"Ginger Ale", "Cucumber Saketini", "Gingertini", "Mojito", "Blackberry Smash", "Kirin Ichiban",
@@ -44,7 +44,7 @@ public class PapillonView extends JFrame {
 			JButton newButton = new JButton(s);
 			categoryPanel.add(newButton);
 		}
-
+		
 		appetizersPanel = new JPanel();
 		appetizersPanel = itemsPanelMaker(appetizersPanel, appetizers);
 
@@ -66,10 +66,11 @@ public class PapillonView extends JFrame {
 		managementPanel.setBackground(Color.WHITE);
 
 		String[] managementChoices = { "Tip Adjust", "Manager View" };
-
 		for (String s : managementChoices) {
 			JButton mgmtButtons = new JButton(s);
 			managementPanel.add(mgmtButtons);
+			
+			
 		}
 
 	}
