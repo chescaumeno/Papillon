@@ -1,19 +1,9 @@
 package papillon;
+/**
+ * The model class
+ */
 
 public class PapillonModel {
-
-	private int panel;
-
-	public PapillonModel() {
-		panel = 1; // default panel to display is the Drinks menu
-	}
-
-	public int whichPanel() {
-		return panel;
-	}
-
-	public void menuSwitcher(int i) {
-		panel = i; 
-	}
-
+    public static int FRAME_WIDTH = 870; 
+    public static int FRAME_HEIGHT = 600; 
 }
