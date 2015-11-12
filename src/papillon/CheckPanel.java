@@ -15,7 +15,7 @@ import javax.swing.*;
 public class CheckPanel extends JPanel {
  
     private JTextArea txtInfo = new JTextArea();
-    private JButton buttonLook = new JButton("Invoice Loopup");
+    private JButton buttonLook = new JButton("Invoice Lookup");
     private JButton buttonUp = new JButton("\u25b2");
     private JButton buttonDown = new JButton("\u25bc");
     private JButton buttonLeft = new JButton("\u25c4");

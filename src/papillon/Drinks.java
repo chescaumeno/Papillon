@@ -8,7 +8,7 @@ public class Drinks extends Item {
     public static final String[] DRINKS = {
         "Fountain\nSoda", "Bottled\nWater", "Sweet\nTea", "Ramune",
         "Cucumber\nSaketini", "Blackberry\nSmash", "Strawberry\nGingertini", "House\nMojito",
-        "Kiri\nIchiban", "Sapporo\nPemium", "Shiner\nBock", "Stella\nArtois",
+        "Kirin\nIchiban", "Sapporo\nPremium", "Shiner\nBock", "Stella\nArtois",
         "White\nWine", "Red\nWine", "Sparkling\nWine", "Sake\nSampler"
     };
     
