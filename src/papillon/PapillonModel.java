@@ -4,6 +4,6 @@ package papillon;
  */
 
 public class PapillonModel {
-    public static int FRAME_WIDTH = 870; 
+    public static int FRAME_WIDTH = 885; 
     public static int FRAME_HEIGHT = 600; 
 }
