@@ -1,7 +1,16 @@
 package papillon;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 
 public class PapillonView extends JFrame {
 
@@ -35,6 +44,7 @@ public class PapillonView extends JFrame {
 	public PapillonView() {
 
 		super("Papillon Main View");
+		
 		font = new Font("Verdana", Font.BOLD, 20);
 
 		categoryPanel = new JPanel();
