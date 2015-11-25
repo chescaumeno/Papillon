@@ -24,11 +24,16 @@ public class ActionPanel extends JPanel {
     private JButton buttonNumPad = new JButton("<html><center>NUM<br />PAD</center></html>");
     private JButton buttonEdit = new JButton("EDIT");
     private JButton buttonClear = new JButton("CLEAR");
+    
+    private PapillonModel model;
 
     /**
      * Constructor
+     * @param model data model
      */
-    public ActionPanel() {
+    public ActionPanel(PapillonModel panel) {
+     this.model = model;
+     
         setLayout(new BorderLayout());
         
         setBorder(BorderFactory.createEmptyBorder(0, 40, 10, 0));
@@ -86,6 +91,7 @@ public class ActionPanel extends JPanel {
         
         buttonSplitCheck.setActionCommand("SPLIT CHECK");
         buttonNumPad.setActionCommand("NUM PAD");
+        buttonEdit.setActionCommand("EDIT");
         
         add(center, BorderLayout.CENTER);
         add(bottom, BorderLayout.SOUTH);
@@ -103,5 +109,37 @@ public class ActionPanel extends JPanel {
         buttonNumPad.addActionListener(controller);
         buttonEdit.addActionListener(controller);
         buttonClear.addActionListener(controller);
+    }
+    
+    /**
+     * Update the view
+     */
+    public void updateView(){
+     Check check = model.getCurrentServer().getCurrentCheck(); // will have to create in PapillonModel
+     
+     txtSubtotal.setEditable(check == null || check.isOpened());
+     txtTax.setEditable(check == null || check.isOpened());
+     txtTotal.setEditable(check == null || check.isOpened());
+     
+     if(check == null){
+      txtSubtotal.setText("");
+      txtTax.setText("");
+      txtTotal.setText("");
+     }
+     else{
+      txtSubtotal.setText(String.format("Subtotal: \n\n %12s",
+        String.format("$%,.2f", check.getSubTotal())));
+      txtTax.setText(String.format("Tax: \n\n %12s",
+        String.format("$%,.2f", check.getTax())));
+      txtTotal.setText(String.format("Total: \n\n %12s",
+        String.format("$%,.2f", check.getGrandTotal())));
+     }
+     
+     if (model.isEditItem()){ // will have to create method in PapillonModel
+      buttonEdit.setText("<html><center>END<br />EDIT</center></html>");
+     }
+     else{
+      buttonEdit.setText("EDIT");
+     }
     }
 }

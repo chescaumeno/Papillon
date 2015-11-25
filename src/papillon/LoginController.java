@@ -8,22 +8,22 @@ import java.awt.event.ActionListener;
  * @author Anna Umeno, Lymari Montijo, Caleb Mussulman, Matt New, Nanette Springer
  */
 public class LoginController implements ActionListener {
-	private LoginModel loginModel;
-	private LoginView loginView;
-	
-	/**
-	 * Constructor - Initializes LoginController with LoginModel and LoginView
-	 * @param loginModel
-	 * @param loginView
-	 */
-	public LoginController(LoginModel loginModel, LoginView loginView) {
-		this.loginModel = loginModel;
-		this.loginView = loginView;
-	}
-	
-	public void actionPerformed(ActionEvent e){
-		String command = e.getActionCommand();
-		loginModel.update(command);
-		loginView.update(loginModel.getValue());
-	}
+ private LoginModel loginModel;
+ private LoginView loginView;
+ 
+ /**
+  * Constructor - Initializes LoginController with LoginModel and LoginView
+  * @param loginModel
+  * @param loginView
+  */
+ public LoginController(LoginModel loginModel, LoginView loginView) {
+  this.loginModel = loginModel;
+  this.loginView = loginView;
+ }
+ 
+ public void actionPerformed(ActionEvent e){
+  String command = e.getActionCommand();
+  loginModel.update(command);
+  loginView.update(loginModel.getValue());
+ }
 }

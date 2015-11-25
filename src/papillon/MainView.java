@@ -55,8 +55,8 @@ public class MainView extends JFrame {
         add(rightBlankPanel, BorderLayout.EAST);
         
         // create other panels
-        checkPanel = new CheckPanel();
-        actionPanel = new ActionPanel();
+        checkPanel = new CheckPanel(model);
+        actionPanel = new ActionPanel(model);
         categoryPanel = new CategoryPanel();
         drinksPanel = new ItemPanel(4, 4, Drinks.DRINKS, "DRINKS", new Color(112, 48, 160));   
         appetizersPanel = new ItemPanel(4, 4, Appetizers.APPETIZERS, "APPETIZERS", new Color(255, 100, 0));
@@ -135,5 +135,13 @@ public class MainView extends JFrame {
         mainPanel.repaint();
         validate();
         repaint();
+    }   
+        
+        /**
+         * Update the view
+         */
+        public void updateView(){
+         actionPanel.updateView();
+         checkPanel.updateView();
+        }
     }
-}
