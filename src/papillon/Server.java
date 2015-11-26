@@ -58,16 +58,16 @@ public class Server {
   */
  public Check getCurrentCheck(){
   if (currentCheck >= 0 && currentCheck < checks.size()){
-   return checks.getCurrentCheck;
-   return null;
+   return checks.get(currentCheck);
   }
+  return null;
  }
  
  //getters and setters
  public String getName(){
   return name;
  }
- public void setName(){
+ public void setName(String name){
   this.name  = name;
  }
  

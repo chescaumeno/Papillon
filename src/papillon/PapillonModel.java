@@ -9,10 +9,13 @@ import java.util.ArrayList;
 public class PapillonModel {
     public static int FRAME_WIDTH = 885; 
     public static int FRAME_HEIGHT = 600;
+    public static int invoiceNumber;
+    public static final double TAX_RATE = 0.0825;
     
     private ArrayList<Server> servers;
     private int currentServer;
     private boolean editItem;   // arrow can be used to edit items or lookup invoice 
+    
     /**
      * Get the edit mode
      * @return true if we can edit item
@@ -46,6 +49,15 @@ public class PapillonModel {
         return servers.get(currentServer);
 
     }
+    
+    public static int newInvoiceNumber(){
+    	return ++invoiceNumber;
+    }
+    
+    public void printCheck(){
+    	//Not sure what we want to do here
+    }
+
 }
     
     

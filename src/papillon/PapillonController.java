@@ -33,7 +33,7 @@ public class PapillonController implements ActionListener {
             view.changeItemPanel(cmd);
         }
         else if (cmd.startsWith("item")){
-   String[] data = cmd.split("  ");
+   String[] data = cmd.split(" ");
    int index = Integer.parseInt(data[1]);
    String type = data[2];
 
@@ -59,7 +59,7 @@ public class PapillonController implements ActionListener {
    }
 //}
    else if (cmd.equals("clear")){
-    model.getCurrentSever().clearCheck();
+    model.getCurrentServer().clearCheck();
     view.updateView();
    }
    else if (cmd.equals("edit")){

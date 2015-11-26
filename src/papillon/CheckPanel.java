@@ -116,7 +116,7 @@ public class CheckPanel extends JPanel {
       txtInfo.setText(check.toString());
      }
      
-     if (model.isEditItem){ //write isEditItem in PapillonModel
+     if (model.isEditItem()){ //write isEditItem in PapillonModel
       buttonUp.setBackground(Color.red);
       buttonDown.setBackground(Color.red);
       buttonLeft.setBackground(Color.red);
