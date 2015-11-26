@@ -21,15 +21,23 @@ public class CheckPanel extends JPanel {
     private JButton buttonLeft = new JButton("\u25c4");
     private JButton buttonRight = new JButton("\u25ba");
     
+    private PapillonModel model;
+    
     /**
      * Constructor
+     * @param model data model
      */
-    public CheckPanel() {
+    public CheckPanel(PapillonModel model) {
+    	this.model = model;
+    	
         setBorder(BorderFactory.createLineBorder(new Color(205, 205, 240)));
         setLayout(new BorderLayout());
         JScrollPane scr = new JScrollPane(txtInfo);
+        scr.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        scr.setBackground(Color.white);
         add(scr, BorderLayout.CENTER);
-        scr.setBorder(null);
+        Font txtFont1 = new Font ("monospaced", 0, 11);
+        txtInfo.setFont(txtFont1);
         
         JPanel pnbtn = new JPanel(new BorderLayout());
         pnbtn.setBackground(Color.white);
@@ -91,5 +99,34 @@ public class CheckPanel extends JPanel {
         buttonDown.addActionListener(controller);
         buttonLeft.addActionListener(controller);
         buttonRight.addActionListener(controller);
+    }
+    
+    /**
+     * Update the view
+     */
+    public void updateView(){
+    	Check check = model.getCurrentServer().getCurrentCheck(); //write getCurrentServer in PapillonModel
+    	
+    	txtInfo.setEditable(check == null || check.isOpened());
+    	
+    	if (check == null){
+    		txtInfo.setText("");
+    	}
+    	else{
+    		txtInfo.setText(check.toString());
+    	}
+    	
+    	if (model.isEditItem){ //write isEditItem in PapillonModel
+    		buttonUp.setBackground(Color.red);
+    		buttonDown.setBackground(Color.red);
+    		buttonLeft.setBackground(Color.red);
+    		buttonRight.setBackground(Color.red);
+    	}
+    	else{
+    		buttonUp.setBackground(Color.green);
+    		buttonDown.setBackground(Color.green);
+    		buttonLeft.setBackground(Color.green);
+    		buttonRight.setBackground(Color.green);
+    	}
     }
 }
