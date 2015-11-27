@@ -1,4 +1,4 @@
-package papillon;
+package papillon.models;
 
 /**
  * This class represents one menu item. It will hold the item

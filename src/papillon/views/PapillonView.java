@@ -1,4 +1,4 @@
-package papillon;
+package papillon.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +10,8 @@ import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import papillon.controllers.PapillonController;
 
 
 public class PapillonView extends JFrame {

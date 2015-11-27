@@ -1,9 +1,11 @@
-package papillon;
+package papillon.views;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+
+import papillon.controllers.LoginController;
 
 /**
  * This class manages the login view GUI layout

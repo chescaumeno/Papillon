@@ -1,12 +1,15 @@
-package papillon;
+package papillon.models;
+
 /**
  * Store information for an item
  */
 
-public abstract class Item {
+public class Item {
     protected double price;
     protected int quantity;
     protected String name;
+   
+    private Category category;
     
     /**
      * Constructs the item with parameters
@@ -18,14 +21,13 @@ public abstract class Item {
         this.name = nm;
         this.quantity = qt;
         this.price = pr;
-    }
+    }    
     
-    /**
-     * Get same item with different quantity
-     * @param qt quantity
-     * @return new item with the quantity
-     */
-    public abstract Item getCopy(int qt);
+    public Item(String name, Category category, double price) {
+    	this.name = name; 
+    	this.category = category; 
+    	this.price = price; 
+    }
     
     /**
      * Calculate total price
@@ -65,6 +67,14 @@ public abstract class Item {
      */
     public String getName() {
         return name;
-    }    
+    }
+    
+    /**
+     * returns the category for the item
+     * @return category
+     */
+    public Category getCategory() {
+    	return category; 
+    }
     
 }

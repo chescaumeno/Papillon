@@ -1,7 +1,10 @@
-package papillon;
+package papillon.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import papillon.models.LoginModel;
+import papillon.views.LoginView;
 
 /**
  * Handles events from Login UI

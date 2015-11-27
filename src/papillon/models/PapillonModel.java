@@ -1,4 +1,4 @@
-package papillon;
+package papillon.models;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package papillon;
+package papillon.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,6 +7,11 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 
 import javax.swing.*;
+
+import papillon.controllers.CheckController;
+import papillon.controllers.PapillonController;
+import papillon.models.Check;
+import papillon.models.PapillonModel;
 
 /**
  * Contains the check information
@@ -22,6 +27,12 @@ public class CheckPanel extends JPanel {
     private JButton buttonRight = new JButton("\u25ba");
     
     private PapillonModel model;
+    private CheckController checkCtrl;
+    
+    public CheckPanel(CheckController checkCtrl) {
+    	this.checkCtrl = checkCtrl;
+    	initialize();
+    }
     
     /**
      * Constructor
@@ -29,8 +40,12 @@ public class CheckPanel extends JPanel {
      */
     public CheckPanel(PapillonModel model) {
     	this.model = model;
-    	
-        setBorder(BorderFactory.createLineBorder(new Color(205, 205, 240)));
+    	initialize();
+        
+    }
+
+    private void initialize() {
+    	setBorder(BorderFactory.createLineBorder(new Color(205, 205, 240)));
         setLayout(new BorderLayout());
         JScrollPane scr = new JScrollPane(txtInfo);
         scr.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
@@ -86,9 +101,9 @@ public class CheckPanel extends JPanel {
         pnbtn.setPreferredSize(new Dimension(200, 90));
         
         add(pnbtn, BorderLayout.SOUTH);
-        
+        this.setBackground(Color.white);
     }
-
+    
     /**
      * Register the action listener
      * @param controller action controller
@@ -116,7 +131,7 @@ public class CheckPanel extends JPanel {
     		txtInfo.setText(check.toString());
     	}
     	
-    	if (model.isEditItem){ //write isEditItem in PapillonModel
+    	if (model.isEditItem()){ //write isEditItem in PapillonModel
     		buttonUp.setBackground(Color.red);
     		buttonDown.setBackground(Color.red);
     		buttonLeft.setBackground(Color.red);
