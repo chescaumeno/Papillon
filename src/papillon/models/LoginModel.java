@@ -1,4 +1,4 @@
-package papillon;
+package papillon.models;
 
 /**
  * This is the model for the login portion of the program.

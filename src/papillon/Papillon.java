@@ -1,7 +1,12 @@
 package papillon;
+
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+
+import papillon.controllers.PapillonController;
+import papillon.models.PapillonModel;
+import papillon.views.MainView;
 
 /**
  * The main class of the program.
@@ -24,6 +29,7 @@ public class Papillon {
     	} catch (Exception e) {
     	    // If Nimbus is not available, you can set the GUI to another look and feel.
     	}
+
         PapillonModel model = new PapillonModel();
         MainView view = new MainView(model);
         PapillonController controller = new PapillonController(view, model);
