@@ -9,12 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import papillon.controllers.CheckController;
 import papillon.controllers.MenuController;
-import papillon.controllers.PapillonController;
 import papillon.models.Category;
 import papillon.models.MenuItem;
 
@@ -24,8 +22,6 @@ import papillon.models.MenuItem;
 
 public class ItemPanel extends JPanel implements ActionListener {
 
-    private JButton[] buttons;
-    private ArrayList<MenuItemButton> menuButtons; 
     private Category category; 
     private CheckController checkCtrl; 
     private MenuController menuCtrl; 
@@ -33,7 +29,6 @@ public class ItemPanel extends JPanel implements ActionListener {
     public ItemPanel(int rows, int cols, Color color,
     		Category category, MenuController menuCtrl, CheckController checkCtrl) {
     	
-    	menuButtons = new ArrayList<MenuItemButton>(); 
     	this.category = category; 
     	this.menuCtrl = menuCtrl; 
     	this.checkCtrl = checkCtrl; 
@@ -77,17 +72,6 @@ public class ItemPanel extends JPanel implements ActionListener {
         return tmp;
     }
 
-    /**
-     * Register the action listener
-     * @param controller action controller
-     */
-    public void register(PapillonController controller) {
-        for (int i = 0; i < buttons.length; i++) {
-            if (!buttons[i].getText().isEmpty())
-                buttons[i].addActionListener(controller);
-        }
-    }
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Check if the event comes from a MenuItem button
@@ -98,7 +82,7 @@ public class ItemPanel extends JPanel implements ActionListener {
 			checkCtrl.addItemToCheck(item); 
 		}
 		
-		//No we can communitcate with the check panel 
+		//Now we can communicate with the check panel 
 		
 	}
 }

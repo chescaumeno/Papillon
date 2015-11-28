@@ -27,50 +27,6 @@ public class Server {
 		currentCheck = 0;
 	}
 
-	/**
-	 * add the item to current check. If current check does not exist then
-	 * create one.
-	 * 
-	 * @param item
-	 *            new item
-	 */
-	public void addItemToCheck(Item item) {
-		if (currentCheck >= 0 && currentCheck < checks.size()) {
-			Check current = checks.get(currentCheck);
-			if (current.isOpened())
-				current.addItem(item);
-		} else {
-			currentCheck = checks.size();
-//			Check newCheck = new Check(this, PapillonModel.newInvoiceNumber());
-//			newCheck.addItem(item);
-//			checks.add(newCheck);
-		}
-	}
-
-	/**
-	 * clear current check
-	 */
-	public void clearCheck() {
-		Check check = getCurrentCheck();
-		if (check != null) {
-			check.clearItems();
-		}
-	}
-
-	/**
-	 * Get current check
-	 * 
-	 * @return current check
-	 */
-	public Check getCurrentCheck() {
-		// TODO(limecakes)
-		if (currentCheck >= 0 && currentCheck < checks.size()) {
-//			return checks.getCurrentCheck;
-			return null;
-		}
-		return null;
-	}
-
 	// getters and setters
 	public String getName() {
 		return name;

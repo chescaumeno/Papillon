@@ -12,7 +12,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import papillon.controllers.MenuController;
-import papillon.controllers.PapillonController;
 import papillon.models.Category;
 
 /**
@@ -49,15 +48,6 @@ public class CategoryPanel extends JPanel {
             
             add(btn);
         }
-    }
-    
-    /**
-     * Register the action listener
-     * @param controller action controller
-     */
-    public void register(PapillonController controller) {
-        for (int i = 0; i < buttons.size(); i++)
-            buttons.get(i).addActionListener(controller);
     }
 
 }
