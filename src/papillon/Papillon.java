@@ -34,7 +34,6 @@ public class Papillon {
         MainView view = new MainView(model);
         PapillonController controller = new PapillonController(view, model);
         
-        view.register(controller);
 
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         view.setSize(PapillonModel.FRAME_WIDTH,PapillonModel.FRAME_HEIGHT);

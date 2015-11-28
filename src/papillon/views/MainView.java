@@ -9,11 +9,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import papillon.controllers.CheckController;
 import papillon.controllers.MenuController;
-import papillon.controllers.PapillonController;
 import papillon.models.PapillonModel;
 
 public class MainView extends JFrame {
@@ -30,12 +32,17 @@ public class MainView extends JFrame {
     
     private MenuController menuCtrl; 
 
+
     /**
      * Constructs the GUI
      * @param model 
      */
     public MainView(PapillonModel model) {
         super("Papillon");
+        
+        //TODO: Have Papillon Controller create ALL the controllers
+        //TODO: remove all these controllers from here. The controllers 
+        //generate the view. 
         
         this.model = model;
         this.menuCtrl = new MenuController();
@@ -56,7 +63,7 @@ public class MainView extends JFrame {
         // Adds CheckAction Panel
         
         CheckController checkCtrl = new CheckController(); 
-        checkActionPanel = new CheckActionPanel(checkCtrl);
+        checkActionPanel = checkCtrl.createCheckActionPanel(); //this creates an ActionPanel 
  
         leftPanel.add(checkActionPanel, BorderLayout.CENTER);
         leftPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 20));
@@ -85,18 +92,4 @@ public class MainView extends JFrame {
         
     }
 
-    /**
-     * Register action listener
-     * @param controller action controller
-     */
-    public void register(PapillonController controller) {
-        buttonManager.addActionListener(controller);
-    }
-
-	/**
-	 * Update the view
-	 */
-	public void updateView() {
-		checkActionPanel.updateView();
-	}
 }

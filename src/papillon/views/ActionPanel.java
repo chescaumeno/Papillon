@@ -7,12 +7,12 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import papillon.controllers.CheckController;
-import papillon.controllers.PapillonController;
-import papillon.models.Check;
-import papillon.models.PapillonModel;
 
 /**
  * Contains the action buttons
@@ -32,20 +32,6 @@ public class ActionPanel extends JPanel {
 	private JButton buttonClear = new JButton("CLEAR");
 
 	private CheckController checkCtrl;
-
-	private PapillonModel model;
-
-	/**
-	 * Constructor
-	 * 
-	 * @param model
-	 *            data model
-	 */
-	public ActionPanel(PapillonModel panel) {
-		this.model = model;
-		initialize(); 
-
-	}
 
 	public ActionPanel(CheckController checkCtrl) {
 		this.checkCtrl = checkCtrl; 
@@ -117,50 +103,5 @@ public class ActionPanel extends JPanel {
 		this.setPreferredSize(new Dimension(250, 210));
 		this.setBackground(Color.white);
 
-	}
-
-	/**
-	 * Register the action listener
-	 * 
-	 * @param controller
-	 *            action controller
-	 */
-	public void register(PapillonController controller) {
-		buttonPrint.addActionListener(controller);
-		buttonPay.addActionListener(controller);
-		buttonSplitCheck.addActionListener(controller);
-		buttonNumPad.addActionListener(controller);
-		buttonEdit.addActionListener(controller);
-		buttonClear.addActionListener(controller);
-	}
-
-	/**
-	 * Update the view
-	 */
-	public void updateView() {
-		Check check = model.getCurrentServer().getCurrentCheck(); // will have
-																	// to create
-																	// in
-																	// PapillonModel
-
-		txtSubtotal.setEditable(check == null || check.isOpened());
-		txtTax.setEditable(check == null || check.isOpened());
-		txtTotal.setEditable(check == null || check.isOpened());
-
-		if (check == null) {
-			txtSubtotal.setText("");
-			txtTax.setText("");
-			txtTotal.setText("");
-		} else {
-			txtSubtotal.setText(String.format("Subtotal: \n\n %12s", String.format("$%,.2f", check.getSubTotal())));
-			txtTax.setText(String.format("Tax: \n\n %12s", String.format("$%,.2f", check.getTax())));
-			txtTotal.setText(String.format("Total: \n\n %12s", String.format("$%,.2f", check.getGrandTotal())));
-		}
-
-		if (model.isEditItem()) { // will have to create method in PapillonModel
-			buttonEdit.setText("<html><center>END<br />EDIT</center></html>");
-		} else {
-			buttonEdit.setText("EDIT");
-		}
 	}
 }

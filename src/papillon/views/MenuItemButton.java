@@ -9,11 +9,17 @@ public class MenuItemButton extends JButton {
 	private MenuItem item;  
 	
 	public MenuItemButton(MenuItem item) {
-		super(item.getName());
+		super(formatName(item.getName()));
 		this.item = item; 
 	}
 	
 	public MenuItem getMenuItem() {
 		return item; 
+	}
+	
+	private static String formatName(String name) {
+		String modName = name.replace(" ", "<br>");
+		return "<html><center>" + modName + "</center></html>"; 
+		
 	}
 }

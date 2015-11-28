@@ -5,13 +5,18 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import papillon.controllers.CheckController;
-import papillon.controllers.PapillonController;
-import papillon.models.Check;
-import papillon.models.PapillonModel;
+import papillon.models.CheckItem;
 
 /**
  * Contains the check information
@@ -19,14 +24,20 @@ import papillon.models.PapillonModel;
 
 public class CheckPanel extends JPanel {
  
+	private static SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
+	
     private JTextArea txtInfo = new JTextArea();
     private JButton buttonLook = new JButton("Invoice Lookup");
-    private JButton buttonUp = new JButton("\u25b2");
-    private JButton buttonDown = new JButton("\u25bc");
-    private JButton buttonLeft = new JButton("\u25c4");
-    private JButton buttonRight = new JButton("\u25ba");
     
-    private PapillonModel model;
+    private String serverName; 
+    private Date date; 
+    private String invoiceNum; 
+    private ArrayList<CheckItem> checkItems; 
+    private double subtotal; 
+    private double tax; 
+    private double total; 
+    
+    
     private CheckController checkCtrl;
     
     public CheckPanel(CheckController checkCtrl) {
@@ -34,15 +45,6 @@ public class CheckPanel extends JPanel {
     	initialize();
     }
     
-    /**
-     * Constructor
-     * @param model data model
-     */
-    public CheckPanel(PapillonModel model) {
-    	this.model = model;
-    	initialize();
-        
-    }
 
     private void initialize() {
     	setBorder(BorderFactory.createLineBorder(new Color(205, 205, 240)));
@@ -53,6 +55,7 @@ public class CheckPanel extends JPanel {
         add(scr, BorderLayout.CENTER);
         Font txtFont1 = new Font ("monospaced", 0, 11);
         txtInfo.setFont(txtFont1);
+        txtInfo.setEditable(false);
         
         JPanel pnbtn = new JPanel(new BorderLayout());
         pnbtn.setBackground(Color.white);
@@ -68,80 +71,68 @@ public class CheckPanel extends JPanel {
         buttonLook.setBackground(Color.blue);
         buttonLook.setForeground(Color.white);
         buttonLook.setMargin(new Insets(0,0,0,0));
-        
-        buttonUp.setBorderPainted(false);
-        buttonDown.setBorderPainted(false);
-        buttonLeft.setBorderPainted(false);
-        buttonRight.setBorderPainted(false);
-        buttonUp.setBackground(Color.green);
-        buttonDown.setBackground(Color.green);
-        buttonLeft.setBackground(Color.green);
-        buttonRight.setBackground(Color.green);
-        buttonUp.setForeground(Color.blue);
-        buttonDown.setForeground(Color.blue);
-        buttonLeft.setForeground(Color.blue);
-        buttonRight.setForeground(Color.blue);
-        Font txtFont = new Font("SansSerif", Font.BOLD, 20);
-        buttonUp.setFont(txtFont);
-        buttonDown.setFont(txtFont);
-        buttonLeft.setFont(txtFont);
-        buttonRight.setFont(txtFont);
-        buttonUp.setActionCommand("UP");
-        buttonDown.setActionCommand("DOWN");
-        buttonLeft.setActionCommand("LEFT");
-        buttonRight.setActionCommand("RIGHT");
-
-        JPanel pnbtn2 = new JPanel(new GridLayout(1, 4));
-        pnbtn2.setBackground(Color.white);
-        pnbtn2.add(buttonUp);
-        pnbtn2.add(buttonDown);
-        pnbtn2.add(buttonLeft);
-        pnbtn2.add(buttonRight);
-        pnbtn.add(pnbtn2, BorderLayout.CENTER);        
+       
+        ArrowsPanel arrowsPanel = new ArrowsPanel(checkCtrl);
+        pnbtn.add(arrowsPanel, BorderLayout.CENTER);
         pnbtn.setPreferredSize(new Dimension(200, 90));
         
         add(pnbtn, BorderLayout.SOUTH);
         this.setBackground(Color.white);
     }
     
-    /**
-     * Register the action listener
-     * @param controller action controller
-     */
-    public void register(PapillonController controller) {
-        buttonLook.addActionListener(controller);
-        buttonUp.addActionListener(controller);
-        buttonDown.addActionListener(controller);
-        buttonLeft.addActionListener(controller);
-        buttonRight.addActionListener(controller);
-    }
     
     /**
      * Update the view
      */
-    public void updateView(){
-    	Check check = model.getCurrentServer().getCurrentCheck(); //write getCurrentServer in PapillonModel
+    public void renderCheck() {
+    	//TODO: Add the subtotal, tax and total. 
+    	//check must also change the quantity of the same item and not add it n times. 
+    
+    	String result = "Server: " + serverName + "\n";
+		
+		result += fmt.format(date) + "\n";
+		result += "Invoice number: " + invoiceNum + "\n\n";
+		result += " ---------------------------  \n\n";
+		
+		for (CheckItem item: checkItems) {
+			result += item.toString();
+			result += "\n";  
+		}
+		
+		
+		txtInfo.setText(result);
     	
-    	txtInfo.setEditable(check == null || check.isOpened());
-    	
-    	if (check == null){
-    		txtInfo.setText("");
-    	}
-    	else{
-    		txtInfo.setText(check.toString());
-    	}
-    	
-    	if (model.isEditItem()){ //write isEditItem in PapillonModel
-    		buttonUp.setBackground(Color.red);
-    		buttonDown.setBackground(Color.red);
-    		buttonLeft.setBackground(Color.red);
-    		buttonRight.setBackground(Color.red);
-    	}
-    	else{
-    		buttonUp.setBackground(Color.green);
-    		buttonDown.setBackground(Color.green);
-    		buttonLeft.setBackground(Color.green);
-    		buttonRight.setBackground(Color.green);
-    	}
     }
+    
+    
+	public void setServerName(String name) {
+		serverName = name; 
+	}
+	
+	public void setDate(Date date) {
+		this.date = date; 
+	}
+	
+	public void setInvoice(int invoiceNum) {
+		this.invoiceNum = Integer.toString(invoiceNum);  
+	}
+	
+	public void setCheckItems(ArrayList<CheckItem> items) {
+		checkItems = items; 
+	}
+	
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
+	}
+	
+	public void setTax(double tax) {
+		this.tax = tax; 
+	}
+	
+	public void setTotal(double total) {
+		this.total = total; 
+	}
+	
+	
+	
 }

@@ -25,4 +25,10 @@ public class CheckItem {
 	public UUID getId() {
 		return id; 
 	}
+	
+	@Override
+	public String toString() {
+		String checkItemString = item.getName() + "\t" + quantity + "\t" + (item.getPrice() * quantity);
+		return checkItemString; 
+	}
 }

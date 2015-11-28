@@ -22,8 +22,7 @@ public class CheckActionPanel extends JPanel {
 		add(actionPanel, BorderLayout.SOUTH);
 	}
 
-	public void updateView() {
-		checkPanel.updateView();
-		actionPanel.updateView();
+	public CheckPanel getCheckPanel() {
+		return checkPanel; 
 	}
 }
