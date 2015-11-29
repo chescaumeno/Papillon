@@ -11,7 +11,7 @@ public class Check {
 	private static final double TAX_RATE = 0.0825; 
 	static SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
-	private Server server; // server belongs to
+	private String server; // server belongs to
 	private int number; // invoice number
 	private Date date;
 	
@@ -28,7 +28,7 @@ public class Check {
 	 * @param server server
 	 * @param num invoice number
 	 */
-	public Check(Server server, int num){
+	public Check(String server, int num){
 		this.server = server;
 		number = num;		
 		checkItems = new ArrayList<CheckItem>(); 
@@ -80,7 +80,7 @@ public class Check {
 		this.opened = opened;
 	}
 	
-	public Server getServer(){
+	public String getServer(){
 		return server;
 	}
 	

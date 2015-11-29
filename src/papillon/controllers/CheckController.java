@@ -12,34 +12,46 @@ public class CheckController {
 	private CheckPanel checkPanel;
 	private CheckActionPanel checkActionPanel; 
 	private Check testCheck; 
-	private Server server;  
+	private Server server;
+	private Check currentCheck;
 	
 	public CheckController(Server server) {
 		checkActionPanel = new CheckActionPanel(this); //checActionPanel creates the checkPanel 
 		checkPanel = checkActionPanel.getCheckPanel(); 
 		this.server = server;
-		testCheck = new Check(server, 1); 
-		
+		currentCheck = server.getCurrentCheck();
 	}
+	
 	public void addItemToCheck(MenuItem item) {
-		CheckItem checkItem = testCheck.addCheckItem(item,  1); 
-		checkPanel.setServerName(server.getName());
-		checkPanel.setInvoice(testCheck.getInvoiceNumber()); 	
-		checkPanel.setDate(testCheck.getDate());
-		checkPanel.setCheckItems(testCheck.getCheckItems());
-		checkPanel.setSubtotal(testCheck.getSubTotal());
-		checkPanel.setTax(testCheck.getTax());
-		checkPanel.setTotal(testCheck.getTotal());
-		
-		checkPanel.renderCheck();
-		
+		currentCheck = server.getCurrentCheck();
+		currentCheck.addCheckItem(item,  1); 
+		this.update();
 	}
 	
 	public CheckActionPanel createCheckActionPanel() {
 		return checkActionPanel;  
 	}
 	
+	public void nextCheck(){
+		server.nextCheck();
+		this.update();
+	}
 	
+	public void previousCheck(){
+		server.previousCheck();
+		this.update();
+	}
 	
+	public void update(){
+		currentCheck = server.getCurrentCheck();
+		checkPanel.setServerName(server.getName());
+		checkPanel.setInvoice(currentCheck.getInvoiceNumber()); 	
+		checkPanel.setDate(currentCheck.getDate());
+		checkPanel.setCheckItems(currentCheck.getCheckItems());
+		checkPanel.setSubtotal(currentCheck.getSubTotal());
+		checkPanel.setTax(currentCheck.getTax());
+		checkPanel.setTotal(currentCheck.getTotal());
+		checkPanel.renderCheck();
+	}
 	
 }

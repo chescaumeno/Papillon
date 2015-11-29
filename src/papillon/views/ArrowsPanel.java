@@ -68,12 +68,20 @@ public class ArrowsPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		System.out.println(cmd); 
-		
+		System.out.println(cmd);
+		if(cmd.equals("UP")){
+			//
+		}else if(cmd.equals("DOWN")){
+			//
+		}else if(cmd.equals("LEFT")){
+			checkCtrl.previousCheck();
+		}else if(cmd.equals("RIGHT")){
+			checkCtrl.nextCheck();
+		}
 		//Write commands that will "speak" to the checkCtrol and the checkPanel
 		//then the checkPanel does it things. 
 		
-		//TODO: ADD functionality to the arrows! 
+		//TODO: ADD functionality to UP and DOWN arrows
 
 		
 	}
