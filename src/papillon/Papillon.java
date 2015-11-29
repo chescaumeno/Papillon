@@ -35,6 +35,7 @@ public class Papillon {
         
 
         loginView.registerListener(loginController);
+        loginView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
     }

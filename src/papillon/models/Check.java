@@ -89,7 +89,7 @@ public class Check {
 	}
 	
 	public double getTax(){
-		return tax;
+		return subTotal * TAX_RATE;
 	}
 	
 

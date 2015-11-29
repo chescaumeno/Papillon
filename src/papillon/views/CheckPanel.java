@@ -102,17 +102,21 @@ public class CheckPanel extends JPanel {
 		result += " ---------------------------  \n\n";
 		
 		for (CheckItem item: checkItems) {
-			result += item.toString();
+			result += convertCheckItemToString(item); 
 			result += "\n";  
 		}
 		
 		result += "\n\n"; 
-		result += "Subtotal:\t" + subtotal + "\n"; 
-		result += "Tax:\t" + tax + "\n"; 
-		result += "Total:\t" + total + "\n"; 
+		result += "Subtotal:\t\t" + formatCurrency(subtotal) + "\n"; 
+		result += "Tax:\t\t\t" + formatCurrency(tax) + "\n"; 
+		result += "Total:\t\t\t" + formatCurrency(total) + "\n"; 
 		
 		txtInfo.setText(result);
     	
+    }
+    
+    public String formatCurrency(double d) {
+    	return String.format("$%.2f", d); 
     }
     
     
@@ -142,6 +146,17 @@ public class CheckPanel extends JPanel {
 	
 	public void setTotal(double total) {
 		this.total = total; 
+	}
+	
+	public String convertCheckItemToString(CheckItem item) {
+		String word = "             "; 
+		String shortName = item.getMenuItem().getName() + word;   
+		if (shortName.length() >= 13) {
+			shortName = shortName.substring(0, 13);
+		} 
+		String price = formatCurrency(item.getMenuItem().getPrice() * item.getQuantity()); 
+		String checkItemString = shortName + "\t" + item.getQuantity() + "\t" + price;
+		return checkItemString; 
 	}
 	
 	

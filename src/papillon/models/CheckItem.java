@@ -25,15 +25,8 @@ public class CheckItem {
 	public UUID getId() {
 		return id; 
 	}
-	
-	@Override
-	public String toString() {
-		String shortName = item.getName();  
-		if (shortName.length() >= 13) {
-			shortName = shortName.substring(0, 13); 
-		
-		}
-		String checkItemString = shortName+ "\t" + quantity + "\t" + (item.getPrice() * quantity);
-		return checkItemString; 
+
+	public int getQuantity() {
+		return quantity; 
 	}
 }
