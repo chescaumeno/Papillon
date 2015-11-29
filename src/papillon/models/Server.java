@@ -70,8 +70,6 @@ public class Server {
 	public void nextCheck(){
 		if((currentCheck + 1) < checkNum){
 			currentCheck++;
-		}else{
-			this.startNewCheck();
 		}
 	}
 	
