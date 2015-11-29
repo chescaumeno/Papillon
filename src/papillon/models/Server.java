@@ -76,7 +76,7 @@ public class Server {
 	}
 	
 	public void previousCheck(){
-		if(currentCheck > 1){
+		if(currentCheck >= 1){
 			currentCheck--;
 		}
 	}
