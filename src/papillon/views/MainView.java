@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import papillon.controllers.CheckController;
 import papillon.controllers.MenuController;
 import papillon.models.PapillonModel;
+import papillon.models.Server;
 
 public class MainView extends JFrame {
     
@@ -36,9 +37,10 @@ public class MainView extends JFrame {
     /**
      * Constructs the GUI
      * @param model 
+     * @param server 
      */
-    public MainView(PapillonModel model) {
-        super("Papillon");
+    public MainView(PapillonModel model, Server server) {
+        super("Papillon | " + server.getName());
         
         //TODO: Have Papillon Controller create ALL the controllers
         //TODO: remove all these controllers from here. The controllers 
