@@ -4,9 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import papillon.controllers.PapillonController;
-import papillon.models.PapillonModel;
-import papillon.views.MainView;
+import papillon.controllers.*;
+import papillon.models.*;
+import papillon.views.*;
 
 /**
  * The main class of the program.
@@ -29,15 +29,13 @@ public class Papillon {
     	} catch (Exception e) {
     	    // If Nimbus is not available, you can set the GUI to another look and feel.
     	}
-
-        PapillonModel model = new PapillonModel();
-        MainView view = new MainView(model);
-        PapillonController controller = new PapillonController(view, model);
+        LoginView loginView = new LoginView();
+        LoginModel loginModel = new LoginModel(loginView);
+        LoginController loginController = new LoginController(loginModel, loginView);
         
 
-        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        view.setSize(PapillonModel.FRAME_WIDTH,PapillonModel.FRAME_HEIGHT);
-        view.setVisible(true);
+        loginView.registerListener(loginController);
+
 
     }
 

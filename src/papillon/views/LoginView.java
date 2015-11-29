@@ -38,15 +38,14 @@ public class LoginView extends JFrame {
 	 */
 	public LoginView() {
 		setTitle("Papillon POS System");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(500, 675);
+		setSize(500, 700);
 		setLayout(new BorderLayout(0,0));
 		font = new Font("Verdana", Font.BOLD, 20);
 		fontHash = new Font("Verdana", Font.PLAIN, 55);
 		
 		//Will display papillon logo on login screen
 		logoPanel = new JPanel();      
-		logoPanel.add(new JLabel(new ImageIcon(getClass().getResource("images/logo.jpg"))));
+		logoPanel.add(new JLabel(new ImageIcon(getClass().getResource("logo.jpg"))));
 		add(logoPanel, BorderLayout.NORTH);
 		
 		//Create display that will show hashed pin entered

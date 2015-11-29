@@ -32,6 +32,7 @@ public class MainView extends JFrame {
     private PapillonModel model;
     
     private MenuController menuCtrl; 
+    private Server server;
 
 
     /**
@@ -48,6 +49,7 @@ public class MainView extends JFrame {
         
         this.model = model;
         this.menuCtrl = new MenuController();
+        this.server = server;
         
         // create the container panels
         leftPanel = new JPanel(new BorderLayout());
@@ -64,7 +66,7 @@ public class MainView extends JFrame {
         
         // Adds CheckAction Panel
         
-        CheckController checkCtrl = new CheckController(); 
+        CheckController checkCtrl = new CheckController(server); 
         checkActionPanel = checkCtrl.createCheckActionPanel(); //this creates an ActionPanel 
  
         leftPanel.add(checkActionPanel, BorderLayout.CENTER);

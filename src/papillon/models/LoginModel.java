@@ -92,11 +92,9 @@ public class LoginModel {
 				        MainView view = new MainView(model, serverList.get(i));
 				        PapillonController controller = new PapillonController(view, model);
 				        
-				        view.register(controller);
 				        view.setSize(PapillonModel.FRAME_WIDTH,PapillonModel.FRAME_HEIGHT);
-				        //view.setExtendedState(view.MAXIMIZED_BOTH);
 				        view.setVisible(true);
-				        //loginView.setVisible(false);
+				        
 						value = 0;
 						displayString = "";
 						internalString = "0";

@@ -12,17 +12,18 @@ public class CheckController {
 	private CheckPanel checkPanel;
 	private CheckActionPanel checkActionPanel; 
 	private Check testCheck; 
-	private Server dummy = new Server("Lymari", "12");  
+	private Server server;  
 	
-	public CheckController() {
+	public CheckController(Server server) {
 		checkActionPanel = new CheckActionPanel(this); //checActionPanel creates the checkPanel 
 		checkPanel = checkActionPanel.getCheckPanel(); 
-		testCheck = new Check(dummy, 1); 
+		this.server = server;
+		testCheck = new Check(server, 1); 
 		
 	}
 	public void addItemToCheck(MenuItem item) {
 		CheckItem checkItem = testCheck.addCheckItem(item,  1); 
-		checkPanel.setServerName(dummy.getName());
+		checkPanel.setServerName(server.getName());
 		checkPanel.setInvoice(testCheck.getInvoiceNumber()); 	
 		checkPanel.setDate(testCheck.getDate());
 		checkPanel.setCheckItems(testCheck.getCheckItems());
