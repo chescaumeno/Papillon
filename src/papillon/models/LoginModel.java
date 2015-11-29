@@ -90,10 +90,13 @@ public class LoginModel {
 						
 				        PapillonModel model = new PapillonModel();
 				        MainView view = new MainView(model, serverList.get(i));
-				        PapillonController controller = new PapillonController(view, model);
+				        PapillonController controller = new PapillonController(view, model, loginView);
 				        
+				        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				        view.registerListener(controller);
 				        view.setSize(PapillonModel.FRAME_WIDTH,PapillonModel.FRAME_HEIGHT);
 				        view.setVisible(true);
+				        loginView.setVisible(false);
 				        
 						value = 0;
 						displayString = "";
@@ -125,4 +128,6 @@ public class LoginModel {
 		serverList.add(server4);
 		serverList.add(server5);
 	}
+	
+	
 }

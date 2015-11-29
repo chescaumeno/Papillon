@@ -14,18 +14,11 @@ import papillon.controllers.LoginController;
  */
 public class LoginView extends JFrame {
 	private JPanel loginPanel;
-	private JPanel idPanel;			//Maybe remove later
-	private JPanel pinPanel;		//Maybe remove later
 	private JPanel logoPanel;
 	private JPanel displayPanel;
 	private JPanel numPadPanel;
 	
-	private JLabel idLabel;			//Maybe remove later
-	private JLabel pinLabel;		//Maybe remove later
 	private JLabel pinDisplay;
-	
-	private JTextField idTextField;	//Maybe remove later
-	private JTextField pinTextField; //Maybe remove later
 	
 	private JButton loginButton;
 	
@@ -78,8 +71,7 @@ public class LoginView extends JFrame {
 }
 	
 	public void registerListener(LoginController controller){
-		//loginButton.addActionListener(controller);
-	
+		
 		Component[] components = numPadPanel.getComponents();
 		for (Component component : components) {
 			if (component instanceof AbstractButton) {
@@ -102,6 +94,7 @@ public class LoginView extends JFrame {
 		} 
 	}
 	
+
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	//**************************		GETTERS AND SETTERS		*******************************//
 	/////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,38 +109,6 @@ public class LoginView extends JFrame {
 		this.loginPanel = loginPanel;
 	}
 
-	public JLabel getIdLabel() {
-		return idLabel;
-	}
-
-	public void setIdLabel(JLabel idLabel) {
-		this.idLabel = idLabel;
-	}
-
-	public JLabel getPinLabel() {
-		return pinLabel;
-	}
-
-	public void setPinLabel(JLabel pinLabel) {
-		this.pinLabel = pinLabel;
-	}
-
-	public JTextField getIdTextField() {
-		return idTextField;
-	}
-
-	public void setIdTextField(JTextField idTextField) {
-		this.idTextField = idTextField;
-	}
-
-	public JTextField getPinTextField() {
-		return pinTextField;
-	}
-
-	public void setPinTextField(JTextField pinTextField) {
-		this.pinTextField = pinTextField;
-	}
-
 	public JButton getLoginButton() {
 		return loginButton;
 	}
@@ -156,19 +117,4 @@ public class LoginView extends JFrame {
 		this.loginButton = loginButton;
 	}
 
-	public JPanel getIdPanel() {
-		return idPanel;
-	}
-
-	public void setIdPanel(JPanel idPanel) {
-		this.idPanel = idPanel;
-	}
-
-	public JPanel getPinPanel() {
-		return pinPanel;
-	}
-
-	public void setPinPanel(JPanel pinPanel) {
-		this.pinPanel = pinPanel;
-	}
 }
