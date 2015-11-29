@@ -67,7 +67,8 @@ public class MainView extends JFrame {
         // Adds CheckAction Panel
         
         CheckController checkCtrl = new CheckController(server); 
-        checkActionPanel = checkCtrl.createCheckActionPanel(); //this creates an ActionPanel 
+        checkActionPanel = checkCtrl.createCheckActionPanel(); //this creates an ActionPanel
+        checkCtrl.update();
  
         leftPanel.add(checkActionPanel, BorderLayout.CENTER);
         leftPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 20));
