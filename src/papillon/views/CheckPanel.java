@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,12 +24,13 @@ import papillon.models.CheckItem;
  * Contains the check information
  */
 
-public class CheckPanel extends JPanel {
+public class CheckPanel extends JPanel implements ActionListener{
  
 	private static SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
     private JTextArea txtInfo = new JTextArea();
     private JButton buttonLook = new JButton("Invoice Lookup");
+    private JButton buttonNewCheck = new JButton("New Check");
     
     private String serverName; 
     private Date date; 
@@ -63,14 +66,24 @@ public class CheckPanel extends JPanel {
         pnbtn1.setBackground(Color.white);
         JPanel tmp = new JPanel();
         tmp.setBackground(Color.white);
-        pnbtn1.add(tmp);  // left empty
+        pnbtn1.add(buttonNewCheck);
         pnbtn1.add(buttonLook);
         pnbtn.add(pnbtn1, BorderLayout.NORTH);        
         pnbtn1.setPreferredSize(new Dimension(200, 35));
+        
         buttonLook.setFont(new Font("SansSerif", Font.BOLD, 10));
         buttonLook.setBackground(Color.blue);
         buttonLook.setForeground(Color.white);
         buttonLook.setMargin(new Insets(0,0,0,0));
+        buttonLook.setActionCommand("INVOICE");
+        buttonLook.addActionListener(this);
+        
+        buttonNewCheck.setFont(new Font("SansSerif", Font.BOLD, 10));
+        buttonNewCheck.setBackground(Color.blue);
+        buttonNewCheck.setForeground(Color.white);
+        buttonNewCheck.setMargin(new Insets(0,0,0,0));
+        buttonNewCheck.setActionCommand("NEW");
+        buttonNewCheck.addActionListener(this);
        
         ArrowsPanel arrowsPanel = new ArrowsPanel(checkCtrl);
         pnbtn.add(arrowsPanel, BorderLayout.CENTER);
@@ -157,6 +170,16 @@ public class CheckPanel extends JPanel {
 		String price = formatCurrency(item.getMenuItem().getPrice() * item.getQuantity()); 
 		String checkItemString = shortName + "\t" + item.getQuantity() + "\t" + price;
 		return checkItemString; 
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		if(cmd.equals("NEW")){
+			checkCtrl.newCheck();
+		}
+		
 	}
 	
 	

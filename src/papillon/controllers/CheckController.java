@@ -1,17 +1,15 @@
 package papillon.controllers;
 
 import papillon.models.Check;
-import papillon.models.CheckItem;
 import papillon.models.MenuItem;
 import papillon.models.Server;
 import papillon.views.CheckActionPanel;
 import papillon.views.CheckPanel;
 
-public class CheckController {
+public class CheckController{
 	
 	private CheckPanel checkPanel;
 	private CheckActionPanel checkActionPanel; 
-	private Check testCheck; 
 	private Server server;
 	private Check currentCheck;
 	
@@ -39,6 +37,11 @@ public class CheckController {
 	
 	public void previousCheck(){
 		server.previousCheck();
+		this.update();
+	}
+	
+	public void newCheck(){
+		server.startNewCheck();
 		this.update();
 	}
 	
