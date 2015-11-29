@@ -28,7 +28,12 @@ public class CheckItem {
 	
 	@Override
 	public String toString() {
-		String checkItemString = item.getName() + "\t" + quantity + "\t" + (item.getPrice() * quantity);
+		String shortName = item.getName();  
+		if (shortName.length() >= 13) {
+			shortName = shortName.substring(0, 13); 
+		
+		}
+		String checkItemString = shortName+ "\t" + quantity + "\t" + (item.getPrice() * quantity);
 		return checkItemString; 
 	}
 }

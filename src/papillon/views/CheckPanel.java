@@ -87,8 +87,15 @@ public class CheckPanel extends JPanel {
     public void renderCheck() {
     	//TODO: Add the subtotal, tax and total. 
     	//check must also change the quantity of the same item and not add it n times. 
-    
-    	String result = "Server: " + serverName + "\n";
+    	
+    	
+    	String result = "KYOTO SUSHI HOUSE\n"; 
+    	result += "1 Sushi Way Ste 345\n"; 
+    	result += "San Antonio, TX, 78260\n"; 
+    	result += "210-555-6789\n"; 
+    	result += "\n\n";  
+    	
+    	result += "Server: " + serverName + "\n";
 		
 		result += fmt.format(date) + "\n";
 		result += "Invoice number: " + invoiceNum + "\n\n";
@@ -99,6 +106,10 @@ public class CheckPanel extends JPanel {
 			result += "\n";  
 		}
 		
+		result += "\n\n"; 
+		result += "Subtotal:\t" + subtotal + "\n"; 
+		result += "Tax:\t" + tax + "\n"; 
+		result += "Total:\t" + total + "\n"; 
 		
 		txtInfo.setText(result);
     	
