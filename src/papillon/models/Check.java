@@ -14,6 +14,7 @@ public class Check {
 	private String server; // server belongs to
 	private int number; // invoice number
 	private Date date;
+	private int currentItem;
 	
 	private ArrayList<CheckItem> checkItems; 
 	
@@ -31,7 +32,8 @@ public class Check {
 	public Check(String server, int num){
 		this.server = server;
 		number = num;		
-		checkItems = new ArrayList<CheckItem>(); 
+		checkItems = new ArrayList<CheckItem>();
+		currentItem = -1;
 		
 		subTotal = 0;
 		tax = 0;
@@ -44,19 +46,15 @@ public class Check {
 		CheckItem checkItem = new CheckItem(item, quantity); 
 		checkItems.add(checkItem);
 		subTotal += checkItem.getSubtotal();
-		
+		currentItem = checkItems.size() - 1;
 		return checkItem; 
 	}
 	
-	public void removeCheckItem(CheckItem checkItem) {
-		for (int i = 0; i < checkItems.size(); i++) {
-			CheckItem c = checkItems.get(i);
-			if (c.getId() == checkItem.getId()) {
-				checkItems.remove(i);
-				subTotal -= c.getSubtotal(); 
-				return;
-			}
+	public void removeCheckItem() {
+		if(checkItems.size() > 0){
+			checkItems.remove(currentItem);
 		}
+		currentItem--;
 	}
 
 	public double getTotal() {
@@ -103,5 +101,21 @@ public class Check {
 	}
 	public ArrayList<CheckItem> getCheckItems() {
 		return checkItems; 
+	}
+	
+	public void nextItem(){
+		if(currentItem < (checkItems.size() - 1)){
+			currentItem++;
+		}
+	}
+	
+	public void previousItem(){
+		if(currentItem > 0){
+			currentItem--;
+		}
+	}
+	
+	public int getCurrentItem(){
+		return currentItem;
 	}
 }

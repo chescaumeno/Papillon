@@ -80,9 +80,10 @@ public class Server {
 	}
 	
 	//Temporarily made invoice num generator so we can see the different checks
+	//If you change the number of digits, the highlighter will be off by that many digits
 	public int invoiceNumber(){
 		Random rndm = new Random();
-		return Math.abs(rndm.nextInt());//positive invoice numbers
+		return Math.abs(rndm.nextInt(90000000) + 10000000);//random number with 8 digits
 	}
 	
 }

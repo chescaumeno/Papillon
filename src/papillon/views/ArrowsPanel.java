@@ -70,9 +70,9 @@ public class ArrowsPanel extends JPanel implements ActionListener {
 		String cmd = e.getActionCommand();
 		System.out.println(cmd);
 		if(cmd.equals("UP")){
-			//
+			checkCtrl.previousItem();
 		}else if(cmd.equals("DOWN")){
-			//
+			checkCtrl.nextItem();
 		}else if(cmd.equals("LEFT")){
 			checkCtrl.previousCheck();
 		}else if(cmd.equals("RIGHT")){
