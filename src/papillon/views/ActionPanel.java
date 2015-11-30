@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,7 +20,7 @@ import papillon.controllers.CheckController;
  * Contains the action buttons
  */
 
-public class ActionPanel extends JPanel {
+public class ActionPanel extends JPanel implements ActionListener{
 
 	private JTextArea txtSubtotal = new JTextArea(3, 20);
 	private JTextArea txtTax = new JTextArea(3, 20);
@@ -28,7 +30,7 @@ public class ActionPanel extends JPanel {
 	private JButton buttonPay = new JButton("PAY");
 	private JButton buttonSplitCheck = new JButton("<html><center>SPLIT<br />CHECK</center></html>");
 	private JButton buttonNumPad = new JButton("<html><center>NUM<br />PAD</center></html>");
-	private JButton buttonEdit = new JButton("EDIT");
+	private JButton buttonRemove = new JButton("REMOVE");
 	private JButton buttonClear = new JButton("CLEAR");
 
 	private CheckController checkCtrl;
@@ -63,18 +65,18 @@ public class ActionPanel extends JPanel {
 		JPanel pnbtn = new JPanel(new GridLayout(4, 1, 0, 5));
 		pnbtn.add(buttonSplitCheck);
 		pnbtn.add(buttonNumPad);
-		pnbtn.add(buttonEdit);
+		pnbtn.add(buttonRemove);
 		pnbtn.add(buttonClear);
 		pnbtn.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
 		pnbtn.setBackground(Color.white);
 		center.add(pnbtn, BorderLayout.EAST);
 		buttonSplitCheck.setBackground(Color.blue);
 		buttonNumPad.setBackground(Color.blue);
-		buttonEdit.setBackground(Color.blue);
+		buttonRemove.setBackground(Color.blue);
 		buttonClear.setBackground(Color.blue);
 		buttonSplitCheck.setForeground(Color.white);
 		buttonNumPad.setForeground(Color.white);
-		buttonEdit.setForeground(Color.white);
+		buttonRemove.setForeground(Color.white);
 		buttonClear.setForeground(Color.white);
 		center.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
@@ -95,7 +97,8 @@ public class ActionPanel extends JPanel {
 
 		buttonSplitCheck.setActionCommand("SPLIT CHECK");
 		buttonNumPad.setActionCommand("NUM PAD");
-		buttonEdit.setActionCommand("EDIT");
+		buttonRemove.setActionCommand("REMOVE");
+		buttonRemove.addActionListener(this);
 
 		add(center, BorderLayout.CENTER);
 		add(bottom, BorderLayout.SOUTH);
@@ -103,5 +106,13 @@ public class ActionPanel extends JPanel {
 		this.setPreferredSize(new Dimension(250, 210));
 		this.setBackground(Color.white);
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		if(cmd.equals("REMOVE")){
+			checkCtrl.removeItemFromCheck();
+		}
 	}
 }

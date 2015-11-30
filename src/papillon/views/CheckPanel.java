@@ -16,6 +16,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.Highlight;
 
 import papillon.controllers.CheckController;
 import papillon.models.CheckItem;
@@ -31,11 +35,12 @@ public class CheckPanel extends JPanel implements ActionListener{
     private JTextArea txtInfo = new JTextArea();
     private JButton buttonLook = new JButton("Invoice Lookup");
     private JButton buttonNewCheck = new JButton("New Check");
+    private Highlighter.HighlightPainter orange = new DefaultHighlighter.DefaultHighlightPainter(Color.orange);
     
     private String serverName; 
     private Date date; 
     private String invoiceNum; 
-    private ArrayList<CheckItem> checkItems; 
+    private ArrayList<CheckItem> checkItems;
     private double subtotal; 
     private double tax; 
     private double total; 
@@ -120,12 +125,12 @@ public class CheckPanel extends JPanel implements ActionListener{
 		}
 		
 		result += "\n\n"; 
-		result += "Subtotal:\t\t" + formatCurrency(subtotal) + "\n"; 
-		result += "Tax:\t\t\t" + formatCurrency(tax) + "\n"; 
-		result += "Total:\t\t\t" + formatCurrency(total) + "\n"; 
+		result += "Subtotal:\t" + formatCurrency(subtotal) + "\n"; 
+		result += "Tax:\t\t" + formatCurrency(tax) + "\n"; 
+		result += "Total:\t\t" + formatCurrency(total) + "\n"; 
 		
 		txtInfo.setText(result);
-    	
+    	this.highlightCurrentItem(checkCtrl.getCurrentCheck().getCurrentItem());
     }
     
     public String formatCurrency(double d) {
@@ -166,9 +171,9 @@ public class CheckPanel extends JPanel implements ActionListener{
 		String shortName = item.getMenuItem().getName() + word;   
 		if (shortName.length() >= 13) {
 			shortName = shortName.substring(0, 13);
-		} 
+		}
 		String price = formatCurrency(item.getMenuItem().getPrice() * item.getQuantity()); 
-		String checkItemString = shortName + "\t" + item.getQuantity() + "\t" + price;
+		String checkItemString = shortName + "    " + item.getQuantity() + "    " + price;
 		return checkItemString; 
 	}
 
@@ -182,6 +187,15 @@ public class CheckPanel extends JPanel implements ActionListener{
 		
 	}
 	
+	public void highlightCurrentItem(int itemNum){
+		if(itemNum >= 0 && itemNum <= checkItems.size()){
+			try{
+				txtInfo.getHighlighter().addHighlight((151 + ((itemNum + 1) * 28)), (179 + ((itemNum + 1) * 28)), orange);
+			}catch(BadLocationException e){
+				//not sure what to do here
+			}
+		}
+	}
 	
 	
 }

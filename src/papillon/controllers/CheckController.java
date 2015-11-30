@@ -1,6 +1,7 @@
 package papillon.controllers;
 
 import papillon.models.Check;
+import papillon.models.CheckItem;
 import papillon.models.MenuItem;
 import papillon.models.Server;
 import papillon.views.CheckActionPanel;
@@ -21,8 +22,12 @@ public class CheckController{
 	}
 	
 	public void addItemToCheck(MenuItem item) {
-		currentCheck = server.getCurrentCheck();
 		currentCheck.addCheckItem(item,  1); 
+		this.update();
+	}
+	
+	public void removeItemFromCheck(){
+		currentCheck.removeCheckItem();
 		this.update();
 	}
 	
@@ -37,6 +42,16 @@ public class CheckController{
 	
 	public void previousCheck(){
 		server.previousCheck();
+		this.update();
+	}
+	
+	public void nextItem(){
+		currentCheck.nextItem();
+		this.update();
+	}
+	
+	public void previousItem(){
+		currentCheck.previousItem();
 		this.update();
 	}
 	
@@ -55,6 +70,10 @@ public class CheckController{
 		checkPanel.setTax(currentCheck.getTax());
 		checkPanel.setTotal(currentCheck.getTotal());
 		checkPanel.renderCheck();
+	}
+	
+	public Check getCurrentCheck(){
+		return currentCheck;
 	}
 	
 }
