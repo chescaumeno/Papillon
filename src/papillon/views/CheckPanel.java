@@ -137,7 +137,7 @@ public class CheckPanel extends JPanel implements ActionListener{
     
     public String formatCurrency(double d) {
     	if(d < 10){
-    		return(String.format("$0%.2f", d));
+    		return(String.format("$ %.2f", d));
     	}
     	return String.format("$%.2f", d); 
     }
