@@ -52,6 +52,8 @@ public class Check {
 	
 	public void removeCheckItem() {
 		if(checkItems.size() > 0 && currentItem >= 0){
+			CheckItem checkItem = checkItems.get(currentItem);
+			subTotal -= checkItem.getSubtotal();
 			checkItems.remove(currentItem);
 		}
 		currentItem--;

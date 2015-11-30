@@ -136,6 +136,9 @@ public class CheckPanel extends JPanel implements ActionListener{
     }
     
     public String formatCurrency(double d) {
+    	if(d < 10){
+    		return(String.format("$0%.2f", d));
+    	}
     	return String.format("$%.2f", d); 
     }
     
@@ -192,8 +195,8 @@ public class CheckPanel extends JPanel implements ActionListener{
 	public void highlightCurrentItem(int itemNum){
 		if(itemNum >= 0 && itemNum <= checkItems.size()){
 			try{
-				int start = header.length() + (itemNum * 28);
-				int end = (header.length() + 28) + (itemNum * 28);
+				int start = header.length() + (itemNum * 29);
+				int end = (header.length() + 29) + (itemNum * 29);
 				txtInfo.getHighlighter().addHighlight(start, end, orange);
 			}catch(BadLocationException e){
 				//not sure what to do here
