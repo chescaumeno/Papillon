@@ -43,7 +43,8 @@ public class CheckPanel extends JPanel implements ActionListener{
     private ArrayList<CheckItem> checkItems;
     private double subtotal; 
     private double tax; 
-    private double total; 
+    private double total;
+    private String header;//needed to get the right offset for highlighter
     
     
     private CheckController checkCtrl;
@@ -119,6 +120,7 @@ public class CheckPanel extends JPanel implements ActionListener{
 		result += "Invoice number: " + invoiceNum + "\n\n";
 		result += " ---------------------------  \n\n";
 		
+		header = result;
 		for (CheckItem item: checkItems) {
 			result += convertCheckItemToString(item); 
 			result += "\n";  
@@ -190,7 +192,9 @@ public class CheckPanel extends JPanel implements ActionListener{
 	public void highlightCurrentItem(int itemNum){
 		if(itemNum >= 0 && itemNum <= checkItems.size()){
 			try{
-				txtInfo.getHighlighter().addHighlight((151 + ((itemNum + 1) * 28)), (179 + ((itemNum + 1) * 28)), orange);
+				int start = header.length() + (itemNum * 28);
+				int end = (header.length() + 28) + (itemNum * 28);
+				txtInfo.getHighlighter().addHighlight(start, end, orange);
 			}catch(BadLocationException e){
 				//not sure what to do here
 			}

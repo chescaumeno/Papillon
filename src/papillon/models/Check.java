@@ -51,10 +51,13 @@ public class Check {
 	}
 	
 	public void removeCheckItem() {
-		if(checkItems.size() > 0){
+		if(checkItems.size() > 0 && currentItem >= 0){
 			checkItems.remove(currentItem);
 		}
 		currentItem--;
+		if(checkItems.size() > 0 && currentItem < 0){
+			currentItem = 0;
+		}
 	}
 
 	public double getTotal() {
