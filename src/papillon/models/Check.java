@@ -61,6 +61,12 @@ public class Check {
 			currentItem = 0;
 		}
 	}
+	
+	public void resetCheck() {
+		subTotal = 0;
+		checkItems.clear();
+		tax = 0;
+	}
 
 	public double getTotal() {
 		double tax = TAX_RATE * subTotal; 

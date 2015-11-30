@@ -31,6 +31,11 @@ public class CheckController{
 		this.update();
 	}
 	
+	public void clearCheck(){
+		currentCheck.resetCheck();
+		checkPanel.setResult(checkPanel.getHeader());
+		this.update();
+	}
 	public CheckActionPanel createCheckActionPanel() {
 		return checkActionPanel;  
 	}

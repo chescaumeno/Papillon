@@ -99,6 +99,9 @@ public class ActionPanel extends JPanel implements ActionListener{
 		buttonNumPad.setActionCommand("NUM PAD");
 		buttonRemove.setActionCommand("REMOVE");
 		buttonRemove.addActionListener(this);
+		
+		buttonClear.setActionCommand("CLEAR");
+		buttonClear.addActionListener(this);
 
 		add(center, BorderLayout.CENTER);
 		add(bottom, BorderLayout.SOUTH);
@@ -113,6 +116,9 @@ public class ActionPanel extends JPanel implements ActionListener{
 		String cmd = e.getActionCommand();
 		if(cmd.equals("REMOVE")){
 			checkCtrl.removeItemFromCheck();
+		}
+		if(cmd.equals("CLEAR")){
+			checkCtrl.clearCheck();
 		}
 	}
 }

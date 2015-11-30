@@ -45,7 +45,7 @@ public class CheckPanel extends JPanel implements ActionListener{
     private double tax; 
     private double total;
     private String header;//needed to get the right offset for highlighter
-    
+    private String result;
     
     private CheckController checkCtrl;
     
@@ -108,7 +108,7 @@ public class CheckPanel extends JPanel implements ActionListener{
     	//check must also change the quantity of the same item and not add it n times. 
     	
     	
-    	String result = "KYOTO SUSHI HOUSE\n"; 
+    	result = "KYOTO SUSHI HOUSE\n"; 
     	result += "1 Sushi Way Ste 345\n"; 
     	result += "San Antonio, TX, 78260\n"; 
     	result += "210-555-6789\n"; 
@@ -142,7 +142,17 @@ public class CheckPanel extends JPanel implements ActionListener{
     	return String.format("$%.2f", d); 
     }
     
+    public void setResult(String result) {
+    	this.result = result;
+    }
     
+    public String getResult(){
+    	return result;
+    }
+    
+    public String getHeader(){
+    	return header;
+    }
 	public void setServerName(String name) {
 		serverName = name; 
 	}
