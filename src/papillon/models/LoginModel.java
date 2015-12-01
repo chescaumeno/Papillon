@@ -25,7 +25,7 @@ public class LoginModel {
 	private boolean start; //True if next digit entered starts a new value
 	
 	private ArrayList<Server> serverList; //holds ArrayList of servers
-	
+	private ArrayList<Manager> managerList;
 	/**
 	 * Constructor - Initializes the LoginModel instance variables
 	 */
@@ -38,6 +38,8 @@ public class LoginModel {
 		
 		serverList = new ArrayList<Server>();
 		generateServers(serverList);
+		managerList = new ArrayList<Manager>();
+		generateManagers(managerList);
 	}
 	/**
 	 * Constructor - Initializes the LoginModel instance variables with LoginView argument passed
@@ -52,6 +54,8 @@ public class LoginModel {
 		
 		serverList = new ArrayList<Server>();
 		generateServers(serverList);
+		managerList = new ArrayList<Manager>();
+		generateManagers(managerList);
 	}
 	
 	/**
@@ -86,8 +90,10 @@ public class LoginModel {
 			else if(operation.equals("Login")) {
 				success = false;
 				for(int i = 0; i < serverList.size(); i++) {
-					if(value == Integer.valueOf(serverList.get(i).getId())) {
+				//	if((value == Integer.valueOf(serverList.get(i).getId()))||(value == Integer.valueOf(managerList.get(i).getId()))) {
 						
+						if(value == Integer.valueOf(serverList.get(i).getId())){
+							
 				        PapillonModel model = new PapillonModel();
 				        MainView view = new MainView(model, serverList.get(i));
 				        PapillonController controller = new PapillonController(view, model, loginView);
@@ -102,9 +108,11 @@ public class LoginModel {
 						displayString = "";
 						internalString = "0";
 						success = true;
-				        break;
+				        break;						
+				       
 					}
 				}
+				
 				if(success == false) {
 					JOptionPane.showMessageDialog(null, "Invalid PIN!");
 				}
@@ -121,13 +129,23 @@ public class LoginModel {
 		Server server3 = new Server("Matt New", "8901");
 		Server server4 = new Server("Caleb Mussulman", "9012");
 		Server server5 = new Server("Nanette Springer", "1123");
+		//Server server6 = new Server("Mananger", "1111");
 
 		serverList.add(server1);
 		serverList.add(server2);
 		serverList.add(server3);
 		serverList.add(server4);
 		serverList.add(server5);
+		//serverList.add(server6);
 	}
-	
+	/*
+	 * wanted to add list for manager, but seem to unable connect it to the main view
+	 */
+	private static void generateManagers(ArrayList<Manager> managerList){
+		Manager manager1 = new Manager("Manager","1111");
+		
+		managerList.add(manager1);
+	}
+		
 	
 }

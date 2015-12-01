@@ -20,6 +20,7 @@ import papillon.controllers.CheckController;
 import papillon.controllers.LoginController;
 import papillon.controllers.MenuController;
 import papillon.controllers.PapillonController;
+import papillon.models.Manager;
 import papillon.models.PapillonModel;
 import papillon.models.Server;
 
@@ -37,6 +38,7 @@ public class MainView extends JFrame {
     
     private MenuController menuCtrl; 
     private Server server;
+	private Manager manager ;
 
 
     /**
@@ -44,7 +46,7 @@ public class MainView extends JFrame {
      * @param model 
      * @param server 
      */
-    public MainView(PapillonModel model, Server server) {
+    public MainView(PapillonModel model, Server server/*, Manager manager*/) {
         super("Papillon | " + server.getName());
         
         //TODO: Have Papillon Controller create ALL the controllers
@@ -54,6 +56,7 @@ public class MainView extends JFrame {
         this.model = model;
         this.menuCtrl = new MenuController();
         this.server = server;
+        //this.manager = manager;
         
         // create the container panels
         leftPanel = new JPanel(new BorderLayout());
@@ -107,7 +110,7 @@ public class MainView extends JFrame {
         add(mainPanel, BorderLayout.CENTER);
         
     }
-    
+
 	public void registerListener(PapillonController controller){
 		
 		Component[] components = tmp.getComponents();

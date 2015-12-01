@@ -12,6 +12,7 @@ public class Check {
 	static SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
 	private String server; // server belongs to
+	//private String manager;
 	private int number; // invoice number
 	private Date date;
 	private int currentItem;
