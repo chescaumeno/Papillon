@@ -133,6 +133,8 @@ public class CheckPanel extends JPanel implements ActionListener{
 		
 		txtInfo.setText(result);
     	this.highlightCurrentItem(checkCtrl.getCurrentCheck().getCurrentItem());
+    	
+    	//where can I update the JText boxes with the current check?
     }
     
     public String formatCurrency(double d) {
@@ -198,7 +200,7 @@ public class CheckPanel extends JPanel implements ActionListener{
 		String cmd = e.getActionCommand();
 		if(cmd.equals("NEW")){
 			checkCtrl.newCheck();
-		}
+		} 
 		
 	}
 	

@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JTextArea;
+
 
 public class Check {
 	private static final double TAX_RATE = 0.0825; 
@@ -72,8 +74,7 @@ public class Check {
 		double tax = TAX_RATE * subTotal; 
 		double total = subTotal + tax; 
 		return total; 
-	}
-	
+	}	
 	//getters and setters
 	public double getTips(){
 		return tips;
