@@ -15,6 +15,8 @@ public class Server {
 	
 	private String name;
 	private String id;
+	private static String lastTimeCheckWasMade;
+	private static int invoiceIndex;
 
 	private ArrayList<Check> openChecks;
 	private ArrayList<Check> closedChecks;
@@ -41,6 +43,8 @@ public class Server {
 		openChecks.add(firstCheck);
 		currentCheck = 0;
 		checkNum = 1;
+		lastTimeCheckWasMade = "";
+		invoiceIndex = 0;
 	}
 
 	// getters and setters
@@ -105,14 +109,24 @@ public class Server {
 	}
 	
 	/**
-	 * Creates unique invoice number using day+hours+minutes+milliseconds
+	 * Creates unique invoice number using day+hours+minutes+invoiceIndex
+	 * Uses static variables to determine if a check was made during this second
+	 * by this server or another server. If the last check was made this second, the
+	 * final digit added is incremented and updated across all servers, guaranteeing
+	 * that a unique invoice number will be created.
 	 * @return
 	 */
 	public int invoiceNumber(){
-		SimpleDateFormat frmt = new SimpleDateFormat("ddkkmmS");
+		SimpleDateFormat frmt = new SimpleDateFormat("ddkkmmss");
 		Date date = new Date(System.currentTimeMillis());
-		//return frmt.format(date);
-		String invoice = frmt.format(date);
+		String time = frmt.format(date);
+		if(time.equals(lastTimeCheckWasMade)){
+			invoiceIndex++;
+		}else{
+			lastTimeCheckWasMade = time;
+			invoiceIndex = 0;
+		}
+		String invoice = time + invoiceIndex;
 		int invoiceNum = Integer.parseInt(invoice);
 		return invoiceNum;
 	}
