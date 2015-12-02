@@ -116,5 +116,8 @@ public class LoginView extends JFrame {
 	public void setLoginButton(JButton loginButton) {
 		this.loginButton = loginButton;
 	}
-
+	
+	public JLabel getPinDisplay() {
+		return pinDisplay;
+	}
 }

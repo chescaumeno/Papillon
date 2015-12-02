@@ -46,6 +46,7 @@ public class PapillonController implements ActionListener {
     }
     public void bringBackLoginScreen(MainView view, LoginView loginView){
     	view.setVisible(false);
+    	loginView.getPinDisplay().setText("Enter PIN");
     	loginView.setVisible(true);
     }
 }
