@@ -1,0 +1,25 @@
+KYOTO SUSHI HOUSE
+1 Sushi Way Ste 345
+San Antonio, TX, 78260
+210-555-6789
+
+
+Server: Caleb Mussulman
+12/02/15 01:25:06 PM
+Invoice number: 21325711
+
+ ---------------------------  
+
+White Wine       1    $ 8.00
+White Wine       1    $ 8.00
+White Wine       1    $ 8.00
+Kirin Ichiban    1    $ 6.00
+Kirin Ichiban    1    $ 6.00
+Sapporo Premi    1    $ 6.00
+Sapporo Premi    1    $ 6.00
+Red Wine         1    $ 8.00
+
+
+Subtotal:	$56.00
+Tax:		$ 4.62
+Total:		$60.62

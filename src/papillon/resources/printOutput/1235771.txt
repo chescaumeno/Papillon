@@ -1,0 +1,23 @@
+The first line
+KYOTO SUSHI HOUSE
+1 Sushi Way Ste 345
+San Antonio, TX, 78260
+210-555-6789
+
+
+Server: Caleb Mussulman
+12/01/15 11:57:11 PM
+Invoice number: 1235771
+
+ ---------------------------  
+
+Fountain Soda    1    $ 3.00
+Bottle Water     1    $ 2.00
+BlackBerry Sm    1    $ 9.00
+Cucumber Sake    1    $ 9.00
+
+
+Subtotal:	$23.00
+Tax:		$ 1.90
+Total:		$24.90
+

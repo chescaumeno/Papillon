@@ -40,6 +40,7 @@ public class CheckManager implements Serializable{
 		checks.add(check); 
 	}
 	
+
 	public void endOfDayReport(){
 		
 	}
@@ -85,6 +86,11 @@ public class CheckManager implements Serializable{
 		return(check);
 	}
 	
+
+//	public Check getCheck(int invoiceNum) {
+//		//this class will search in a HashMap???
+//	}
+
 	
 	// In the manager view, when the manager hits END of Day Sales Report 
 	// the checkManager class will export or write the report based on the checkItems 
