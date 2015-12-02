@@ -29,11 +29,11 @@ public class Check {
 	/**
 	 * constructs the check with server and number
 	 * @param server server
-	 * @param num invoice number
+	 * @param invoiceNum invoice number
 	 */
-	public Check(String server, int num){
+	public Check(String server, int invoiceNum){
 		this.server = server;
-		number = num;		
+		number = invoiceNum; //we will search invoice number 	
 		checkItems = new ArrayList<CheckItem>();
 		currentItem = -1;
 		
@@ -44,12 +44,26 @@ public class Check {
 		date = new Date();
 	}
 	
-	public CheckItem addCheckItem(MenuItem item, int quantity) {
+	public CheckItem addCheckItem(MenuItem item, int quantity) { 
+		for (CheckItem i: checkItems) {
+			MenuItem MI = i.getMenuItem(); 
+			if (MI.getName().equals(item.getName()) &&
+					MI.getCategory().equals(item.getCategory())) {
+				i.setQuantity(i.getQuantity() + quantity);  
+				updateSubtotal(i); 
+				return i; 
+			}
+		}
+	
 		CheckItem checkItem = new CheckItem(item, quantity); 
 		checkItems.add(checkItem);
+		updateSubtotal(checkItem);
+		return checkItem; 
+	}
+
+	private void updateSubtotal(CheckItem checkItem) {
 		subTotal += checkItem.getSubtotal();
 		currentItem = checkItems.size() - 1;
-		return checkItem; 
 	}
 	
 	public void removeCheckItem() {

@@ -32,6 +32,9 @@ public class CheckManager {
 		checks.add(check); 
 	}
 	
+//	public Check getCheck(int invoiceNum) {
+//		//this class will search in a HashMap???
+//	}
 	
 	// In the manager view, when the manager hits END of Day Sales Report 
 	// the checkManager class will export or write the report based on the checkItems 
