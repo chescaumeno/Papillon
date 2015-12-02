@@ -17,6 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import papillon.controllers.CheckController;
+import papillon.models.CheckManager;
 
 /**
  * Contains the action buttons
