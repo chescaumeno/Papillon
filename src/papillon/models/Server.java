@@ -1,15 +1,23 @@
 package papillon.models;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 //store information for the server
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 
 public class Server {
-
+	
+	//Each element is an String array with two indices, the server and that server's id
+	public static final String[][] SERVERS_AND_IDS = {{"Chesca Umeno", "6789"}, {"Lymari Montijo", "7890"}, {"Matt New", "8901"},
+													  {"Caleb Mussulman", "9012"}, {"Nanette Springer", "1123"}};
+	
 	private String name;
 	private String id;
 
-	private ArrayList<Check> checks;
+	private ArrayList<Check> openChecks;
+	private ArrayList<Check> closedChecks;
 	private int currentCheck; // check index in the list
 	private int checkNum;
 	
@@ -26,10 +34,11 @@ public class Server {
 	public Server(String nm, String id) {
 		this.name = nm;
 		this.id = id;
-
-		checks = new ArrayList<Check>();
+		openChecks = new ArrayList<Check>();
+		closedChecks = new ArrayList<Check>();
+		
 		Check firstCheck = new Check(name, this.invoiceNumber());
-		checks.add(firstCheck);
+		openChecks.add(firstCheck);
 		currentCheck = 0;
 		checkNum = 1;
 	}
@@ -51,17 +60,17 @@ public class Server {
 		this.id = id;
 	}
 
-	public ArrayList<Check> getChecks() {
-		return checks;
+	public ArrayList<Check> getOpenChecks() {
+		return openChecks;
 	}
 	
 	public Check getCurrentCheck(){
-		return(checks.get(currentCheck));
+		return(openChecks.get(currentCheck));
 	}
 	
 	public void startNewCheck(){
 		Check newCheck = new Check(name, invoiceNumber());
-		checks.add(newCheck);
+		openChecks.add(newCheck);
 		checkNum++;
 		currentCheck = checkNum - 1;
 	}
@@ -79,11 +88,33 @@ public class Server {
 		}
 	}
 	
-	//Temporarily made invoice num generator so we can see the different checks
-	//If you change the number of digits, the highlighter will be off by that many digits
+	public void closeCurrentCheck(){
+		Check check = openChecks.get(currentCheck);
+		if(check.getItemNum() > 0){//Makes sure we aren't adding multiple blank checks
+			closedChecks.add(check);
+		}
+		openChecks.remove(currentCheck);
+		currentCheck--;
+		checkNum--;
+		if(checkNum == 0){
+			this.startNewCheck();
+		}
+		if(currentCheck == -1){
+			currentCheck = 0;
+		}
+	}
+	
+	/**
+	 * Creates unique invoice number using day+hours+minutes+milliseconds
+	 * @return
+	 */
 	public int invoiceNumber(){
-		Random rndm = new Random();
-		return Math.abs(rndm.nextInt(90000000) + 10000000);//random number with 8 digits
+		SimpleDateFormat frmt = new SimpleDateFormat("ddkkmmS");
+		Date date = new Date(System.currentTimeMillis());
+		//return frmt.format(date);
+		String invoice = frmt.format(date);
+		int invoiceNum = Integer.parseInt(invoice);
+		return invoiceNum;
 	}
 	
 }

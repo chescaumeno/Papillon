@@ -122,6 +122,12 @@ public class ActionPanel extends JPanel implements ActionListener{
 		buttonClear.setActionCommand("CLEAR");
 		buttonClear.addActionListener(this);
 		setLayout(null);
+		
+		buttonPay.setActionCommand("PAY");
+		buttonPay.addActionListener(this);
+		buttonPrint.setActionCommand("PRINT");
+		buttonPrint.addActionListener(this);
+
 
 		add(center);
 		add(bottom);
@@ -164,13 +170,20 @@ public class ActionPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		if(cmd.equals("REMOVE")){
+		if (cmd.equals("REMOVE")){
 			checkCtrl.removeItemFromCheck();
-		} else if (cmd.equals("PAY")) {
-			checkCtrl.closeCheck(); 
-		}
-		if(cmd.equals("CLEAR")){
+		} 
+//		else if (cmd.equals("PAY")) {
+//			checkCtrl.closeCheck(); 
+//		}
+		else if(cmd.equals("CLEAR")){
 			checkCtrl.clearCheck();
+			
+		} else if(cmd.equals("PAY")){
+			checkCtrl.payCheck();
+			
+		} else if(cmd.equals("PRINT")){
+			checkCtrl.printCheck();
 		}
 	}
 }

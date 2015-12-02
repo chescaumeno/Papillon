@@ -1,5 +1,10 @@
 package papillon.controllers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 import papillon.models.Check;
 import papillon.models.CheckItem;
 import papillon.models.CheckManager;
@@ -92,11 +97,33 @@ public class CheckController{
 		return currentCheck;
 	}
 	
-	public void closeCheck() {
-		checkManager.add(currentCheck); 
-		currentCheckClosed = true; 
-		newCheck(); 
+
+//	public void closeCheck() {
+//		checkManager.add(currentCheck); 
+//		currentCheckClosed = true; 
+//		newCheck(); 
+//	}
+	
+	public void printCheck(){
+		int invoice = currentCheck.getInvoiceNumber();
+		String printOutput = checkPanel.getCheckFormat();
+		String filePath = "src/papillon/resources/printOutput/";
+		String fileName = filePath + invoice + ".txt";
+		PrintWriter out = null;
+		try{
+			out = new PrintWriter(fileName);
+		}catch(FileNotFoundException e){
+			System.err.println("Error creating print output for invoice number " + invoice);
+		}
+		out.print(printOutput);
+		out.close();
 	}
 	
+	public void payCheck(){
+		//TODO may want to add some verification that the check was paid instead of only closing it
+		server.closeCurrentCheck();
+		this.update();
+	}
+
 	
 }
