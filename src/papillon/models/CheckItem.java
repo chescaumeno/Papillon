@@ -30,8 +30,4 @@ public class CheckItem {
 		return quantity; 
 	}
 
-	public void setQuantity(int quant) {
-		quantity = quant; 
-		
-	}
 }

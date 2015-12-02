@@ -45,25 +45,11 @@ public class Check {
 	}
 	
 	public CheckItem addCheckItem(MenuItem item, int quantity) { 
-		for (CheckItem i: checkItems) {
-			MenuItem MI = i.getMenuItem(); 
-			if (MI.getName().equals(item.getName()) &&
-					MI.getCategory().equals(item.getCategory())) {
-				i.setQuantity(i.getQuantity() + quantity);  
-				updateSubtotal(i); 
-				return i; 
-			}
-		}
-	
 		CheckItem checkItem = new CheckItem(item, quantity); 
 		checkItems.add(checkItem);
-		updateSubtotal(checkItem);
-		return checkItem; 
-	}
-
-	private void updateSubtotal(CheckItem checkItem) {
 		subTotal += checkItem.getSubtotal();
-		currentItem = checkItems.size() - 1;
+		currentItem = checkItems.size() - 1;	
+		return checkItem; 
 	}
 	
 	public void removeCheckItem() {
