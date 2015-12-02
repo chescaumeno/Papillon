@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import papillon.models.Check;
 import papillon.models.CheckItem;
@@ -115,7 +116,7 @@ public class CheckController{
 			System.err.println("Error creating print output for invoice number " + invoice);
 		}
 		out.print(printOutput);
-		out.close();
+		out.close();		
 	}
 	
 	public void payCheck(){

@@ -1,4 +1,5 @@
 package papillon.models;
+import java.io.Serializable;
 /**
  * Store information for check
  */
@@ -9,7 +10,7 @@ import java.util.Date;
 import javax.swing.JTextArea;
 
 
-public class Check {
+public class Check implements Serializable{
 	private static final double TAX_RATE = 0.0825; 
 	static SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
@@ -149,4 +150,5 @@ public class Check {
 	public int getItemNum(){
 		return (checkItems.size());
 	}
+	
 }

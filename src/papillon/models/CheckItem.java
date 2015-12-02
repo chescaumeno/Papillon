@@ -1,8 +1,9 @@
 package papillon.models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class CheckItem {
+public class CheckItem implements Serializable{
 	private UUID id;
 	private MenuItem item;
 	private int quantity; 

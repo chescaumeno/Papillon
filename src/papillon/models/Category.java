@@ -1,8 +1,9 @@
 package papillon.models;
 
 import java.awt.Color;
+import java.io.Serializable;
 
-public enum Category {
+public enum Category implements Serializable{
 	DRINKS("Drinks", new Color(221, 0, 100)), 
 	APPETIZERS("Appetizers", new Color(202, 0, 213)), 
 	SIDES("Sides", new Color(149, 51, 204)),
