@@ -205,7 +205,7 @@ public class CheckPanel extends JPanel implements ActionListener{
 	}
 	
 	public void highlightCurrentItem(int itemNum){
-		if(itemNum >= 0 && itemNum <= checkItems.size()){
+		if(itemNum >= 0 && itemNum < checkItems.size()){
 			try{
 				int start = header.length() + (itemNum * 29);
 				int end = (header.length() + 29) + (itemNum * 29);

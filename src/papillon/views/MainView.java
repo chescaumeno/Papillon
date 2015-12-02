@@ -58,7 +58,7 @@ public class MainView extends JFrame {
         // create the container panels
         leftPanel = new JPanel(new BorderLayout());
         leftPanel.setBackground(Color.white);
-        leftPanel.setPreferredSize(new Dimension(260, 500));
+        leftPanel.setPreferredSize(new Dimension(285, 500)); 
         
         rightBlankPanel = new JPanel();
         rightBlankPanel.setBackground(Color.white);
