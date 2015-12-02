@@ -37,7 +37,7 @@ public class LoginModel {
 		operation = "";
 		
 		serverList = new ArrayList<Server>();
-		generateServers(serverList);
+		generateServers();
 	}
 	/**
 	 * Constructor - Initializes the LoginModel instance variables with LoginView argument passed
@@ -51,7 +51,7 @@ public class LoginModel {
 		this.loginView = loginView;
 		
 		serverList = new ArrayList<Server>();
-		generateServers(serverList);
+		generateServers();
 	}
 	
 	/**
@@ -71,8 +71,11 @@ public class LoginModel {
 		if(text.length() == 1 && "0123456789".indexOf(text) >= 0){
 			displayString += "*";
 			internalString += text;
+			if(internalString.length() > 4){
+				internalString = internalString.substring(1, 5);
+				displayString = "****";
+			}
 			value = Integer.valueOf(internalString);
-			System.out.print(value + "\n");
 		}
 		else{
 			displayString = "";;
@@ -80,7 +83,7 @@ public class LoginModel {
 			start = true;
 			if(operation.equals("Clear")){
 				value = 0;
-				displayString = "";
+				displayString = "Enter PIN";
 				internalString = "0";
 			}
 			else if(operation.equals("Login")) {
@@ -97,10 +100,6 @@ public class LoginModel {
 				        view.setSize(PapillonModel.FRAME_WIDTH,PapillonModel.FRAME_HEIGHT);
 				        view.setVisible(true);
 				        loginView.setVisible(false);
-				        
-						value = 0;
-						displayString = "";
-						internalString = "0";
 						success = true;
 				        break;
 					}
@@ -109,24 +108,22 @@ public class LoginModel {
 					JOptionPane.showMessageDialog(null, "Invalid PIN!");
 				}
 				value = 0;
-				displayString = "";
+				displayString = "Enter PIN";
 				internalString = "0";
 			}
 		}	
 	}
 	
-	private static void generateServers(ArrayList<Server> serverList){
-		Server server1 = new Server("Chesca Umeno", "6789");
-		Server server2 = new Server("Lymari Montijo", "7890");
-		Server server3 = new Server("Matt New", "8901");
-		Server server4 = new Server("Caleb Mussulman", "9012");
-		Server server5 = new Server("Nanette Springer", "1123");
-
-		serverList.add(server1);
-		serverList.add(server2);
-		serverList.add(server3);
-		serverList.add(server4);
-		serverList.add(server5);
+	private void generateServers(){
+		String serverName;
+		String ID;
+		Server server;
+		for(String[] serverAndID : Server.SERVERS_AND_IDS){
+			serverName = serverAndID[0];
+			ID = serverAndID[1];
+			server = new Server(serverName, ID);
+			serverList.add(server);
+		}
 	}
 	
 	

@@ -103,7 +103,7 @@ public class CheckPanel extends JPanel implements ActionListener{
     /**
      * Update the view
      */
-    public void renderCheck() {
+    public String getCheckFormat() {
     	//TODO: Add the subtotal, tax and total. 
     	//check must also change the quantity of the same item and not add it n times. 
     	
@@ -131,10 +131,7 @@ public class CheckPanel extends JPanel implements ActionListener{
 		result += "Tax:\t\t" + formatCurrency(tax) + "\n"; 
 		result += "Total:\t\t" + formatCurrency(total) + "\n"; 
 		
-		txtInfo.setText(result);
-    	this.highlightCurrentItem(checkCtrl.getCurrentCheck().getCurrentItem());
-    	
-    	//where can I update the JText boxes with the current check?
+		return result;
     }
     
     public String formatCurrency(double d) {
@@ -216,5 +213,8 @@ public class CheckPanel extends JPanel implements ActionListener{
 		}
 	}
 	
-	
+	public void renderCheck(){
+		txtInfo.setText(this.getCheckFormat());
+		this.highlightCurrentItem(checkCtrl.getCurrentCheck().getCurrentItem());
+	}
 }

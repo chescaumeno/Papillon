@@ -68,6 +68,7 @@ public class Check {
 		subTotal = 0;
 		checkItems.clear();
 		tax = 0;
+		currentItem = -1;
 	}
 
 	public double getTotal() {
@@ -129,5 +130,9 @@ public class Check {
 	
 	public int getCurrentItem(){
 		return currentItem;
+	}
+	
+	public int getItemNum(){
+		return (checkItems.size());
 	}
 }
