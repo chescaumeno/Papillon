@@ -25,4 +25,8 @@ public class CheckActionPanel extends JPanel {
 	public CheckPanel getCheckPanel() {
 		return checkPanel; 
 	}
+	
+	public ActionPanel getActionPanel() {
+		return actionPanel; 
+	}
 }

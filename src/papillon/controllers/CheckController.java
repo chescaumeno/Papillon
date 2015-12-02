@@ -2,23 +2,31 @@ package papillon.controllers;
 
 import papillon.models.Check;
 import papillon.models.CheckItem;
+import papillon.models.CheckManager;
 import papillon.models.MenuItem;
 import papillon.models.Server;
+import papillon.views.ActionPanel;
 import papillon.views.CheckActionPanel;
 import papillon.views.CheckPanel;
 
 public class CheckController{
 	
+	private CheckActionPanel checkActionPanel;
 	private CheckPanel checkPanel;
-	private CheckActionPanel checkActionPanel; 
+	private ActionPanel actionPanel; 
 	private Server server;
 	private Check currentCheck;
+	private boolean currentCheckClosed; ///////new change
+	private CheckManager checkManager;  //////new change
 	
 	public CheckController(Server server) {
 		checkActionPanel = new CheckActionPanel(this); //checActionPanel creates the checkPanel 
 		checkPanel = checkActionPanel.getCheckPanel(); 
+		actionPanel = checkActionPanel.getActionPanel(); 
 		this.server = server;
 		currentCheck = server.getCurrentCheck();
+		checkManager = new CheckManager(); //////new change
+		currentCheckClosed = false; /////new change
 	}
 	
 	public void addItemToCheck(MenuItem item) {
@@ -74,11 +82,21 @@ public class CheckController{
 		checkPanel.setSubtotal(currentCheck.getSubTotal());
 		checkPanel.setTax(currentCheck.getTax());
 		checkPanel.setTotal(currentCheck.getTotal());
-		checkPanel.renderCheck();
+		checkPanel.renderCheck(); 
+		actionPanel.updateSubtotal(currentCheck.getSubTotal());
+		actionPanel.updateTax(currentCheck.getTax());
+		actionPanel.updateTotal(currentCheck.getTotal());
 	}
 	
 	public Check getCurrentCheck(){
 		return currentCheck;
 	}
+	
+	public void closeCheck() {
+		checkManager.add(currentCheck); 
+		currentCheckClosed = true; 
+		newCheck(); 
+	}
+	
 	
 }

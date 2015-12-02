@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import papillon.controllers.CheckController;
 
@@ -22,9 +23,9 @@ import papillon.controllers.CheckController;
 
 public class ActionPanel extends JPanel implements ActionListener{
 
-	private JTextArea txtSubtotal = new JTextArea(3, 20);
-	private JTextArea txtTax = new JTextArea(3, 20);
-	private JTextArea txtTotal = new JTextArea(3, 20);
+	private JTextField txtSubtotal = new JTextField();
+	private JTextField txtTax = new JTextField(); 
+	private JTextField txtTotal = new JTextField(); 
 
 	private JButton buttonPrint = new JButton("PRINT");
 	private JButton buttonPay = new JButton("PAY");
@@ -50,17 +51,26 @@ public class ActionPanel extends JPanel implements ActionListener{
 		pntxt.add(txtSubtotal);
 		pntxt.add(txtTax);
 		pntxt.add(txtTotal);
-		Font txtFont = new Font("Courier New", 0, 12);
+		Font txtFont = new Font ("monospaced", 0, 18);
 		txtSubtotal.setBorder(BorderFactory.createLineBorder(new Color(205, 205, 240)));
-		txtTax.setBorder(BorderFactory.createLineBorder(new Color(205, 205, 240)));
-		txtTotal.setBorder(BorderFactory.createLineBorder(new Color(205, 205, 240)));
+		txtSubtotal.setEditable(false);
+		txtSubtotal.setHorizontalAlignment(JTextField.CENTER);
 		txtSubtotal.setFont(txtFont);
+		
+		txtTax.setBorder(BorderFactory.createLineBorder(new Color(205, 205, 240)));
+		txtTax.setEditable(false);
+		txtTax.setHorizontalAlignment(JTextField.CENTER);
 		txtTax.setFont(txtFont);
+		
+		txtTotal.setBorder(BorderFactory.createLineBorder(new Color(205, 205, 240)));
+		txtTotal.setEditable(false);
+		txtTotal.setHorizontalAlignment(JTextField.CENTER); 
 		txtTotal.setFont(txtFont);
+		
 		center.add(pntxt, BorderLayout.CENTER);
 		pntxt.setBackground(Color.white);
 		pntxt.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
-		center.setBackground(Color.white);
+		center.setBackground(Color.WHITE);
 
 		JPanel pnbtn = new JPanel(new GridLayout(4, 1, 0, 5));
 		pnbtn.add(buttonSplitCheck);
@@ -87,6 +97,8 @@ public class ActionPanel extends JPanel implements ActionListener{
 		buttonPrint.setFont(new Font("SansSerif", Font.BOLD, 15));
 		buttonPrint.setMargin(new Insets(0, 0, 0, 0));
 		bottom.add(buttonPay);
+		
+		buttonPay.addActionListener(this);
 		buttonPay.setBackground(Color.green);
 		buttonPay.setForeground(Color.white);
 		buttonPay.setFont(new Font("SansSerif", Font.BOLD, 15));
@@ -110,12 +122,33 @@ public class ActionPanel extends JPanel implements ActionListener{
 		this.setBackground(Color.white);
 
 	}
+	
+	public void updateSubtotal(double subtotal) {
+		String sub = formatJText(subtotal);  
+		txtSubtotal.setText(sub);
+	}
+	
+	public void updateTax(double tax) {
+		String tx = formatJText(tax); 
+		txtTax.setText(tx);
+	}
+	
+	public void updateTotal(double total) {
+		String ttl = formatJText(total);
+		txtTotal.setText(ttl); 
+	}
+
+	public String formatJText(double d) {
+    	return String.format("$%.2f", d); 
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if(cmd.equals("REMOVE")){
 			checkCtrl.removeItemFromCheck();
+		} else if (cmd.equals("PAY")) {
+			checkCtrl.closeCheck(); 
 		}
 		if(cmd.equals("CLEAR")){
 			checkCtrl.clearCheck();

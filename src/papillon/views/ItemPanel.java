@@ -82,6 +82,8 @@ public class ItemPanel extends JPanel implements ActionListener {
 			checkCtrl.addItemToCheck(item); 
 		}
 		
+		//should the update of the Action Panel happen here?
+		
 		//Now we can communicate with the check panel 
 		
 	}
