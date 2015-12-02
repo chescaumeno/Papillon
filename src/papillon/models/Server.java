@@ -12,7 +12,7 @@ public class Server {
 	//Each element is an String array with two indices, the server and that server's id
 	public static final String[][] SERVERS_AND_IDS = {{"Chesca Umeno", "6789"}, {"Lymari Montijo", "7890"}, {"Matt New", "8901"},
 													  {"Caleb Mussulman", "9012"}, {"Nanette Springer", "1123"}};
-	
+
 	private String name;
 	private String id;
 	private static String lastTimeCheckWasMade;
@@ -22,15 +22,15 @@ public class Server {
 	private ArrayList<Check> closedChecks;
 	private int currentCheck; // check index in the list
 	private int checkNum;
+	private boolean isCurrentCheckClosed; 
 	
 	Random rndm = new Random();
 
 	/**
 	 * constructs the server
 	 * 
-	 * @param nm
-	 *            name
-	 * @param id
+	 * @param nm - server name
+	 * @param id - server id
 	 *            id
 	 */
 	public Server(String nm, String id) {
@@ -43,8 +43,11 @@ public class Server {
 		openChecks.add(firstCheck);
 		currentCheck = 0;
 		checkNum = 1;
+		
 		lastTimeCheckWasMade = "";
 		invoiceIndex = 0;
+		isCurrentCheckClosed = false; 
+
 	}
 
 	// getters and setters
@@ -92,7 +95,7 @@ public class Server {
 		}
 	}
 	
-	public void closeCurrentCheck(){
+	public Check closeCurrentCheck(){
 		Check check = openChecks.get(currentCheck);
 		if(check.getItemNum() > 0){//Makes sure we aren't adding multiple blank checks
 			closedChecks.add(check);
@@ -105,7 +108,9 @@ public class Server {
 		}
 		if(currentCheck == -1){
 			currentCheck = 0;
-		}
+		} 
+		
+		return check; 
 	}
 	
 	/**

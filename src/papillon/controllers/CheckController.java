@@ -21,7 +21,7 @@ public class CheckController{
 	private ActionPanel actionPanel; 
 	private Server server;
 	private Check currentCheck;
-	private boolean currentCheckClosed; ///////new change
+
 	private CheckManager checkManager;  //////new change
 	
 	public CheckController(Server server) {
@@ -31,7 +31,6 @@ public class CheckController{
 		this.server = server;
 		currentCheck = server.getCurrentCheck();
 		checkManager = new CheckManager(); //////new change
-		currentCheckClosed = false; /////new change
 	}
 	
 	public void addItemToCheck(MenuItem item) {
@@ -121,7 +120,8 @@ public class CheckController{
 	
 	public void payCheck(){
 		//TODO may want to add some verification that the check was paid instead of only closing it
-		server.closeCurrentCheck();
+		Check closedCheck = server.closeCurrentCheck();
+		checkManager.add(closedCheck); 
 		this.update();
 	}
 
