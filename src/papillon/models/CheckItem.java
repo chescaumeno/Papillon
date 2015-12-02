@@ -31,8 +31,4 @@ public class CheckItem implements Serializable{
 		return quantity; 
 	}
 
-	public void setQuantity(int quant) {
-		quantity = quant; 
-		
-	}
 }
