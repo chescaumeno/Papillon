@@ -15,6 +15,7 @@ public class PapillonController implements ActionListener {
 	private MainView view;
 	private PapillonModel model;
 	private LoginView loginView;
+	private ManagerView managerView; 
 
 	/**
 	 * Constructor with view
@@ -23,10 +24,12 @@ public class PapillonController implements ActionListener {
 	 *            main view
 	 * @param model
 	 */
-	public PapillonController(MainView view, PapillonModel model, LoginView loginView) {
+	public PapillonController(MainView view, PapillonModel model, LoginView loginView, ManagerView managerView) {
 		this.view = view;
 		this.model = model;
 		this.loginView = loginView;
+		this.managerView = managerView; 
+		
 	}
 
 	@Override
@@ -38,8 +41,10 @@ public class PapillonController implements ActionListener {
 	}
 
     public void performCommand(String command){
-    	if(command.equals("Log Off")){
+    	if(command.equals("Log Off")) {
     		bringBackLoginScreen(view, loginView);
+    	} else if (command.equals("Manager View")) {
+    		displayManagerView(view, managerView); 
     	}
     		
     	
@@ -48,5 +53,10 @@ public class PapillonController implements ActionListener {
     	view.setVisible(false);
     	loginView.getPinDisplay().setText("Enter PIN");
     	loginView.setVisible(true);
+    }
+    
+    public void displayManagerView(MainView view, ManagerView managerView) {
+    	view.setVisible(false);
+    	managerView.setVisible(true);
     }
 }
