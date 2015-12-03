@@ -94,7 +94,8 @@ public class LoginModel {
 						
 				        PapillonModel model = new PapillonModel();
 				        MainView view = new MainView(model, serverList.get(i));
-				        PapillonController controller = new PapillonController(view, model, loginView);
+				        ManagerView managerView = new ManagerView(); 
+				        PapillonController controller = new PapillonController(view, model, loginView, managerView);
 				        
 				        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				        view.registerListener(controller);
