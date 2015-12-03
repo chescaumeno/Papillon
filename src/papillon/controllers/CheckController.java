@@ -98,6 +98,13 @@ public class CheckController{
 		return currentCheck;
 	}
 	
+	public void setCurrentCheck(Check check){
+		currentCheck = check;
+	}
+	
+	public Server getServer(){
+		return server;
+	}
 
 //	public void closeCheck() {
 //		checkManager.add(currentCheck); 
@@ -125,6 +132,21 @@ public class CheckController{
 		Check closedCheck = server.closeCurrentCheck();
 		checkManager.add(closedCheck); 
 		this.update();
+	}
+
+	public void jumpUpdate() {
+			checkPanel.setServerName(server.getName());
+			checkPanel.setInvoice(currentCheck.getInvoiceNumber()); 	
+			checkPanel.setDate(currentCheck.getDate());
+			checkPanel.setCheckItems(currentCheck.getCheckItems());
+			checkPanel.setSubtotal(currentCheck.getSubTotal());
+			checkPanel.setTax(currentCheck.getTax());
+			checkPanel.setTotal(currentCheck.getTotal());
+			checkPanel.setTip(currentCheck.getTips());
+			checkPanel.renderCheck(); 
+			actionPanel.updateSubtotal(currentCheck.getSubTotal());
+			actionPanel.updateTax(currentCheck.getTax());
+			actionPanel.updateTotal(currentCheck.getTotal());
 	}
 
 	

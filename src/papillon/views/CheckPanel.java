@@ -13,6 +13,7 @@ import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -20,6 +21,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.Highlight;
+
 
 import papillon.controllers.*;
 import papillon.models.*;
@@ -219,6 +221,12 @@ public class CheckPanel extends JPanel implements ActionListener{
 			TipAdjustModel tipAdjModel = new TipAdjustModel(tipAdjView, checkCtrl);
 			TipAdjustController tipAdjCntrl = new TipAdjustController(tipAdjModel, tipAdjView);
 			tipAdjView.registerListener(tipAdjCntrl);
+		}
+		if(cmd.equals("INVOICE")){
+			String input = JOptionPane.showInputDialog("Enter Invoice Number:");
+			int inv = Integer.parseInt(input);
+			checkCtrl.setCurrentCheck(checkCtrl.getServer().getInvoiceLookUpMap().get(inv));
+			checkCtrl.jumpUpdate();
 		}
 		
 	}

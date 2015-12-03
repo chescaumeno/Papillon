@@ -114,6 +114,7 @@ public class LoginModel {
 		String serverName;
 		String ID;
 		Server server;
+		int firstCheckInv = 1;
 		for(String[] serverAndID : Server.SERVERS_AND_IDS){
 			serverName = serverAndID[0];
 			ID = serverAndID[1];
