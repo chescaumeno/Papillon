@@ -225,8 +225,14 @@ public class CheckPanel extends JPanel implements ActionListener{
 		if(cmd.equals("INVOICE")){
 			String input = JOptionPane.showInputDialog("Enter Invoice Number:");
 			int inv = Integer.parseInt(input);
-			checkCtrl.setCurrentCheck(checkCtrl.getServer().getInvoiceLookUpMap().get(inv));
-			checkCtrl.jumpUpdate();
+			if(!checkCtrl.getServer().getInvoiceLookUpMap().containsKey(inv)){
+				JOptionPane.showMessageDialog(null, "Invoice not found!");
+			}
+			else {
+				checkCtrl.setCurrentCheck(checkCtrl.getServer().getInvoiceLookUpMap().get(inv));
+				checkCtrl.jumpUpdate();
+
+			}
 		}
 		
 	}
