@@ -3,9 +3,8 @@ package papillon.models;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 //store information for the server
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Random;
+import java.util.*;
+
 
 public class Server {
 	
@@ -20,9 +19,13 @@ public class Server {
 
 	private ArrayList<Check> openChecks;
 	private ArrayList<Check> closedChecks;
+	
+	private Map<Integer, Check> invoiceLookUpMap;
 	private int currentCheck; // check index in the list
 	private int checkNum;
 	private boolean isCurrentCheckClosed; 
+	private Check firstCheck;
+	private static int firstCheckInv = 0;
 	
 	Random rndm = new Random();
 
@@ -38,8 +41,8 @@ public class Server {
 		this.id = id;
 		openChecks = new ArrayList<Check>();
 		closedChecks = new ArrayList<Check>();
-		
-		Check firstCheck = new Check(name, this.invoiceNumber());
+		invoiceLookUpMap= new HashMap<Integer,Check>();
+		Check firstCheck = new Check(name, this.invoiceNumber()+ ++firstCheckInv);
 		openChecks.add(firstCheck);
 		currentCheck = 0;
 		checkNum = 1;
@@ -48,6 +51,9 @@ public class Server {
 		invoiceIndex = 0;
 		isCurrentCheckClosed = false; 
 
+		 //invoice number as key to a check
+		invoiceLookUpMap.put(firstCheck.getInvoiceNumber(), firstCheck);
+		System.out.println("Added invoice " + firstCheck.getInvoiceNumber());
 	}
 
 	// getters and setters
@@ -78,10 +84,11 @@ public class Server {
 	public void startNewCheck(){
 		Check newCheck = new Check(name, invoiceNumber());
 		openChecks.add(newCheck);
+		invoiceLookUpMap.put(newCheck.getInvoiceNumber(), newCheck);
+		System.out.println("Added invoice " + newCheck.getInvoiceNumber());
 		checkNum++;
 		currentCheck = checkNum - 1;
 	}
-	
 	
 	public void nextCheck(){
 		if((currentCheck + 1) < checkNum){
@@ -134,6 +141,18 @@ public class Server {
 		String invoice = time + invoiceIndex;
 		int invoiceNum = Integer.parseInt(invoice);
 		return invoiceNum;
+	}
+	
+	public Map<Integer, Check> getInvoiceLookUpMap(){
+		return invoiceLookUpMap;
+	}
+	
+	public Check getFirstCheck(){
+		return firstCheck;
+	}
+	
+	public void setFirstCheckInv(int firstCheckInv){
+		this.firstCheckInv = firstCheckInv;
 	}
 	
 }

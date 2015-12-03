@@ -15,7 +15,7 @@ public class Check implements Serializable{
 	static SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
 	private String server; // server belongs to
-	private int number; // invoice number
+	private int invoiceNumber; // invoice number
 	private Date date;
 	private int currentItem;
 	
@@ -34,7 +34,7 @@ public class Check implements Serializable{
 	 */
 	public Check(String server, int invoiceNum){
 		this.server = server;
-		number = invoiceNum; //we will search invoice number 	
+		invoiceNumber = invoiceNum; //we will search invoice number 	
 		checkItems = new ArrayList<CheckItem>();
 		currentItem = -1;
 		
@@ -106,7 +106,7 @@ public class Check implements Serializable{
 	
 
 	public int getInvoiceNumber() {
-		return number; 
+		return invoiceNumber; 
 	}
 
 	public Date getDate() {
