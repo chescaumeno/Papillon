@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import papillon.models.Check;
 import papillon.models.CheckItem;
-import papillon.models.CheckManager;
+import papillon.models.Manager;
 import papillon.models.MenuItem;
 import papillon.models.Server;
 import papillon.models.TipAdjustModel;
@@ -27,7 +27,7 @@ public class CheckController{
 	private Server server;
 	private Check currentCheck;
 
-	private CheckManager checkManager;  //////new change
+	private Manager manager;  //////new change
 	
 	public CheckController(Server server) {
 		checkActionPanel = new CheckActionPanel(this); //checActionPanel creates the checkPanel 
@@ -35,7 +35,7 @@ public class CheckController{
 		actionPanel = checkActionPanel.getActionPanel(); 
 		this.server = server;
 		currentCheck = server.getCurrentCheck();
-		checkManager = new CheckManager(); //////new change
+		manager = new Manager("Name", "1111"); //Temporary
 	}
 	
 	public void addItemToCheck(MenuItem item) {
@@ -134,7 +134,7 @@ public class CheckController{
 	public void payCheck(){
 		//TODO may want to add some verification that the check was paid instead of only closing it
 		Check closedCheck = server.closeCurrentCheck();
-		checkManager.add(closedCheck); 
+		manager.addClosedCheck(closedCheck); 
 		this.update();
 	}
 
