@@ -6,14 +6,18 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import papillon.models.Check;
 import papillon.models.CheckItem;
 import papillon.models.CheckManager;
 import papillon.models.MenuItem;
 import papillon.models.Server;
+import papillon.models.TipAdjustModel;
 import papillon.views.ActionPanel;
 import papillon.views.CheckActionPanel;
 import papillon.views.CheckPanel;
+import papillon.views.TipAdjustView;
 
 public class CheckController{
 	
@@ -134,7 +138,8 @@ public class CheckController{
 		this.update();
 	}
 
-	public void jumpUpdate() {
+	//Not sure what this is for. It's almost identical to update() function
+	/*public void jumpUpdate() {
 			checkPanel.setServerName(server.getName());
 			checkPanel.setInvoice(currentCheck.getInvoiceNumber()); 	
 			checkPanel.setDate(currentCheck.getDate());
@@ -147,7 +152,31 @@ public class CheckController{
 			actionPanel.updateSubtotal(currentCheck.getSubTotal());
 			actionPanel.updateTax(currentCheck.getTax());
 			actionPanel.updateTotal(currentCheck.getTotal());
+	}*/
+	
+	public void setTip(){
+		TipAdjustView tipAdjView = new TipAdjustView();
+		TipAdjustModel tipAdjModel = new TipAdjustModel(tipAdjView, this);
+		TipAdjustController tipAdjCntrl = new TipAdjustController(tipAdjModel, tipAdjView);
+		tipAdjView.registerListener(tipAdjCntrl);
 	}
 
+	public void invoiceLookup(){
+		String input = JOptionPane.showInputDialog("Enter Invoice Number:");
+		if(input != null){
+			try{
+				int inv = Integer.parseInt(input);
+				if(!server.getInvoiceLookUpMap().containsKey(inv)){
+					JOptionPane.showMessageDialog(null, "Invoice not found!");
+				}
+				else {
+					server.setCurrentCheck(server.getInvoiceLookUpMap().get(inv));
+					this.update();
 	
+				}
+			}catch(NumberFormatException e){
+				JOptionPane.showMessageDialog(null, "Must enter integer format");
+			}
+		}
+	}
 }

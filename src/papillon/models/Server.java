@@ -155,4 +155,13 @@ public class Server {
 		this.firstCheckInv = firstCheckInv;
 	}
 	
+	public void setCurrentCheck(Check check){
+		int index = 0;
+		for(Check c: openChecks){
+			if(c.getInvoiceNumber() == check.getInvoiceNumber()){
+				currentCheck = index;
+			}
+			index++;
+		}
+	}
 }

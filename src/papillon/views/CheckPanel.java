@@ -217,22 +217,10 @@ public class CheckPanel extends JPanel implements ActionListener{
 			checkCtrl.newCheck();
 		} 
 		if(cmd.equals("TIP")){
-			TipAdjustView tipAdjView = new TipAdjustView();
-			TipAdjustModel tipAdjModel = new TipAdjustModel(tipAdjView, checkCtrl);
-			TipAdjustController tipAdjCntrl = new TipAdjustController(tipAdjModel, tipAdjView);
-			tipAdjView.registerListener(tipAdjCntrl);
+			checkCtrl.setTip();
 		}
 		if(cmd.equals("INVOICE")){
-			String input = JOptionPane.showInputDialog("Enter Invoice Number:");
-			int inv = Integer.parseInt(input);
-			if(!checkCtrl.getServer().getInvoiceLookUpMap().containsKey(inv)){
-				JOptionPane.showMessageDialog(null, "Invoice not found!");
-			}
-			else {
-				checkCtrl.setCurrentCheck(checkCtrl.getServer().getInvoiceLookUpMap().get(inv));
-				checkCtrl.jumpUpdate();
-
-			}
+			checkCtrl.invoiceLookup();
 		}
 		
 	}
