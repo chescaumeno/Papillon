@@ -87,6 +87,7 @@ public class CheckController{
 		checkPanel.setSubtotal(currentCheck.getSubTotal());
 		checkPanel.setTax(currentCheck.getTax());
 		checkPanel.setTotal(currentCheck.getTotal());
+		checkPanel.setTip(currentCheck.getTips());
 		checkPanel.renderCheck(); 
 		actionPanel.updateSubtotal(currentCheck.getSubTotal());
 		actionPanel.updateTax(currentCheck.getTax());
