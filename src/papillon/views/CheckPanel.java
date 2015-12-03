@@ -21,8 +21,9 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.Highlight;
 
-import papillon.controllers.CheckController;
-import papillon.models.CheckItem;
+import papillon.controllers.*;
+import papillon.models.*;
+import papillon.views.*;
 
 /**
  * Contains the check information
@@ -33,8 +34,9 @@ public class CheckPanel extends JPanel implements ActionListener{
 	private static SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
     private JTextArea txtInfo = new JTextArea();
-    private JButton buttonLook = new JButton("Invoice Lookup");
-    private JButton buttonNewCheck = new JButton("New Check");
+    private JButton buttonLook = new JButton("<html><center>Invoice<br>Lookup</center></html>");
+    private JButton buttonNewCheck = new JButton("<html><center>New<br>Check</center></html>");
+    private JButton buttonTipAdj = new JButton("<html><center>Tip<br>Adjust</center></html>");
     private Highlighter.HighlightPainter orange = new DefaultHighlighter.DefaultHighlightPainter(Color.orange);
     
     private String serverName; 
@@ -44,6 +46,7 @@ public class CheckPanel extends JPanel implements ActionListener{
     private double subtotal; 
     private double tax; 
     private double total;
+    private double tip;
     private String header;//needed to get the right offset for highlighter
     private String result;
     
@@ -74,6 +77,7 @@ public class CheckPanel extends JPanel implements ActionListener{
         tmp.setBackground(Color.white);
         pnbtn1.add(buttonNewCheck);
         pnbtn1.add(buttonLook);
+        pnbtn1.add(buttonTipAdj);
         pnbtn.add(pnbtn1, BorderLayout.NORTH);        
         pnbtn1.setPreferredSize(new Dimension(200, 35));
         
@@ -91,6 +95,13 @@ public class CheckPanel extends JPanel implements ActionListener{
         buttonNewCheck.setActionCommand("NEW");
         buttonNewCheck.addActionListener(this);
        
+        buttonTipAdj.setFont(new Font("SansSerif", Font.BOLD, 10));
+        buttonTipAdj.setBackground(Color.blue);
+        buttonTipAdj.setForeground(Color.white);
+        buttonTipAdj.setMargin(new Insets(0,0,0,0));
+        buttonTipAdj.setActionCommand("TIP");
+        buttonTipAdj.addActionListener(this);
+        
         ArrowsPanel arrowsPanel = new ArrowsPanel(checkCtrl);
         pnbtn.add(arrowsPanel, BorderLayout.CENTER);
         pnbtn.setPreferredSize(new Dimension(200, 90));
@@ -129,7 +140,8 @@ public class CheckPanel extends JPanel implements ActionListener{
 		result += "\n\n"; 
 		result += "Subtotal:\t" + formatCurrency(subtotal) + "\n"; 
 		result += "Tax:\t\t" + formatCurrency(tax) + "\n"; 
-		result += "Total:\t\t" + formatCurrency(total) + "\n"; 
+		result += "Total:\t\t" + formatCurrency(total) + "\n";
+		result += "\nTip:\t\t" + formatCurrency(tip) + "\n";
 		
 		return result;
     }
@@ -180,6 +192,10 @@ public class CheckPanel extends JPanel implements ActionListener{
 		this.total = total; 
 	}
 	
+	public void setTip(double tip) {
+		this.tip = tip;
+	}
+	
 	public String convertCheckItemToString(CheckItem item) {
 		String word = "             "; 
 		String shortName = item.getMenuItem().getName() + word;   
@@ -198,6 +214,12 @@ public class CheckPanel extends JPanel implements ActionListener{
 		if(cmd.equals("NEW")){
 			checkCtrl.newCheck();
 		} 
+		if(cmd.equals("TIP")){
+			TipAdjustView tipAdjView = new TipAdjustView();
+			TipAdjustModel tipAdjModel = new TipAdjustModel(tipAdjView, checkCtrl);
+			TipAdjustController tipAdjCntrl = new TipAdjustController(tipAdjModel, tipAdjView);
+			tipAdjView.registerListener(tipAdjCntrl);
+		}
 		
 	}
 	

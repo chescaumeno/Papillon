@@ -71,10 +71,6 @@ public class LoginModel {
 		if(text.length() == 1 && "0123456789".indexOf(text) >= 0){
 			displayString += "*";
 			internalString += text;
-			if(internalString.length() > 4){
-				internalString = internalString.substring(1, 5);
-				displayString = "****";
-			}
 			value = Integer.valueOf(internalString);
 		}
 		else{
