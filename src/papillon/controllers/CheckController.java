@@ -53,7 +53,7 @@ public class CheckController{
 		checkPanel.setResult(checkPanel.getHeader());
 		this.update();
 	}
-	public CheckActionPanel createCheckActionPanel() {
+	public CheckActionPanel createCheckActionPanel(){
 		return checkActionPanel;  
 	}
 	

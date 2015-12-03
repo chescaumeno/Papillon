@@ -38,7 +38,8 @@ public class TipAdjustView extends JFrame {
 		
 		//Create display that will show hashed pin entered
 		displayPanel = new JPanel(new BorderLayout());
-		tipDisplay = new JTextArea("");
+		tipDisplay = new JTextArea("$0.00");
+		tipDisplay.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		tipDisplay.setFont(font);
 		tipDisplay.setBackground(Color.WHITE);
 		tipDisplay.setEditable(false);
@@ -53,7 +54,7 @@ public class TipAdjustView extends JFrame {
 				"1", "2", "3",
 				"4", "5", "6",
 				"7", "8", "9",
-			"Clear", "0", "."
+			"Clear", "0", "Enter"
 		};
 		for(String s: numPadStrings){
 			JButton numPadButton = new JButton(s);
@@ -64,13 +65,6 @@ public class TipAdjustView extends JFrame {
 
 		add(numPadPanel, BorderLayout.CENTER);
 		
-		//Create Add Tip Button at very bottom
-		addTipPanel = new JPanel();
-		addTipButton = new JButton("Submit Tip Adjustment");
-		addTipButton.setActionCommand("SUBMIT");
-		addTipButton.setFont(new Font("SansSerif", Font.BOLD, 25));
-		addTipPanel.add(addTipButton);
-		add(addTipPanel, BorderLayout.SOUTH);
 		setVisible(true);
 }
 	
@@ -84,7 +78,7 @@ public class TipAdjustView extends JFrame {
 				button.addActionListener(controller);
 			}
 		}
-		addTipButton.addActionListener(controller);
+		//addTipButton.addActionListener(controller);
 	}
 	
 	/**

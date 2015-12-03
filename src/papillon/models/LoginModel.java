@@ -75,6 +75,7 @@ public class LoginModel {
 				internalString = internalString.substring(1, 5);
 				displayString = "****";
 			}
+			System.out.println(internalString);
 			value = Integer.valueOf(internalString);
 		}
 		else{

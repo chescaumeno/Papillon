@@ -14,8 +14,8 @@ public class Server {
 
 	private String name;
 	private String id;
-	private static String lastTimeCheckWasMade;
-	private static int invoiceIndex;
+	private static String lastTimeCheckWasMade = "";
+	private static int invoiceIndex = 0;
 
 	private ArrayList<Check> openChecks;
 	private ArrayList<Check> closedChecks;
@@ -25,7 +25,6 @@ public class Server {
 	private int checkNum;
 	private boolean isCurrentCheckClosed; 
 	private Check firstCheck;
-	private static int firstCheckInv = 0;
 	
 	Random rndm = new Random();
 
@@ -42,13 +41,10 @@ public class Server {
 		openChecks = new ArrayList<Check>();
 		closedChecks = new ArrayList<Check>();
 		invoiceLookUpMap= new HashMap<Integer,Check>();
-		Check firstCheck = new Check(name, this.invoiceNumber()+ ++firstCheckInv);
+		Check firstCheck = new Check(name, this.invoiceNumber());
 		openChecks.add(firstCheck);
 		currentCheck = 0;
 		checkNum = 1;
-		
-		lastTimeCheckWasMade = "";
-		invoiceIndex = 0;
 		isCurrentCheckClosed = false; 
 
 		 //invoice number as key to a check
@@ -149,10 +145,6 @@ public class Server {
 	
 	public Check getFirstCheck(){
 		return firstCheck;
-	}
-	
-	public void setFirstCheckInv(int firstCheckInv){
-		this.firstCheckInv = firstCheckInv;
 	}
 	
 	public void setCurrentCheck(Check check){
