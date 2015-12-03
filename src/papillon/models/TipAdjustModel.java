@@ -17,12 +17,11 @@ public class TipAdjustModel {
 	private String displayString; //String corresponding to what the user is entering
 	private String operation; //either "Clear" or "Login"
 	private boolean start; //True if next digit entered starts a new value
-	private boolean dot;
 	
 	public TipAdjustModel(TipAdjustView tipAdjustView, CheckController checkCtrl) {
 		value = 0;
 		internalString = "0";
-		displayString = "";
+		displayString = "$0.00";
 		start = true;
 		operation = "";
 		this.tipAdjustView = tipAdjustView;
@@ -40,43 +39,46 @@ public class TipAdjustModel {
 	public void update(String text){
 		if(start){			
 			value = Double.valueOf(internalString);
-			displayString = "";
+			displayString = "$0.00";
 			start = false;
-			dot = false;
 		}
 		if(text.length() == 1 && "0123456789".indexOf(text) >= 0){
-			
-			displayString += text;
-			internalString += text;
-			value = Double.valueOf(internalString);
-		}
-		else if (text.equals(".")) {
-			if (! dot) {	
-				dot = true;	
-				if (displayString.equals("")) {
-					displayString = "0";
-				}
-				displayString += ".";
+			if(internalString.length() < 8){
 				internalString += text;
-				value = Double.valueOf(internalString);
+				if(internalString.length() > 3){
+					int s = internalString.length();
+					String cents = internalString.substring(s - 2, s);
+					String dollarsString = internalString.substring(1, s - 2);
+					int dollars = Integer.parseInt(dollarsString);
+					internalString = "0" + dollars + cents;
+					displayString = dollars + "." + cents;
+					value = Double.valueOf(displayString);
+				}else if(internalString.length() == 3){
+					displayString = "0." + internalString.substring(1, 3);
+					value = Double.valueOf(displayString);
+				}else{
+					displayString = "0.0" + internalString.substring(1, 2);
+					value = Double.valueOf(displayString);
+				}
+				displayString = "$" + displayString;
 			}
 		}
 		else{
-			displayString = "";
+			displayString = "$0.00";
 			operation = text;
 			start = true;
 			if(operation.equals("Clear")){
 				value = 0;
 				checkCtrl.getCurrentCheck().setTips(value);
-				displayString = "";
+				displayString = "$0.00";
 				internalString = "0";
 			}
-			else if(operation.equals("SUBMIT")) {
+			else if(operation.equals("Enter")) {
 				checkCtrl.getCurrentCheck().setTips(value);
 				checkCtrl.update();
 				System.out.println("Tip entered : " + value);
 				value = 0;
-				displayString = "";
+				displayString = "$0.00";
 				internalString = "0";
 				tipAdjustView.setVisible(false);
 			}
