@@ -79,7 +79,7 @@ public class MainView extends JFrame {
         
         // Menu panels
         menuPanel = new MenuPanel(menuCtrl, checkCtrl);
-        mainPanel.add(menuPanel, BorderLayout.CENTER);        
+        mainPanel.add(menuPanel, BorderLayout.CENTER);       
         
         // Add Log off button
         buttonLogOff = new JButton("Log Off");
