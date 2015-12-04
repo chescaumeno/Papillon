@@ -23,7 +23,7 @@ public class ManagerView extends JFrame{
 	 *   Constructor - Initialize the login window frame
 	 */
 	public ManagerView(Manager manager){
-		super("Manager's View");
+		super("Manager's View | " + manager.getName());
 		this.manager = manager;
 		setSize(500,700);
 		setLayout(new BorderLayout(0,0));

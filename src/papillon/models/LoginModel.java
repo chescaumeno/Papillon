@@ -106,14 +106,16 @@ public class LoginModel {
 					managerView.registerListener(controller);
 					managerView.setSize(Manager.FRAME_WIDTH, Manager.FRAME_HEIGHT);
 					managerView.setVisible(true);
+					displayString = "Enter PIN";
 					loginView.setVisible(false);
 					success = true;
 				}
 				if(success == false) {
-					JOptionPane.showMessageDialog(null, "Invalid PIN!");
+					displayString = "Invalid PIN";
+					//JOptionPane.showMessageDialog(null, "Invalid PIN!");
 				}
 				value = 0;
-				displayString = "Enter PIN";
+				//displayString = "Enter PIN";
 				internalString = "0";
 			}
 		}	
