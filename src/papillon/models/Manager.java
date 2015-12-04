@@ -51,10 +51,6 @@ public class Manager {
 		closedChecks.add(check);
 	}
 
-	public void endOfDayReport() {
-
-	}
-
 	public int writeCheckToFile(Check check) {
 		FileOutputStream out = null;
 		ObjectOutputStream outStream = null;
@@ -112,15 +108,4 @@ public class Manager {
 	public ArrayList<Check> getClosedChecks() {
 		return closedChecks;
 	}
-
-	// public Check getCheck(int invoiceNum) {
-	// //this class will search in a HashMap???
-	// }
-
-	// In the manager view, when the manager hits END of Day Sales Report
-	// the Manager class will export or write the report based on the checkItems
-	// ArrayList. When the report is generated. Manager will have a clear()
-	// method that will reset
-	// the arrayList for the next business day.
-
 }
