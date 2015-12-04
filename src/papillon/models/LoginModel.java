@@ -25,19 +25,13 @@ public class LoginModel {
 	private boolean start; //True if next digit entered starts a new value
 	
 	private ArrayList<Server> serverList; //holds ArrayList of servers
+	private Manager manager;
 	
 	/**
 	 * Constructor - Initializes the LoginModel instance variables
 	 */
 	public LoginModel(){
-		value = 0;
-		internalString = "0";
-		displayString = "";
-		start = true;
-		operation = "";
-		
-		serverList = new ArrayList<Server>();
-		generateServers();
+		this(null);
 	}
 	/**
 	 * Constructor - Initializes the LoginModel instance variables with LoginView argument passed
@@ -51,7 +45,7 @@ public class LoginModel {
 		this.loginView = loginView;
 		
 		serverList = new ArrayList<Server>();
-		generateServers();
+		generateServersAndManager();
 	}
 	
 	/**
@@ -94,7 +88,7 @@ public class LoginModel {
 						
 				        PapillonModel model = new PapillonModel();
 				        MainView view = new MainView(model, serverList.get(i));
-				        ManagerView managerView = new ManagerView(); 
+				        ManagerView managerView = new ManagerView(manager); 
 				        PapillonController controller = new PapillonController(view, model, loginView, managerView);
 				        
 				        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,6 +100,15 @@ public class LoginModel {
 				        break;
 					}
 				}
+				if(value == Integer.valueOf(manager.getId())){
+					ManagerView managerView = new ManagerView(manager);
+					ManagerController controller = new ManagerController(loginView, null, managerView);
+					managerView.registerListener(controller);
+					managerView.setSize(Manager.FRAME_WIDTH, Manager.FRAME_HEIGHT);
+					managerView.setVisible(true);
+					loginView.setVisible(false);
+					success = true;
+				}
 				if(success == false) {
 					JOptionPane.showMessageDialog(null, "Invalid PIN!");
 				}
@@ -116,17 +119,19 @@ public class LoginModel {
 		}	
 	}
 	
-	private void generateServers(){
+	private void generateServersAndManager(){
 		String serverName;
 		String ID;
 		Server server;
-		int firstCheckInv = 1;
 		for(String[] serverAndID : Server.SERVERS_AND_IDS){
 			serverName = serverAndID[0];
 			ID = serverAndID[1];
 			server = new Server(serverName, ID);
 			serverList.add(server);
 		}
+		String managerName = Manager.MANAGER_AND_ID[0];
+		String M_ID = Manager.MANAGER_AND_ID[1];
+		manager = new Manager(managerName, M_ID);
 	}
 	
 	

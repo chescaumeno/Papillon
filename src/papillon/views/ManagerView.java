@@ -4,7 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import papillon.controllers.ManagerController;
+import papillon.models.Manager;
+
 public class ManagerView extends JFrame{
+	
+	Manager manager;
+	
 	private JPanel managerPanel;
 	private Font fontOne;
 	
@@ -16,14 +22,15 @@ public class ManagerView extends JFrame{
 	/*
 	 *   Constructor - Initialize the login window frame
 	 */
-	public ManagerView(){
+	public ManagerView(Manager manager){
 		super("Manager's View");
+		this.manager = manager;
 		setSize(500,700);
 		setLayout(new BorderLayout(0,0));
 		fontOne = new Font("Verdana", Font.BOLD, 15);
 		
 		//Buttons 
-		JPanel managerPanel = new JPanel(new GridLayout(2,1,0,0));
+		managerPanel = new JPanel(new GridLayout(2,1,0,0));
 		//managerPanel.setLayout(new BorderLayout());
 		add(managerPanel, BorderLayout.CENTER); 
 		
@@ -42,10 +49,17 @@ public class ManagerView extends JFrame{
 		
 		mainViewButton.setBackground(Color.black);
 		mainViewButton.setForeground(Color.white);
-		mainViewButton.setFont(fontOne);
-		
+		mainViewButton.setFont(fontOne);	
+	}
 	
-		
+	public void registerListener(ManagerController controller){
+		Component[] components = managerPanel.getComponents();
+		for(Component component : components){
+			if(component instanceof AbstractButton){
+				AbstractButton button = (AbstractButton) component;
+				button.addActionListener(controller);
+			}
+		}
 	}
 	
 }

@@ -10,6 +10,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Manager {
+	
+	public static final String[] MANAGER_AND_ID = {"Mark Robinson", "8405"};
+	public static int FRAME_WIDTH = 1024; 
+    public static int FRAME_HEIGHT = 768;
 
 	private String name;
 	private String id;
