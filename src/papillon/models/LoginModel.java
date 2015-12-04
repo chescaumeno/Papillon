@@ -27,6 +27,11 @@ public class LoginModel {
 	private ArrayList<Server> serverList; //holds ArrayList of servers
 	private Manager manager;
 	
+	MainView[] mainView;
+	PapillonController[] papillonController;
+	ManagerView managerView;
+	ManagerController controller;
+	
 	/**
 	 * Constructor - Initializes the LoginModel instance variables
 	 */
@@ -46,6 +51,9 @@ public class LoginModel {
 		
 		serverList = new ArrayList<Server>();
 		generateServersAndManager();
+		mainView = new MainView[serverList.size()];
+		papillonController = new PapillonController[serverList.size()];
+		createViews();
 	}
 	
 	/**
@@ -85,26 +93,13 @@ public class LoginModel {
 				success = false;
 				for(int i = 0; i < serverList.size(); i++) {
 					if(value == Integer.valueOf(serverList.get(i).getId())) {
-						
-				        PapillonModel model = new PapillonModel();
-				        MainView view = new MainView(model, serverList.get(i));
-				        ManagerView managerView = new ManagerView(manager); 
-				        PapillonController controller = new PapillonController(view, model, loginView, managerView);
-				        
-				        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				        view.registerListener(controller);
-				        view.setSize(PapillonModel.FRAME_WIDTH,PapillonModel.FRAME_HEIGHT);
-				        view.setVisible(true);
+				        mainView[i].setVisible(true);
 				        loginView.setVisible(false);
 						success = true;
 				        break;
 					}
 				}
 				if(value == Integer.valueOf(manager.getId())){
-					ManagerView managerView = new ManagerView(manager);
-					ManagerController controller = new ManagerController(loginView, null, managerView);
-					managerView.registerListener(controller);
-					managerView.setSize(Manager.FRAME_WIDTH, Manager.FRAME_HEIGHT);
 					managerView.setVisible(true);
 					displayString = "Enter PIN";
 					loginView.setVisible(false);
@@ -134,6 +129,23 @@ public class LoginModel {
 		String managerName = Manager.MANAGER_AND_ID[0];
 		String M_ID = Manager.MANAGER_AND_ID[1];
 		manager = new Manager(managerName, M_ID);
+	}
+	
+	private void createViews(){
+		PapillonModel model = new PapillonModel();
+		managerView = new ManagerView(manager); 
+		for(int i = 0; i < serverList.size(); i++){
+			mainView[i] = new MainView(model, serverList.get(i));
+			papillonController[i] = new PapillonController(mainView[i], model, loginView, managerView);
+			mainView[i].setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			mainView[i].registerListener(papillonController[i]);
+			mainView[i].setSize(PapillonModel.FRAME_WIDTH,PapillonModel.FRAME_HEIGHT);
+			mainView[i].setVisible(false);
+		}
+		controller = new ManagerController(loginView, null, managerView);
+		managerView.registerListener(controller);
+		managerView.setSize(Manager.FRAME_WIDTH, Manager.FRAME_HEIGHT);
+		managerView.setVisible(false);
 	}
 	
 	
