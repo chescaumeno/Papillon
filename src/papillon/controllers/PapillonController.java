@@ -27,6 +27,7 @@ public class PapillonController implements ActionListener {
 		this.view = view;
 		this.model = model;
 		this.loginView = loginView;
+		//this.managerView = managerView;
 	}
 
 	@Override
@@ -41,11 +42,17 @@ public class PapillonController implements ActionListener {
     	if(command.equals("Log Off")){
     		bringBackLoginScreen(view, loginView);
     	}
+    	if(command.equals("Manager View")){
     		
+    	}
     	
     }
     public void bringBackLoginScreen(MainView view, LoginView loginView){
     	view.setVisible(false);
     	loginView.setVisible(true);
+    }
+    
+    public void managerLoginScreen(MainView view, ManagerView loginView ){
+    
     }
 }
