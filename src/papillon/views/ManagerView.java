@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class ManagerView extends JFrame{
 	private JPanel managerPanel;
-	private Font fontOne, fontTwo;
+	private Font fontOne;
 	
 	private JButton reportButton = new JButton("Close Reprot");
 	private JButton logoutButton = new JButton("Logout");

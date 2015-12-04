@@ -1,6 +1,4 @@
-package papillon.controllers;
-
-import papillon.models.Server;
+package papillon.models;
 
 /**
  * Stores the information for the end of day report
