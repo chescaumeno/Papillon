@@ -29,7 +29,6 @@ public class PapillonController implements ActionListener {
 		this.model = model;
 		this.loginView = loginView;
 		this.managerView = managerView; 
-		
 	}
 
 	@Override
@@ -59,4 +58,5 @@ public class PapillonController implements ActionListener {
     	view.setVisible(false);
     	managerView.setVisible(true);
     }
+    
 }
