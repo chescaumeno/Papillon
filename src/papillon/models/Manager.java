@@ -116,4 +116,13 @@ public class Manager {
 		}
 		return closedInvoices;
 	}
+	
+	public Check getClosedCheck(int invoice){
+		for(Check check : closedChecks){
+			if(check.getInvoiceNumber() == invoice){
+				return check;
+			}
+		}
+		return null;
+	}
 }

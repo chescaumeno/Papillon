@@ -166,4 +166,22 @@ public class Server {
 		}
 		return openInvoices;
 	}
+	
+	public boolean hasCheck(int invoice){
+		for(Check check : openChecks){
+			if(check.getInvoiceNumber() == invoice){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Check getCheck(int invoice){
+		for(Check check : openChecks){
+			if(check.getInvoiceNumber() == invoice){
+				return check;
+			}
+		}
+		return null;
+	}
 }

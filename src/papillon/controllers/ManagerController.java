@@ -13,14 +13,16 @@ import papillon.views.ManagerView;
 
 public class ManagerController implements ActionListener{
 
-	LoginView loginView;
-	ManagerView managerView;
-	Manager manager;
+	private LoginView loginView;
+	private ManagerView managerView;
+	private Manager manager;
+	private boolean currentlyShowingOpenChecks;
 	
 	public ManagerController(LoginView loginView, ManagerView managerView, Manager manager){
 		this.managerView = managerView;
 		this.loginView = loginView;
 		this.manager = manager;
+		currentlyShowingOpenChecks = true;
 	}
 
 	@Override
@@ -28,9 +30,11 @@ public class ManagerController implements ActionListener{
 		String command = e.getActionCommand();
 		System.out.println(command);//Temporary
 		if(command.equals("Open Checks")){
+			currentlyShowingOpenChecks = true;
 			this.showOpenChecks();
 		}
 		if(command.equals("Closed Checks")){
+			currentlyShowingOpenChecks = false;
 			this.showClosedChecks();
 		}
 		if(command.equals("Lookup Invoice")){
@@ -69,7 +73,18 @@ public class ManagerController implements ActionListener{
 	}
 	
 	private void lookupInvoice(){
-		
+		int invoice = managerView.getSelectedInvoice();
+		if(currentlyShowingOpenChecks){
+			Check check = LoginController.getOpenCheck(invoice);
+			if(check != null){
+				managerView.displayCheck(check);
+			}
+		}else{
+			Check check = manager.getClosedCheck(invoice);
+			if(check != null){
+				managerView.displayCheck(check);
+			}
+		}		
 	}
 	
 	private void reportEOD(){
@@ -81,8 +96,16 @@ public class ManagerController implements ActionListener{
 		managerView.setVisible(false);
 	}
 	
+	/**
+	 * Used to update the current open/closed invoices that should be displayed
+	 * when the manager logs back in
+	 */
 	public void updateView(){
-		showOpenChecks();//need to update once more is added to view
+		if(currentlyShowingOpenChecks){
+			showOpenChecks();
+		}else{
+			showClosedChecks();
+		}
 	}
 	
 }
