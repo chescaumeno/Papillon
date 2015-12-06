@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import papillon.models.Check;
 import papillon.models.LoginModel;
 import papillon.models.Manager;
 import papillon.models.Server;
@@ -41,4 +42,13 @@ public class LoginController implements ActionListener {
 		return openInvoices;
 	}
 	
+	public static Check getOpenCheck(int invoice){
+		Check check = null;
+		for(Server server : loginModel.getLoggedInServers()){
+			if(server.hasCheck(invoice)){
+				check = server.getCheck(invoice);
+			}
+		}
+		return check;
+	}
 }

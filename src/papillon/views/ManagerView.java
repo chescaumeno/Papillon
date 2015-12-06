@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import papillon.controllers.ManagerController;
+import papillon.models.Check;
 import papillon.models.Manager;
 
 public class ManagerView extends JFrame{
@@ -69,4 +70,12 @@ public class ManagerView extends JFrame{
 		invoiceList.setListData(invoiceNums);
 	}
 	
+	public int getSelectedInvoice(){
+		int item = invoiceList.getSelectedValue();
+		return item;
+	}
+	
+	public void displayCheck(Check check){
+		//Will implement this once we have the appropriate panel for displaying a check
+	}
 }
