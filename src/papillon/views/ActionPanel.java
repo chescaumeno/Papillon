@@ -105,7 +105,6 @@ public class ActionPanel extends JPanel implements ActionListener{
 		buttonPrint.setMargin(new Insets(0, 0, 0, 0));
 		bottom.add(buttonPay);
 		
-		buttonPay.addActionListener(this);
 		buttonPay.setBackground(Color.green);
 		buttonPay.setForeground(Color.white);
 		buttonPay.setFont(new Font("SansSerif", Font.BOLD, 15));
