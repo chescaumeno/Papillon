@@ -2,6 +2,8 @@ package papillon.views;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 import papillon.controllers.ManagerController;
@@ -9,22 +11,16 @@ import papillon.models.Manager;
 
 public class ManagerView extends JFrame{
 	
-	Manager manager;
+	private Manager manager;
 	
-	private JPanel managerPanel;
 	private JPanel buttonPanel;
 	private JList<Integer> invoiceList;
 	private JScrollPane invoiceScroller;
 	private JPanel checkPanel;
 	private Font fontOne;
 	
-	private JButton reportButton = new JButton("Produce EOD Sales Report");
-	private JButton logoutButton = new JButton("Logout");
-	private JButton mainViewButton = new JButton("Main View");
-	private JButton invoiceButton= new JButton("Lookup Invoice");
-	
-	private Integer[] testArray = {103333, 453453, 332345234, 55234525,1,1,15,5,5,5,5,5,5,5,5,5,5,5,5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,3,4,4};
-	
+	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("Lookup Invoice"), new JButton(""),
+								     new JButton("Closed Checks"), new JButton("Produce EOD Sales Report"), new JButton("Logout")};	
 
 	/*
 	 *   Constructor - Initialize the login window frame
@@ -39,45 +35,22 @@ public class ManagerView extends JFrame{
 		buttonPanel = new JPanel(new GridLayout(2,2,100,20));
 		buttonPanel.setSize(500,200);
 		
-		invoiceList = new JList<Integer>(testArray);
+		invoiceList = new JList<Integer>();
 		invoiceList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		invoiceList.setVisibleRowCount(-1);
 		
 		invoiceScroller = new JScrollPane(invoiceList);
 		invoiceScroller.setPreferredSize(new Dimension(250,500));
 		
-		add(invoiceScroller, BorderLayout.CENTER);
+		add(invoiceScroller, BorderLayout.WEST);
 		
-		//Buttons 
-		managerPanel = new JPanel(new GridLayout(2,1,0,0));
-		//managerPanel.setLayout(new BorderLayout());
-		//add(managerPanel, BorderLayout.CENTER); 
-		
-		/*
-		managerPanel.add(reportButton);
-		managerPanel.add(logoutButton);
-		managerPanel.add(mainViewButton);
-		managerPanel.setBackground(Color.white);
-		*/
-
-		
-		reportButton.setBackground(Color.black);
-		reportButton.setForeground(Color.white);
-		reportButton.setFont(fontOne);
-		logoutButton.setBackground(Color.black);
-		logoutButton.setForeground(Color.white);
-		logoutButton.setFont(fontOne);
-		mainViewButton.setBackground(Color.black);
-		mainViewButton.setForeground(Color.white);
-		mainViewButton.setFont(fontOne);
-		invoiceButton.setBackground(Color.black);
-		invoiceButton.setForeground(Color.white);
-		invoiceButton.setFont(fontOne);
-		
-		buttonPanel.add(invoiceButton);
-		buttonPanel.add(reportButton);
-		buttonPanel.add(mainViewButton);
-		buttonPanel.add(logoutButton);
+		for(JButton button : viewButtons){
+			button.setBackground(Color.black);
+			button.setForeground(Color.white);
+			button.setFont(fontOne);
+			buttonPanel.add(button);
+		}
+		viewButtons[2].setVisible(false);
 		
 		add(buttonPanel, BorderLayout.SOUTH);
 	}
@@ -90,6 +63,10 @@ public class ManagerView extends JFrame{
 				button.addActionListener(controller);
 			}
 		}
+	}
+	
+	public void setInvoiceDisplay(Integer[] invoiceNums){
+		invoiceList.setListData(invoiceNums);
 	}
 	
 }

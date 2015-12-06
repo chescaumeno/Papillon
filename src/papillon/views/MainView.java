@@ -20,6 +20,7 @@ import papillon.controllers.CheckController;
 import papillon.controllers.LoginController;
 import papillon.controllers.MenuController;
 import papillon.controllers.PapillonController;
+import papillon.models.Manager;
 import papillon.models.PapillonModel;
 import papillon.models.Server;
 
@@ -31,7 +32,6 @@ public class MainView extends JFrame {
     private JPanel tmp;
     private CheckActionPanel checkActionPanel;
     private MenuPanel menuPanel; 
-    private JButton buttonManager;
     private JButton buttonLogOff;
     private PapillonModel model;
     
@@ -44,7 +44,7 @@ public class MainView extends JFrame {
      * @param model 
      * @param server 
      */
-    public MainView(PapillonModel model, Server server) {
+    public MainView(PapillonModel model, Server server, Manager manager) {
         super("Papillon | " + server.getName());
         
         //TODO: Have Papillon Controller create ALL the controllers
@@ -70,7 +70,7 @@ public class MainView extends JFrame {
         
         // Adds CheckAction Panel
         
-        CheckController checkCtrl = new CheckController(server); 
+        CheckController checkCtrl = new CheckController(server, manager); 
         checkActionPanel = checkCtrl.createCheckActionPanel(); //this creates an ActionPanel
         checkCtrl.update();
  
@@ -87,18 +87,11 @@ public class MainView extends JFrame {
         buttonLogOff.setBackground(Color.green);
         buttonLogOff.setForeground(Color.white);
         
-        // Add Manager's View button
-        buttonManager = new JButton("Manager View");
-        buttonManager.setFont(new Font("SansSerif", Font.BOLD, 25));
-        buttonManager.setBackground(Color.green);
-        buttonManager.setForeground(Color.white);
-        
         tmp = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         tmp.setPreferredSize(new Dimension(400, 100));
         tmp.setBackground(Color.white);
         tmp.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         tmp.add(buttonLogOff);
-        tmp.add(buttonManager);
         mainPanel.add(tmp, BorderLayout.SOUTH);
         
         setLayout(new BorderLayout());

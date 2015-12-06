@@ -108,4 +108,12 @@ public class Manager {
 	public ArrayList<Check> getClosedChecks() {
 		return closedChecks;
 	}
+	
+	public ArrayList<Integer> getClosedInvoices(){
+		ArrayList<Integer> closedInvoices = new ArrayList<Integer>();
+		for(Check check : closedChecks){
+			closedInvoices.add(check.getInvoiceNumber());
+		}
+		return closedInvoices;
+	}
 }
