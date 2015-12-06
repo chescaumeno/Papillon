@@ -24,13 +24,13 @@ public class LoginModel {
 	private String operation; //either "Clear" or "Login"
 	private boolean start; //True if next digit entered starts a new value
 	
-	private ArrayList<Server> serverList; //holds ArrayList of servers
+	private static ArrayList<Server> serverList = null; //holds ArrayList of servers
 	private Manager manager;
 	
 	MainView[] mainView;
 	PapillonController[] papillonController;
 	ManagerView managerView;
-	ManagerController controller;
+	ManagerController managerController;
 	
 	/**
 	 * Constructor - Initializes the LoginModel instance variables
@@ -100,6 +100,7 @@ public class LoginModel {
 					}
 				}
 				if(value == Integer.valueOf(manager.getId())){
+					managerController.updateView();
 					managerView.setVisible(true);
 					displayString = "Enter PIN";
 					loginView.setVisible(false);
@@ -135,18 +136,21 @@ public class LoginModel {
 		PapillonModel model = new PapillonModel();
 		managerView = new ManagerView(manager); 
 		for(int i = 0; i < serverList.size(); i++){
-			mainView[i] = new MainView(model, serverList.get(i));
+			mainView[i] = new MainView(model, serverList.get(i), manager);
 			papillonController[i] = new PapillonController(mainView[i], model, loginView, managerView);
 			mainView[i].setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			mainView[i].registerListener(papillonController[i]);
 			mainView[i].setSize(PapillonModel.FRAME_WIDTH,PapillonModel.FRAME_HEIGHT);
 			mainView[i].setVisible(false);
 		}
-		controller = new ManagerController(loginView, null, managerView);
-		managerView.registerListener(controller);
+		managerController = new ManagerController(loginView, managerView, manager);
+		managerView.registerListener(managerController);
 		managerView.setSize(Manager.FRAME_WIDTH, Manager.FRAME_HEIGHT);
 		managerView.setVisible(false);
 	}
 	
+	public ArrayList<Server> getLoggedInServers(){
+		return serverList;
+	}
 	
 }

@@ -29,13 +29,13 @@ public class CheckController{
 
 	private Manager manager;  //////new change
 	
-	public CheckController(Server server) {
+	public CheckController(Server server, Manager manager) {
 		checkActionPanel = new CheckActionPanel(this); //checActionPanel creates the checkPanel 
 		checkPanel = checkActionPanel.getCheckPanel(); 
 		actionPanel = checkActionPanel.getActionPanel(); 
 		this.server = server;
 		currentCheck = server.getCurrentCheck();
-		manager = new Manager("Name", "1111"); //Temporary
+		this.manager = manager; 
 	}
 	
 	public void addItemToCheck(MenuItem item) {
@@ -134,7 +134,9 @@ public class CheckController{
 	public void payCheck(){
 		//TODO may want to add some verification that the check was paid instead of only closing it
 		Check closedCheck = server.closeCurrentCheck();
-		manager.addClosedCheck(closedCheck); 
+		if(closedCheck.getItemNum() > 0){
+			manager.addClosedCheck(closedCheck);
+		}
 		this.update();
 	}
 

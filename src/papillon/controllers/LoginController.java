@@ -2,8 +2,11 @@ package papillon.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import papillon.models.LoginModel;
+import papillon.models.Manager;
+import papillon.models.Server;
 import papillon.views.LoginView;
 
 /**
@@ -11,7 +14,7 @@ import papillon.views.LoginView;
  * @author Anna Umeno, Lymari Montijo, Caleb Mussulman, Matt New, Nanette Springer
  */
 public class LoginController implements ActionListener {
-	private LoginModel loginModel;
+	private static LoginModel loginModel;
 	private LoginView loginView;
 	
 	/**
@@ -29,4 +32,13 @@ public class LoginController implements ActionListener {
 		loginModel.update(command);
 		loginView.update(loginModel.getValue());
 	}
+	
+	public static ArrayList<Integer> getOpenInvoices(){
+		ArrayList<Integer> openInvoices = new ArrayList<Integer>();
+		for(Server server : loginModel.getLoggedInServers()){
+			openInvoices.addAll(server.getOpenInvoices());
+		}
+		return openInvoices;
+	}
+	
 }

@@ -41,22 +41,12 @@ public class PapillonController implements ActionListener {
 
     public void performCommand(String command){
     	if(command.equals("Log Off")) {
-    		bringBackLoginScreen(view, loginView);
-    	} else if (command.equals("Manager View")) {
-    		displayManagerView(view, managerView); 
+    		bringBackLoginScreen();
     	}
-    		
-    	
     }
-    public void bringBackLoginScreen(MainView view, LoginView loginView){
+    public void bringBackLoginScreen(){
     	view.setVisible(false);
     	loginView.getPinDisplay().setText("Enter PIN");
     	loginView.setVisible(true);
-    }
-    
-    public void displayManagerView(MainView view, ManagerView managerView) {
-    	view.setVisible(false);
-    	managerView.setVisible(true);
-    }
-    
+    }    
 }

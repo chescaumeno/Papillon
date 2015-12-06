@@ -156,4 +156,14 @@ public class Server {
 			index++;
 		}
 	}
+	
+	public ArrayList<Integer> getOpenInvoices(){
+		ArrayList<Integer> openInvoices = new ArrayList<Integer>();
+		for(Check check : openChecks){
+			if(check.getItemNum() != 0){
+				openInvoices.add(check.getInvoiceNumber());
+			}
+		}
+		return openInvoices;
+	}
 }
