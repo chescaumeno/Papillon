@@ -137,4 +137,48 @@ public class Check implements Serializable{
 		return (checkItems.size());
 	}
 	
+	public String toString(){
+		String result = "KYOTO SUSHI HOUSE\n"; 
+    	result += "1 Sushi Way Ste 345\n"; 
+    	result += "San Antonio, TX, 78260\n"; 
+    	result += "210-555-6789\n"; 
+    	result += "\n\n";  
+    	
+    	result += "Server: " + server + "\n";
+		
+		result += fmt.format(date) + "\n";
+		result += "Invoice number: " + invoiceNumber + "\n\n";
+		result += " ---------------------------  \n\n";
+		
+		for (CheckItem item: checkItems) {
+			result += convertCheckItemToString(item); 
+			result += "\n";  
+		}
+		
+		result += "\n\n"; 
+		result += "Subtotal:\t" + formatCurrency(subTotal) + "\n"; 
+		result += "Tax:\t\t" + formatCurrency(tax) + "\n"; 
+		result += "Total:\t\t" + formatCurrency(getTotal()) + "\n";
+		result += "\nTip:\t\t" + formatCurrency(tips) + "\n";
+		
+		return result;
+	}
+	
+	 public String formatCurrency(double d) {
+	    	if(d < 10){
+	    		return(String.format("$ %.2f", d));
+	    	}
+	    	return String.format("$%.2f", d); 
+	 }
+	 
+	 public String convertCheckItemToString(CheckItem item) {
+			String word = "             "; 
+			String shortName = item.getMenuItem().getName() + word;   
+			if (shortName.length() >= 13) {
+				shortName = shortName.substring(0, 13);
+			}
+			String price = formatCurrency(item.getMenuItem().getPrice() * item.getQuantity()); 
+			String checkItemString = shortName + "    " + item.getQuantity() + "    " + price;
+			return checkItemString; 
+		}
 }
