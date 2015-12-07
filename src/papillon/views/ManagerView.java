@@ -47,10 +47,12 @@ public class ManagerView extends JFrame{
 		checkText.setFont(new Font("monospaced", 0, 11));
 		checkDisplay = new JScrollPane(checkText);
 		checkDisplay.setPreferredSize(new Dimension(250,500));
+		checkDisplay.setBackground(Color.cyan);
 		checkPanel = new JPanel();
 		checkPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "check display", TitledBorder.CENTER, TitledBorder.TOP));
 		checkPanel.add(checkDisplay);
 		checkPanel.setPreferredSize(new Dimension(250,500));
+		checkPanel.setBackground(Color.yellow);
 		
 		buttonPanel = new JPanel(new GridLayout(2,2,100,20));
 		buttonPanel.setSize(500,200);
