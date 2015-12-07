@@ -138,13 +138,6 @@ public class CheckPanel extends JPanel implements ActionListener{
 			result += convertCheckItemToString(item); 
 			result += "\n";  
 		}
-		
-		result += "\n\n"; 
-		result += "Subtotal:\t" + formatCurrency(subtotal) + "\n"; 
-		result += "Tax:\t\t" + formatCurrency(tax) + "\n"; 
-		result += "Total:\t\t" + formatCurrency(total) + "\n";
-		result += "\nTip:\t\t" + formatCurrency(tip) + "\n";
-		
 		return result;
     }
     

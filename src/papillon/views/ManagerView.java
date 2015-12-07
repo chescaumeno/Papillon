@@ -23,7 +23,7 @@ public class ManagerView extends JFrame{
 	private JPanel checkPanel;
 	private Font fontOne;
 	
-	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("Lookup Invoice"), new JButton(""),
+	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("Display Check"), new JButton(""),
 								     new JButton("Closed Checks"), new JButton("Produce EOD Sales Report"), new JButton("Logout")};	
 
 	/*

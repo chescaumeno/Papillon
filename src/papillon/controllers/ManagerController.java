@@ -37,8 +37,8 @@ public class ManagerController implements ActionListener{
 			currentlyShowingOpenChecks = false;
 			this.showClosedChecks();
 		}
-		if(command.equals("Lookup Invoice")){
-			this.lookupInvoice();
+		if(command.equals("Display Check")){
+			this.displayCheck();
 		}
 		if(command.equals("Produce EOD Sales Report")){
 			this.reportEOD();
@@ -72,7 +72,7 @@ public class ManagerController implements ActionListener{
 		}
 	}
 	
-	private void lookupInvoice(){
+	private void displayCheck(){
 		int invoice = managerView.getSelectedInvoice();
 		if(currentlyShowingOpenChecks){
 			Check check = LoginController.getOpenCheck(invoice);
