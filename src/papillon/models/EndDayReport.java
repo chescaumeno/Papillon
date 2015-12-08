@@ -173,7 +173,7 @@ public class EndDayReport implements Serializable{
 		
 		eod += "EOD SALES REPORT\n";
 		eod += "----------------------------------------\n\n"; 
-		eod += "Date:\t" + EODChecks.get(1).getDate(); 
+		eod += "Date:\t" + this.getEODDate(); 
 		eod += "\nManager in Charge:\tMark Robinson\n";
 		eod += "\n\n"; 
 		
@@ -186,7 +186,7 @@ public class EndDayReport implements Serializable{
 		
 		eod += "----------------------------------------\n\n"; 
 		eod += "Total Gross Sales:\t\t" + formatDouble(this.getGrossSales()) + "\n"; 
-		eod += "Total Taxes:\t\t" + formatDouble(this.getTaxes()) + "\n";
+		eod += "Total Taxes:\t\t\t" + formatDouble(this.getTaxes()) + "\n";
 		
 		
 		eod += "\n\n\tEnd of Sales Report\n"; 
@@ -219,6 +219,11 @@ public class EndDayReport implements Serializable{
 	    		return(String.format("$ %.2f", d));
 	    	}
 	    	return String.format("$ %.2f", d); 
+	 }
+	 
+	 public String getEODDate(){
+		 SimpleDateFormat eodDay = new SimpleDateFormat("MM/dd/yy");
+		 return eodDay.format(date);
 	 }
 
 }
