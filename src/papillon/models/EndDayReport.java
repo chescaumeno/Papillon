@@ -11,6 +11,8 @@ import java.util.Date;
 
 public class EndDayReport implements Serializable{
 
+
+	private static final long serialVersionUID = -8594593588675985176L;
 	private Server server; // not sure if I need this yet
 	private int numChecks; // not sure of I need this.
 	private double grossSales;
@@ -55,24 +57,12 @@ public class EndDayReport implements Serializable{
 		date = new Date();
 	}
 
-	/**
-	 * Return the comma separate string
-	 */
-	public String toString() {
-		String result = manager.getName() + ", " + numChecks + ", " + grossSales + ", " + drinkSales + ", "
-				+ dessertSales + ", " + totalTips;
-		return result;
-	}
-
 	// getter and setters
 	public Server getServer() {
 		return server;
 	}
 
 	public int getNumChecks() {
-
-		// take the arayList of Checks and just count how many checks we should
-		// have.
 		return numChecks;
 	}
 
@@ -174,25 +164,63 @@ public class EndDayReport implements Serializable{
 	 * text Field. 
 	 * @return
 	 */
-	public String EndDayReport() {
-		String eod = "EOD SALES REPORT\n";
+	@Override
+	public String toString() {
+		
+		String eod = "TOKYO SUSHI HOUSE\n"; 
+		eod += "1 Sushi Way Ste 345\nSan Antonio, TX, 78260\n"; 
+		eod += "210-555-6789\n"; 
+		
+		eod += "EOD SALES REPORT\n";
 		eod += "----------------------------------------\n\n"; 
-		eod += "Date:\t" + EODChecks.get(1).getDate(); //date of the first check, they are all from the same day. 
-		eod += "Manager in Charge:\tJane Doe\n";
-		eod += "Total Gross Sales:\t" + this.getGrossSales() + "\n"; 
-		eod += "Total Taxes:\t" + this.getTaxes() + "\n";
-		eod += "----------------------------------------\n"; 
-		eod += "Total Drink Sales:\t" + this.getDrinkSales() + "\n"; 
-		eod += "Total Appetizer Sales:\t" + this.getAppetizerSales() + "\n"; 
-		eod += "Total Sides Sales:\t" + this.getSidesSales() + "\n";
-		eod += "Total Entrees Sales:\t" + this.getEntreesSales() + "\n";
-		eod += "Total DessertSales:\t" + this.getDessertsSales() + "\n";
-		eod += "Sales by server:\n"; 
-		//eod += write code to get the sales of each server
+		eod += "Date:\t" + EODChecks.get(1).getDate(); 
+		eod += "\nManager in Charge:\tMark Robinson\n";
+		eod += "\n\n"; 
+		
+		eod += "----------------------------------------\n\n"; 
+		eod += "Total Drink Sales:\t\t" + formatDouble(this.getDrinkSales()) + "\n"; 
+		eod += "Total Appetizer Sales:\t\t" + formatDouble(this.getAppetizerSales()) + "\n"; 
+		eod += "Total Sides Sales:\t\t" + formatDouble(this.getSidesSales()) + "\n";
+		eod += "Total Entrees Sales:\t\t" + formatDouble(this.getEntreesSales()) + "\n";
+		eod += "Total DessertSales:\t\t" + formatDouble(this.getDessertsSales()) + "\n";
+		
+		eod += "----------------------------------------\n\n"; 
+		eod += "Total Gross Sales:\t\t" + formatDouble(this.getGrossSales()) + "\n"; 
+		eod += "Total Taxes:\t\t" + formatDouble(this.getTaxes()) + "\n";
+		
+		
+		eod += "\n\n\tEnd of Sales Report\n"; 
 		return eod; 
 	}
 	
 	public String getReportName(){
 		return fmt.format(date);
 	}
+	
+
+
+	public ArrayList<Integer> getEODInvoices(){
+		ArrayList<Integer> invoices = new ArrayList<Integer>();
+		for(Check check : EODChecks){
+			invoices.add(check.getInvoiceNumber());
+		}
+		return invoices;
+	}
+	
+	public Check getCheck(int invoice){
+		for(Check check : EODChecks){
+			if(invoice == check.getInvoiceNumber()){
+				return check;
+			}
+		}
+		return null;
+	}
+
+	 public String formatDouble(double d) {
+	    	if(d < 10) {
+	    		return(String.format("$ %.2f", d));
+	    	}
+	    	return String.format("$ %.2f", d); 
+	 }
+
 }

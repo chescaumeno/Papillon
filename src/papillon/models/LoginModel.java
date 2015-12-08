@@ -144,7 +144,7 @@ public class LoginModel {
 			mainView[i].setSize(PapillonModel.FRAME_WIDTH,PapillonModel.FRAME_HEIGHT);
 			mainView[i].setVisible(false);
 		}
-		managerController = new ManagerController(report,loginView, managerView, manager);
+		managerController = new ManagerController(loginView, managerView, manager);
 		managerView.registerListener(managerController);
 		managerView.setSize(Manager.FRAME_WIDTH, Manager.FRAME_HEIGHT);
 		managerView.setVisible(false);

@@ -21,38 +21,43 @@ public class ManagerController implements ActionListener{
 	private LoginView loginView;
 	private ManagerView managerView;
 	private Manager manager;
-	//eod report
-	private EndDayReport report;
+	private EndDayReport currentLoadedReport;
+
 	private boolean currentlyShowingOpenChecks;
+	private boolean currentlyShowingClosedChecks;
 	private boolean nextLogoutExits;
 	
-	public ManagerController(EndDayReport report, LoginView loginView, ManagerView managerView, Manager manager){
+	public ManagerController(LoginView loginView, ManagerView managerView, Manager manager){
 		this.managerView = managerView;
 		this.loginView = loginView;
 		this.manager = manager;
-		this.report = report;
 		currentlyShowingOpenChecks = true;
+		currentlyShowingClosedChecks = false;
 		nextLogoutExits = false;
-		showEODReportFiles();
+		currentLoadedReport = null;
+		displayReportFiles();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
-		System.out.println(command);//Temporary
 		if(command.equals("Open Checks")){
 			currentlyShowingOpenChecks = true;
+			currentlyShowingClosedChecks = false;
 			this.showOpenChecks();
 		}
 		if(command.equals("Closed Checks")){
 			currentlyShowingOpenChecks = false;
+			currentlyShowingClosedChecks = true;
 			this.showClosedChecks();
 		}
 		if(command.equals("Display Check")){
 			this.displayCheck();
 		}
-		if(command.equals("View EOD Sales Report")){
-			this.viewReportEOD();
+		if(command.equals("Load Checks")){
+			currentlyShowingOpenChecks = false;
+			currentlyShowingClosedChecks = false;
+			this.loadChecks();
 		}
 		if(command.equals("Produce EOD Sales Report")){
 			int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to produce an end-of-day report",
@@ -100,19 +105,35 @@ public class ManagerController implements ActionListener{
 			if(check != null){
 				managerView.displayText(check.toString());
 			}
-		}else{
+		}else if(currentlyShowingClosedChecks){
 			Check check = manager.getClosedCheck(invoice);
 			if(check != null){
 				managerView.displayText(check.toString());
 			}
-		}		
+		}else{
+			Check check = currentLoadedReport.getCheck(invoice);
+			if(check != null){
+				managerView.displayText(check.toString());
+			}
+		}
 	}
 	
-	private void viewReportEOD(){
-		//String display = report.EndDayReport();
-		
-		System.out.print("report");
-		
+	private void loadChecks(){
+		String file = managerView.getSelectedReportFile();
+		currentLoadedReport = null;
+		if(file == null){
+			return;
+		}else{
+			currentLoadedReport = manager.loadDayReportFromFile(file);
+			if(currentLoadedReport == null){
+				return;
+			}else{
+				ArrayList<Integer> eodInvoiceList = currentLoadedReport.getEODInvoices();
+				Integer[] eodInvoices = eodInvoiceList.toArray(new Integer[eodInvoiceList.size()]);
+				Arrays.sort(eodInvoices);
+				managerView.setInvoiceDisplay(eodInvoices);
+			}
+		}	
 	}
 	
 	private void produceReportEOD(){
@@ -151,7 +172,15 @@ public class ManagerController implements ActionListener{
 		
 	}
 	
-	public void showEODReportFiles(){
-		ArrayList<String> eodFileNames = manager.getEODFileNames();
+	public void displayReportFiles(){
+		ArrayList<String> eodFileList = manager.getEODFileNames();
+		if(eodFileList.size() == 0){
+			String[] noEODFiles = {"No end-of-day files on record"};
+			managerView.setReportDisplay(noEODFiles);
+		}else{
+			String[] eodFileNames = eodFileList.toArray(new String[eodFileList.size()]);
+			Arrays.sort(eodFileNames);
+			managerView.setReportDisplay(eodFileNames);
+		}
 	}
 }
