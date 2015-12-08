@@ -34,7 +34,7 @@ public class ManagerView extends JFrame{
 	private JPanel reportPanel;
 
 	
-	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("View EOD Sales Report"), new JButton("Display Check"),
+	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("Load Checks"), new JButton("Display Check"),
 								     new JButton("Closed Checks"), new JButton("Produce EOD Sales Report"), new JButton("Logout")};	
 
 	/*
@@ -115,12 +115,24 @@ public class ManagerView extends JFrame{
 		invoiceList.setListData(invoiceNums);
 	}
 	
+	public void setReportDisplay(String[] reports){
+		reportList.setListData(reports);
+	}
+	
 	public int getSelectedInvoice(){
 		int item = -1;
 		if(invoiceList.getSelectedIndex() >= 0){
 			item = invoiceList.getSelectedValue();
 		}
 		return item;
+	}
+	
+	public String getSelectedReportFile(){
+		String file = null;
+		if(reportList.getSelectedIndex() >= 0){
+			file = reportList.getSelectedValue();
+		}
+		return file;
 	}
 	
 	public void displayText(String text){

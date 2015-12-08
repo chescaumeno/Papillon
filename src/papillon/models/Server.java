@@ -49,7 +49,6 @@ public class Server {
 
 		 //invoice number as key to a check
 		invoiceLookUpMap.put(firstCheck.getInvoiceNumber(), firstCheck);
-		System.out.println("Added invoice " + firstCheck.getInvoiceNumber());
 	}
 
 	// getters and setters
@@ -78,6 +77,14 @@ public class Server {
 	}
 	
 	public void startNewCheck(){
+		int i = 0;
+		for(Check check : openChecks){
+			if(check.getItemNum() == 0){
+				currentCheck = i;
+				return;
+			}
+			i++;
+		}
 		Check newCheck = new Check(name, invoiceNumber());
 		openChecks.add(newCheck);
 		invoiceLookUpMap.put(newCheck.getInvoiceNumber(), newCheck);

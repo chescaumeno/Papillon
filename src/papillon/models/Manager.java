@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class Manager implements Serializable{
 	
+
+	private static final long serialVersionUID = 9153836767229924315L;
 	public static final String[] MANAGER_AND_ID = {"Mark Robinson", "8405"};
 	public static int FRAME_WIDTH = 1024; 
     public static int FRAME_HEIGHT = 768;
@@ -80,14 +82,16 @@ public class Manager implements Serializable{
 		EndDayReport eodReport = null;
 		FileInputStream in = null;
 		ObjectInputStream inStream = null;
+		String file = eodFolder + "/" + fileName;
 		try {
-			in = new FileInputStream(fileName);
+			in = new FileInputStream(file);
 			inStream = new ObjectInputStream(in);
 			eodReport = (EndDayReport) inStream.readObject();
 			inStream.close();
 			in.close();
 		} catch (IOException e) {
 			System.err.println("Error reading report object from file for report file " + fileName);
+			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// Not sure how that would even happen...
 		}

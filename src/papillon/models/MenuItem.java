@@ -3,6 +3,9 @@ package papillon.models;
 import java.io.Serializable;
 
 public class MenuItem implements Serializable{
+
+	
+	private static final long serialVersionUID = 1143881218619818797L;
 	private String name; 
 	private double price; 
 	private Category category; 

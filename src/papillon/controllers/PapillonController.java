@@ -34,7 +34,6 @@ public class PapillonController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
-		System.out.println(command);
 		performCommand(command);
 		
 	}

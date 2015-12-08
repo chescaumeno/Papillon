@@ -35,7 +35,7 @@ public class MenuController {
 			}
 			
 		} catch(IOException ex) {
-			System.out.println(ex.getMessage()); 
+			System.err.println(ex.getMessage()); 
 		}
 		
 	}

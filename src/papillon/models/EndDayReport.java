@@ -11,6 +11,8 @@ import java.util.Date;
 
 public class EndDayReport implements Serializable{
 
+
+	private static final long serialVersionUID = -8594593588675985176L;
 	private Server server; // not sure if I need this yet
 	private int numChecks; // not sure of I need this.
 	private double grossSales;
@@ -194,5 +196,22 @@ public class EndDayReport implements Serializable{
 	
 	public String getReportName(){
 		return fmt.format(date);
+	}
+	
+	public ArrayList<Integer> getEODInvoices(){
+		ArrayList<Integer> invoices = new ArrayList<Integer>();
+		for(Check check : EODChecks){
+			invoices.add(check.getInvoiceNumber());
+		}
+		return invoices;
+	}
+	
+	public Check getCheck(int invoice){
+		for(Check check : EODChecks){
+			if(invoice == check.getInvoiceNumber()){
+				return check;
+			}
+		}
+		return null;
 	}
 }
