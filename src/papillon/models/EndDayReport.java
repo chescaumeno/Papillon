@@ -196,7 +196,6 @@ public class EndDayReport implements Serializable{
 	public String getReportName(){
 		return fmt.format(date);
 	}
-	
 
 	public ArrayList<Integer> getEODInvoices(){
 		ArrayList<Integer> invoices = new ArrayList<Integer>();

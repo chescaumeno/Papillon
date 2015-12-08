@@ -23,11 +23,7 @@ public class MenuController {
 			ArrayList<MenuItem> list = new ArrayList<MenuItem>(); 
 			menuItemsByCategory.put(category, list); 
 		}
-		
-
 		loadMenuFromFile(MenuController.LUNCH_MENU_PATH); 
-
-		
 	}
 
 	private MenuItem createMenuItem(String currentLine) {

@@ -21,7 +21,6 @@ public class ManagerController implements ActionListener{
 	private LoginView loginView;
 	private ManagerView managerView;
 	private Manager manager;
-	//eod report
 	private EndDayReport currentLoadedReport;
 
 	private boolean currentlyShowingOpenChecks;
