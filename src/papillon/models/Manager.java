@@ -101,7 +101,6 @@ public class Manager implements Serializable{
 	public ArrayList<String> getEODFileNames(){
 		ArrayList<String> eodFileNames = new ArrayList<String>();
 		for (final File fileEntry : eodFolder.listFiles()) {
-	            System.out.println(fileEntry.getName());
 	            eodFileNames.add(fileEntry.getName());
 	    }
 		return(eodFileNames);

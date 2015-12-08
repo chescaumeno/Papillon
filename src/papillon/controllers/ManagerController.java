@@ -19,6 +19,7 @@ import papillon.views.ManagerView;
 public class ManagerController implements ActionListener{
 
 	private LoginView loginView;
+
 	private ManagerView managerView;
 	private Manager manager;
 	private EndDayReport currentLoadedReport;
@@ -41,34 +42,43 @@ public class ManagerController implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
-		if(command.equals("Open Checks")){
+		if(command.equals("Open Invoices")){
 			currentlyShowingOpenChecks = true;
 			currentlyShowingClosedChecks = false;
 			this.showOpenChecks();
 		}
-		if(command.equals("Closed Checks")){
+		if(command.equals("Closed Invoices")){
 			currentlyShowingOpenChecks = false;
 			currentlyShowingClosedChecks = true;
 			this.showClosedChecks();
 		}
+		if(command.equals("File's Invoices")){
+			currentlyShowingOpenChecks = false;
+			currentlyShowingClosedChecks = false;
+			this.showFileChecks();
+		}
 		if(command.equals("Display Check")){
 			this.displayCheck();
 		}
-		if(command.equals("Load Checks")){
+		if(command.equals("Load File")){
 			currentlyShowingOpenChecks = false;
 			currentlyShowingClosedChecks = false;
 			this.loadChecks();
 		}
-		if(command.equals("Produce EOD Sales Report")){
+		if(command.equals("Produce EOD Report")){
 			int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to produce an end-of-day report",
 											"Confirmation", JOptionPane.YES_NO_OPTION);
 			if(response == JOptionPane.YES_OPTION){
 				this.produceReportEOD();
 			}
 		}
+		if(command.equals("Display EOD Report")){
+			this.displayReport();
+		}
 		if(command.equals("Logout")){
 			this.logout();
 		}
+		
 	}
 	
 	private void showOpenChecks(){
@@ -118,6 +128,14 @@ public class ManagerController implements ActionListener{
 		}
 	}
 	
+	private void displayReport(){
+		if(currentLoadedReport == null){
+			JOptionPane.showMessageDialog(null, "No end-of-day report file is currently loaded");
+			return;
+		}
+		managerView.displayText(currentLoadedReport.toString());
+	}
+	
 	private void loadChecks(){
 		String file = managerView.getSelectedReportFile();
 		currentLoadedReport = null;
@@ -125,15 +143,8 @@ public class ManagerController implements ActionListener{
 			return;
 		}else{
 			currentLoadedReport = manager.loadDayReportFromFile(file);
-			if(currentLoadedReport == null){
-				return;
-			}else{
-				ArrayList<Integer> eodInvoiceList = currentLoadedReport.getEODInvoices();
-				Integer[] eodInvoices = eodInvoiceList.toArray(new Integer[eodInvoiceList.size()]);
-				Arrays.sort(eodInvoices);
-				managerView.setInvoiceDisplay(eodInvoices);
-			}
-		}	
+			this.showFileChecks();
+		}
 	}
 	
 	private void produceReportEOD(){
@@ -166,13 +177,15 @@ public class ManagerController implements ActionListener{
 	public void updateView(){
 		if(currentlyShowingOpenChecks){
 			showOpenChecks();
-		}else{
+		}else if(currentlyShowingClosedChecks){
 			showClosedChecks();
+		}else{
+			showFileChecks();
 		}
 		
 	}
 	
-	public void displayReportFiles(){
+	private void displayReportFiles(){
 		ArrayList<String> eodFileList = manager.getEODFileNames();
 		if(eodFileList.size() == 0){
 			String[] noEODFiles = {"No end-of-day files on record"};
@@ -181,6 +194,17 @@ public class ManagerController implements ActionListener{
 			String[] eodFileNames = eodFileList.toArray(new String[eodFileList.size()]);
 			Arrays.sort(eodFileNames);
 			managerView.setReportDisplay(eodFileNames);
+		}
+	}
+	
+	private void showFileChecks(){
+		if(currentLoadedReport == null){
+			return;
+		}else{
+			ArrayList<Integer> eodInvoiceList = currentLoadedReport.getEODInvoices();
+			Integer[] eodInvoices = eodInvoiceList.toArray(new Integer[eodInvoiceList.size()]);
+			Arrays.sort(eodInvoices);
+			managerView.setInvoiceDisplay(eodInvoices);
 		}
 	}
 }

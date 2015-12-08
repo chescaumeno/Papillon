@@ -23,7 +23,9 @@ public class MenuController {
 			ArrayList<MenuItem> list = new ArrayList<MenuItem>(); 
 			menuItemsByCategory.put(category, list); 
 		}
+
 		loadMenuFromFile(MenuController.LUNCH_MENU_PATH); 
+
 	}
 
 	private MenuItem createMenuItem(String currentLine) {
@@ -70,7 +72,7 @@ public class MenuController {
 			}
 			
 		} catch(IOException ex) {
-			System.out.println(ex.getMessage()); 
+			System.err.println(ex.getMessage()); 
 		}
 	}
 

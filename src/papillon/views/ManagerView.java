@@ -32,8 +32,10 @@ public class ManagerView extends JFrame{
 	private Font fontOne;
 	
 	
-	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("Load Checks"), new JButton("Display Check"),
-								     new JButton("Closed Checks"), new JButton("Produce EOD Sales Report"), new JButton("Logout")};	
+	private JButton[] viewButtons = {new JButton("Load File"), new JButton("Open Invoices"),
+									 new JButton("Display Check"), new JButton("Produce EOD Report"),
+									 new JButton("File's Invoices"), new JButton("Closed Invoices"),
+									 new JButton("Display EOD Report"), new JButton("Logout")};	
 	
 	public ManagerView(Manager manager){
 		super("Manager's View | " + manager.getName());
@@ -67,7 +69,7 @@ public class ManagerView extends JFrame{
 		topPanel.setSize(250,200);
 		
 
-		buttonPanel = new JPanel(new GridLayout(2,3,50,20));
+		buttonPanel = new JPanel(new GridLayout(2,4,50,20));
 		buttonPanel.setSize(250,200);
 		for(JButton button : viewButtons){
 			button.setBackground(Color.black);
