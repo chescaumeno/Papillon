@@ -19,27 +19,24 @@ public class ManagerView extends JFrame{
 	
 	private JPanel backPanel;
 	
-	private JPanel buttonPanel;
 	private JList<Integer> invoiceList;
 	private JScrollPane invoiceScroller;
-	//private JPanel invoicePanel;
+	
+	private JPanel buttonPanel;
+	private JPanel topPanel;
+	private JList<String> reportList;
+	private JScrollPane reportDisplay;
 	
 	private JTextArea checkText;
 	private JScrollPane checkDisplay;
-	private JPanel checkPanel;
 	private Font fontOne;
-	//report
-	private JList<String> reportList;
-	private JScrollPane reportDisplay;
-	private JPanel reportPanel;
+	
+
 
 	
 	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("View EOD Sales Report"), new JButton("Display Check"),
 								     new JButton("Closed Checks"), new JButton("Produce EOD Sales Report"), new JButton("Logout")};	
-
-	/*
-	 *   Constructor - Initialize the login window frame
-	 */
+	
 	public ManagerView(Manager manager){
 		super("Manager's View | " + manager.getName());
 		backPanel = new JPanel();
@@ -49,20 +46,12 @@ public class ManagerView extends JFrame{
 		setLayout(new BorderLayout(0,0));
 		fontOne = new Font("Verdana", Font.BOLD, 15);
 		
-		//BorderLayout(50, 50);
-		
 		invoiceList = new JList<Integer>();
 		invoiceList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		invoiceList.setVisibleRowCount(-1);
 		invoiceScroller = new JScrollPane(invoiceList);
 		invoiceScroller.setPreferredSize(new Dimension(300,100));
 		
-
-	//	JUST IN CASE WE NEED BORDER AGAIN
-	//	invoicePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "check display", TitledBorder.CENTER, TitledBorder.TOP));
-	
-		
-		//make report
 		reportList = new JList<String>();
 		reportList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		reportList.setVisibleRowCount(-1);
@@ -76,9 +65,11 @@ public class ManagerView extends JFrame{
 		checkDisplay = new JScrollPane(checkText);
 		checkDisplay.setPreferredSize(new Dimension(300,100));
 	
+		topPanel = new JPanel(new GridLayout(1,3));
+		topPanel.setSize(250,200);
+		
 
-
-		buttonPanel = new JPanel(new GridLayout(2,3,100,20));
+		buttonPanel = new JPanel(new GridLayout(2,3,50,20));
 		buttonPanel.setSize(250,200);
 		for(JButton button : viewButtons){
 			button.setBackground(Color.black);
@@ -86,19 +77,15 @@ public class ManagerView extends JFrame{
 			button.setFont(fontOne);
 			buttonPanel.add(button);
 		}
-		
-		
-		
-		
+		//Container topPanel = makeIt("Top", Component.TOP_ALIGNMENT);
 		backPanel.add(invoiceScroller, BorderLayout.CENTER);
-		
-		//report
+		backPanel.add(topPanel, BorderLayout.PAGE_START);
 		backPanel.add(reportDisplay, BorderLayout.LINE_START);
 		backPanel.add(checkDisplay, BorderLayout.LINE_END);
 		backPanel.add(buttonPanel, BorderLayout.PAGE_END);
-		
 		add(backPanel, BorderLayout.CENTER);
 	}
+	
 	
 	public void registerListener(ManagerController controller){
 		Component[] components = buttonPanel.getComponents();
