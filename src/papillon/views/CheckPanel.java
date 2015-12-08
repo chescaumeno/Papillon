@@ -117,10 +117,7 @@ public class CheckPanel extends JPanel implements ActionListener{
      * Update the view
      */
     public String getCheckFormat() {
-    	//TODO: Add the subtotal, tax and total. 
-    	//check must also change the quantity of the same item and not add it n times. 
-    	
-    	
+   	
     	result = "KYOTO SUSHI HOUSE\n"; 
     	result += "1 Sushi Way Ste 345\n"; 
     	result += "San Antonio, TX, 78260\n"; 

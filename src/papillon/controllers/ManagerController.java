@@ -20,8 +20,7 @@ public class ManagerController implements ActionListener{
 
 	private LoginView loginView;
 	private ManagerView managerView;
-	private Manager manager;
-	//eod report
+	private Manager manager; 
 	private EndDayReport report;
 	private boolean currentlyShowingOpenChecks;
 	private boolean nextLogoutExits;

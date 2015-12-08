@@ -31,8 +31,6 @@ public class ManagerView extends JFrame{
 	private JScrollPane checkDisplay;
 	private Font fontOne;
 	
-
-
 	
 	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("View EOD Sales Report"), new JButton("Display Check"),
 								     new JButton("Closed Checks"), new JButton("Produce EOD Sales Report"), new JButton("Logout")};	
@@ -115,7 +113,8 @@ public class ManagerView extends JFrame{
 	}
 	
 	//eod report
-	public void displayReprot(){
+	public void displayReport(){
+		
 		
 	}
 	
