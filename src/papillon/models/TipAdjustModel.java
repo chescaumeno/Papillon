@@ -76,7 +76,6 @@ public class TipAdjustModel {
 			else if(operation.equals("Enter")) {
 				checkCtrl.getCurrentCheck().setTips(value);
 				checkCtrl.update();
-				System.out.println("Tip entered : " + value);
 				value = 0;
 				displayString = "$0.00";
 				internalString = "0";
