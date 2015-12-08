@@ -119,7 +119,7 @@ public class CheckController{
 	public void printCheck(){
 		int invoice = currentCheck.getInvoiceNumber();
 		String printOutput = checkPanel.getCheckFormat();
-		String filePath = "src/papillon/resources/printOutput/";
+		String filePath = "src/papillon/resources/";
 		String fileName = filePath + invoice + ".txt";
 		PrintWriter out = null;
 		try{
