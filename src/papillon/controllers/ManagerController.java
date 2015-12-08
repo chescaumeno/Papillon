@@ -83,6 +83,7 @@ public class ManagerController implements ActionListener{
 	
 	private void showOpenChecks(){
 		ArrayList<Integer> invoiceList = LoginController.getOpenInvoices();
+		managerView.setInvoiceTitle("Open Invoices");
 		if(invoiceList != null){
 			Integer[] openInvoiceNums = invoiceList.toArray(new Integer[invoiceList.size()]);
 			Arrays.sort(openInvoiceNums);
@@ -95,6 +96,7 @@ public class ManagerController implements ActionListener{
 	
 	private void showClosedChecks(){
 		ArrayList<Integer> invoiceList = manager.getClosedInvoices();
+		managerView.setInvoiceTitle("Closed Invoices");
 		if(invoiceList != null){
 			Integer[] closedInvoiceNums = invoiceList.toArray(new Integer[invoiceList.size()]);
 			Arrays.sort(closedInvoiceNums);
@@ -110,6 +112,7 @@ public class ManagerController implements ActionListener{
 		if(invoice == -1){
 			return;
 		}
+		managerView.setDisplayTitle("Check Display");
 		if(currentlyShowingOpenChecks){
 			Check check = LoginController.getOpenCheck(invoice);
 			if(check != null){
@@ -133,6 +136,7 @@ public class ManagerController implements ActionListener{
 			JOptionPane.showMessageDialog(null, "No end-of-day report file is currently loaded");
 			return;
 		}
+		managerView.setDisplayTitle("EOD Report Display");
 		managerView.displayText(currentLoadedReport.toString());
 	}
 	
@@ -158,6 +162,7 @@ public class ManagerController implements ActionListener{
 			}
 			managerView.hideProduceReportButton();
 			nextLogoutExits = true;
+			managerView.setDisplayTitle("EOD Report Display");
 			managerView.displayText(eodReport.toString());
 		}
 	}
@@ -201,6 +206,7 @@ public class ManagerController implements ActionListener{
 		if(currentLoadedReport == null){
 			return;
 		}else{
+			managerView.setInvoiceTitle("File's Invoices");
 			ArrayList<Integer> eodInvoiceList = currentLoadedReport.getEODInvoices();
 			Integer[] eodInvoices = eodInvoiceList.toArray(new Integer[eodInvoiceList.size()]);
 			Arrays.sort(eodInvoices);

@@ -31,6 +31,9 @@ public class ManagerView extends JFrame{
 	private JScrollPane checkDisplay;
 	private Font fontOne;
 	
+	private JButton[] viewNames = {new JButton("EOD Report Files"),
+								   new JButton("Open Invoices"),
+								   new JButton("Check Display")};
 	
 	private JButton[] viewButtons = {new JButton("Load File"), new JButton("Open Invoices"),
 									 new JButton("Display Check"), new JButton("Produce EOD Report"),
@@ -40,7 +43,7 @@ public class ManagerView extends JFrame{
 	public ManagerView(Manager manager){
 		super("Manager's View | " + manager.getName());
 		backPanel = new JPanel();
-		backPanel.setLayout(new BorderLayout(50, 50));
+		backPanel.setLayout(new BorderLayout(50,0));
 		this.manager = manager;
 		setSize(900,600);
 		setLayout(new BorderLayout(0,0));
@@ -65,16 +68,23 @@ public class ManagerView extends JFrame{
 		checkDisplay = new JScrollPane(checkText);
 		checkDisplay.setPreferredSize(new Dimension(300,100));
 	
-		topPanel = new JPanel(new GridLayout(1,3));
+		topPanel = new JPanel(new GridLayout(1,3,50,0));
 		topPanel.setSize(250,200);
 		
-
+		for(JButton button : viewNames){
+			button.setPreferredSize(new Dimension(300, 50));
+	        button.setBackground(Color.white);
+	        button.setForeground(Color.black);
+	        button.setFont(fontOne);
+	        topPanel.add(button);
+	    }
+		
 		buttonPanel = new JPanel(new GridLayout(2,4,50,20));
 		buttonPanel.setSize(250,200);
 		for(JButton button : viewButtons){
-			button.setForeground(Color.white);
-			button.setFont(fontOne);
 			button.setBackground(Color.black);
+			button.setForeground(Color.white);
+			button.setFont(fontOne);			
 			buttonPanel.add(button);
 		}
 		//Container topPanel = makeIt("Top", Component.TOP_ALIGNMENT);
@@ -126,18 +136,21 @@ public class ManagerView extends JFrame{
 		checkText.setText(text);
 	}
 	
-	//eod report
-	public void displayReport(){
-		
-		
-	}
 	
 	public void hideProduceReportButton(){
 		for(JButton button : viewButtons){
-			if(button.getText().equals("Produce EOD Sales Report")){
+			if(button.getText().equals("Produce EOD Report")){
 				button.setVisible(false);
 			}
 		}
+	}
+	
+	public void setInvoiceTitle(String title){
+		viewNames[1].setText(title);
+	}
+	
+	public void setDisplayTitle(String title){
+		viewNames[2].setText(title);
 	}
 	
 }
