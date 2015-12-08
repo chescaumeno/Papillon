@@ -40,7 +40,7 @@ public class ItemPanel extends JPanel implements ActionListener {
         add(createBorderPanel(30, 300), BorderLayout.EAST);
         
         JPanel btnPanel = new JPanel();
-        btnPanel.setBackground(Color.white);
+        btnPanel.setBackground(Color.WHITE);
         btnPanel.setLayout(new GridLayout(rows, cols, 15, 15));
         add(btnPanel, BorderLayout.CENTER);
         
@@ -81,10 +81,5 @@ public class ItemPanel extends JPanel implements ActionListener {
 			MenuItem item = btn.getMenuItem(); 
 			checkCtrl.addItemToCheck(item); 
 		}
-		
-		//should the update of the Action Panel happen here?
-		
-		//Now we can communicate with the check panel 
-		
 	}
 }

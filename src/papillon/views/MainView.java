@@ -24,6 +24,11 @@ import papillon.models.Manager;
 import papillon.models.PapillonModel;
 import papillon.models.Server;
 
+/**
+ * This class contains code for the main view of the GUI
+ * @author Matt New, Lymari Montijo
+ *
+ */
 public class MainView extends JFrame {
     
     private JPanel leftPanel;
@@ -46,22 +51,17 @@ public class MainView extends JFrame {
      */
     public MainView(PapillonModel model, Server server, Manager manager) {
         super("Papillon | " + server.getName());
-        
-        //TODO: Have Papillon Controller create ALL the controllers
-        //TODO: remove all these controllers from here. The controllers 
-        //generate the view. 
-        
+          
         this.model = model;
         this.menuCtrl = new MenuController();
         this.server = server;
         
-        // create the container panels
         leftPanel = new JPanel(new BorderLayout());
         leftPanel.setBackground(Color.white);
         leftPanel.setPreferredSize(new Dimension(285, 500)); 
         
         rightBlankPanel = new JPanel();
-        rightBlankPanel.setBackground(Color.white);
+        rightBlankPanel.setBackground(Color.WHITE);
         rightBlankPanel.setPreferredSize(new Dimension(40, 500));
         
         mainPanel = new JPanel(new BorderLayout());
@@ -84,12 +84,12 @@ public class MainView extends JFrame {
         // Add Log off button
         buttonLogOff = new JButton("Log Off");
         buttonLogOff.setFont(new Font("Sansserif", Font.BOLD, 25));
-        buttonLogOff.setBackground(Color.green);
-        buttonLogOff.setForeground(Color.white);
+        buttonLogOff.setBackground(Color.GREEN);
+        buttonLogOff.setForeground(Color.WHITE);
         
         tmp = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         tmp.setPreferredSize(new Dimension(400, 100));
-        tmp.setBackground(Color.white);
+        tmp.setBackground(Color.WHITE);
         tmp.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         tmp.add(buttonLogOff);
         mainPanel.add(tmp, BorderLayout.SOUTH);

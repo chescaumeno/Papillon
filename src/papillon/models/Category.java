@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.io.Serializable;
 
 public enum Category implements Serializable{
-	DRINKS("Drinks", new Color(221, 0, 100)), 
-	APPETIZERS("Appetizers", new Color(202, 0, 213)), 
-	SIDES("Sides", new Color(149, 51, 204)),
+	DRINKS("Drinks", new Color(204, 0, 153)), 
+	APPETIZERS("Appetizers", new Color(102, 0, 102)), 
+	SIDES("Sides", new Color(102, 0, 204)),
 	ENTREES("Entrees", new Color(0, 50, 198)), 
-	DESSERTS("Desserts", new Color(51, 141, 153));  
+	DESSERTS("Desserts", new Color(0, 143, 179));  
 	
 	
 	private final String str;

@@ -86,7 +86,7 @@ public class ActionPanel extends JPanel implements ActionListener{
 		pnbtn.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
 		pnbtn.setBackground(Color.white);
 		center.add(pnbtn);
-		buttonSplitCheck.setBackground(Color.blue);
+		buttonSplitCheck.setBackground(Color.BLUE);
 		buttonNumPad.setBackground(Color.blue);
 		buttonRemove.setBackground(Color.blue);
 		buttonClear.setBackground(Color.blue);
@@ -99,13 +99,13 @@ public class ActionPanel extends JPanel implements ActionListener{
 		JPanel bottom = new JPanel(new GridLayout(1, 2, 10, 0));
 		bottom.setBounds(50, 165, 200, 35);
 		bottom.add(buttonPrint);
-		buttonPrint.setBackground(Color.blue);
+		buttonPrint.setBackground(Color.BLUE);
 		buttonPrint.setForeground(Color.white);
 		buttonPrint.setFont(new Font("SansSerif", Font.BOLD, 15));
 		buttonPrint.setMargin(new Insets(0, 0, 0, 0));
 		bottom.add(buttonPay);
 		
-		buttonPay.setBackground(Color.green);
+		buttonPay.setBackground(new Color(0, 204, 0));
 		buttonPay.setForeground(Color.white);
 		buttonPay.setFont(new Font("SansSerif", Font.BOLD, 15));
 		buttonPay.setMargin(new Insets(0, 0, 0, 0));
@@ -132,7 +132,7 @@ public class ActionPanel extends JPanel implements ActionListener{
 		add(bottom);
 
 		this.setPreferredSize(new Dimension(250, 210));
-		this.setBackground(Color.white);
+		this.setBackground(Color.WHITE);
 		subTotalLabel.setFont(new Font("SansSerif", Font.BOLD, 15));
 		subTotalLabel.setBounds(0, 17, 56, 40);
 		add(subTotalLabel);
@@ -172,9 +172,6 @@ public class ActionPanel extends JPanel implements ActionListener{
 		if (cmd.equals("REMOVE")){
 			checkCtrl.removeItemFromCheck();
 		} 
-//		else if (cmd.equals("PAY")) {
-//			checkCtrl.closeCheck(); 
-//		}
 		else if(cmd.equals("CLEAR")){
 			checkCtrl.clearCheck();
 			

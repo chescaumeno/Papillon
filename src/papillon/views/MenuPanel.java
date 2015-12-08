@@ -19,7 +19,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 	private MenuController menuCtrl;
 	private CheckController checkCtrl;
 	private Map<Category, ItemPanel> categoriesMap;
-	private CategoryPanel categoryPanel; //
+	private CategoryPanel categoryPanel;
 	private ItemPanel currentCategoryPanel;
 	
 
@@ -50,8 +50,6 @@ public class MenuPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object b = e.getSource();
 		if (b instanceof CategoryButton) {
-			// Button pressed is CategoryButton
-			// therefore contains the desired Category.
 			CategoryButton catBtn = (CategoryButton) b;
 			Category category = catBtn.getCategory(); 
 			remove(currentCategoryPanel);
