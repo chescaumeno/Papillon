@@ -35,7 +35,7 @@ public class ManagerView extends JFrame{
 	private JButton[] viewButtons = {new JButton("Load File"), new JButton("Open Invoices"),
 									 new JButton("Display Check"), new JButton("Produce EOD Report"),
 									 new JButton("File's Invoices"), new JButton("Closed Invoices"),
-									 new JButton("Display EOD Report"), new JButton("Logout")};	
+									 new JButton("Display EOD Report"), new JButton("Logout")};
 	
 	public ManagerView(Manager manager){
 		super("Manager's View | " + manager.getName());
@@ -72,9 +72,9 @@ public class ManagerView extends JFrame{
 		buttonPanel = new JPanel(new GridLayout(2,4,50,20));
 		buttonPanel.setSize(250,200);
 		for(JButton button : viewButtons){
-			button.setBackground(Color.black);
 			button.setForeground(Color.white);
 			button.setFont(fontOne);
+			button.setBackground(Color.black);
 			buttonPanel.add(button);
 		}
 		//Container topPanel = makeIt("Top", Component.TOP_ALIGNMENT);
