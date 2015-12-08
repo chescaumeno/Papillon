@@ -23,7 +23,6 @@ public class Server {
 	private Map<Integer, Check> invoiceLookUpMap;
 	private int currentCheck; // check index in the list
 	private int checkNum;
-	private boolean isCurrentCheckClosed; 
 	private Check firstCheck;
 	
 	Random rndm = new Random();
@@ -44,8 +43,7 @@ public class Server {
 		Check firstCheck = new Check(name, this.invoiceNumber());
 		openChecks.add(firstCheck);
 		currentCheck = 0;
-		checkNum = 1;
-		isCurrentCheckClosed = false; 
+		checkNum = 1; 
 
 		 //invoice number as key to a check
 		invoiceLookUpMap.put(firstCheck.getInvoiceNumber(), firstCheck);

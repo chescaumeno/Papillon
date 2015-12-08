@@ -124,11 +124,13 @@ public class CheckController{
 		PrintWriter out = null;
 		try{
 			out = new PrintWriter(fileName);
+			out.print(printOutput);
+			out.close();
 		}catch(FileNotFoundException e){
 			System.err.println("Error creating print output for invoice number " + invoice);
 		}
-		out.print(printOutput);
-		out.close();		
+		
+				
 	}
 	
 	public void payCheck(){

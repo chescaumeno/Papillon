@@ -30,8 +30,6 @@ public class ActionPanel extends JPanel implements ActionListener{
 
 	private JButton buttonPrint = new JButton("PRINT");
 	private JButton buttonPay = new JButton("PAY");
-	private JButton buttonSplitCheck = new JButton("<html><center>SPLIT<br />CHECK</center></html>");
-	private JButton buttonNumPad = new JButton("<html><center>NUM<br />PAD</center></html>");
 	private JButton buttonRemove = new JButton("REMOVE");
 	private JButton buttonClear = new JButton("CLEAR");
 
@@ -79,19 +77,14 @@ public class ActionPanel extends JPanel implements ActionListener{
 
 		JPanel pnbtn = new JPanel(new GridLayout(4, 1, 0, 5));
 		pnbtn.setBounds(116, 10, 84, 145);
-		pnbtn.add(buttonSplitCheck);
-		pnbtn.add(buttonNumPad);
+
 		pnbtn.add(buttonRemove);
 		pnbtn.add(buttonClear);
 		pnbtn.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
 		pnbtn.setBackground(Color.white);
 		center.add(pnbtn);
-		buttonSplitCheck.setBackground(Color.BLUE);
-		buttonNumPad.setBackground(Color.blue);
 		buttonRemove.setBackground(Color.blue);
 		buttonClear.setBackground(Color.blue);
-		buttonSplitCheck.setForeground(Color.white);
-		buttonNumPad.setForeground(Color.white);
 		buttonRemove.setForeground(Color.white);
 		buttonClear.setForeground(Color.white);
 		center.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
@@ -113,8 +106,6 @@ public class ActionPanel extends JPanel implements ActionListener{
 
 		bottom.setPreferredSize(new Dimension(220, 35));
 
-		buttonSplitCheck.setActionCommand("SPLIT CHECK");
-		buttonNumPad.setActionCommand("NUM PAD");
 		buttonRemove.setActionCommand("REMOVE");
 		buttonRemove.addActionListener(this);
 		
@@ -148,17 +139,17 @@ public class ActionPanel extends JPanel implements ActionListener{
 	}
 	
 	public void updateSubtotal(double subtotal) {
-		String sub = formatJText(subtotal);  
+		String sub = formatJText(Math.abs(subtotal));  
 		txtSubtotal.setText(sub);
 	}
 	
 	public void updateTax(double tax) {
-		String tx = formatJText(tax); 
+		String tx = formatJText(Math.abs(tax)); 
 		txtTax.setText(tx);
 	}
 	
 	public void updateTotal(double total) {
-		String ttl = formatJText(total);
+		String ttl = formatJText(Math.abs(total));
 		txtTotal.setText(ttl); 
 	}
 
