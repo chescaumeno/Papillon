@@ -83,6 +83,9 @@ public class ManagerController implements ActionListener{
 	
 	private void displayCheck(){
 		int invoice = managerView.getSelectedInvoice();
+		if(invoice == -1){
+			return;
+		}
 		if(currentlyShowingOpenChecks){
 			Check check = LoginController.getOpenCheck(invoice);
 			if(check != null){

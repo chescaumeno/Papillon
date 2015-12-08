@@ -31,7 +31,7 @@ public class ManagerView extends JFrame{
 
 	
 	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("View EOD Sales Report"), new JButton("Display Check"),
-								     							new JButton("Closed Checks"), new JButton("Produce EOD Sales Report"), new JButton("Logout")};	
+								     new JButton("Closed Checks"), new JButton("Produce EOD Sales Report"), new JButton("Logout")};	
 
 	/*
 	 *   Constructor - Initialize the login window frame
@@ -54,10 +54,15 @@ public class ManagerView extends JFrame{
 		checkText.setFont(new Font("monospaced", 0, 11));
 		checkDisplay = new JScrollPane(checkText);
 		checkDisplay.setPreferredSize(new Dimension(270,640));
+		checkDisplay.setPreferredSize(new Dimension(250,500));
+		checkDisplay.setBackground(Color.cyan);
 		checkPanel = new JPanel();
 		checkPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "check display", TitledBorder.CENTER, TitledBorder.TOP));
 		checkPanel.add(checkDisplay);
+
 		checkPanel.setPreferredSize(new Dimension(270,640));
+		checkPanel.setBackground(Color.yellow);
+
 		
 		//make report
 		reportText = new JTextArea();
@@ -104,7 +109,10 @@ public class ManagerView extends JFrame{
 	}
 	
 	public int getSelectedInvoice(){
-		int item = invoiceList.getSelectedValue();
+		int item = -1;
+		if(invoiceList.getSelectedIndex() >= 0){
+			item = invoiceList.getSelectedValue();
+		}
 		return item;
 	}
 	
