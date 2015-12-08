@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import papillon.controllers.CheckController;
@@ -16,16 +17,19 @@ public class ManagerView extends JFrame{
 	
 	private Manager manager;
 	
+	private JPanel backPanel;
+	
 	private JPanel buttonPanel;
 	private JList<Integer> invoiceList;
 	private JScrollPane invoiceScroller;
-
+	//private JPanel invoicePanel;
+	
 	private JTextArea checkText;
 	private JScrollPane checkDisplay;
 	private JPanel checkPanel;
 	private Font fontOne;
 	//report
-	private JTextArea reportText;
+	private JList<String> reportList;
 	private JScrollPane reportDisplay;
 	private JPanel reportPanel;
 
@@ -38,59 +42,62 @@ public class ManagerView extends JFrame{
 	 */
 	public ManagerView(Manager manager){
 		super("Manager's View | " + manager.getName());
+		backPanel = new JPanel();
+		backPanel.setLayout(new BorderLayout(50, 50));
 		this.manager = manager;
-		setSize(500,700);
+		setSize(900,600);
 		setLayout(new BorderLayout(0,0));
 		fontOne = new Font("Verdana", Font.BOLD, 15);
+		
+		//BorderLayout(50, 50);
 		
 		invoiceList = new JList<Integer>();
 		invoiceList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		invoiceList.setVisibleRowCount(-1);
 		invoiceScroller = new JScrollPane(invoiceList);
-		invoiceScroller.setPreferredSize(new Dimension(270,500));
+		invoiceScroller.setPreferredSize(new Dimension(300,100));
+		
+
+	//	JUST IN CASE WE NEED BORDER AGAIN
+	//	invoicePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "check display", TitledBorder.CENTER, TitledBorder.TOP));
+	
+		
+		//make report
+		reportList = new JList<String>();
+		reportList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		reportList.setVisibleRowCount(-1);
+		reportList.setFont(new Font("monospaced", 0, 11));
+		reportDisplay = new JScrollPane(reportList);
+		reportDisplay.setPreferredSize(new Dimension(300,100));
 		
 		checkText = new JTextArea();
 		checkText.setEditable(false);
 		checkText.setFont(new Font("monospaced", 0, 11));
 		checkDisplay = new JScrollPane(checkText);
-		checkDisplay.setPreferredSize(new Dimension(270,640));
-		checkDisplay.setPreferredSize(new Dimension(250,500));
-		checkDisplay.setBackground(Color.cyan);
-		checkPanel = new JPanel();
-		checkPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "check display", TitledBorder.CENTER, TitledBorder.TOP));
-		checkPanel.add(checkDisplay);
+		checkDisplay.setPreferredSize(new Dimension(300,100));
+	
 
-		checkPanel.setPreferredSize(new Dimension(270,640));
-		checkPanel.setBackground(Color.yellow);
 
-		
-		//make report
-		reportText = new JTextArea();
-		reportText.setEditable(false);
-		reportText.setFont(new Font("monospaced", 0, 11));
-		reportDisplay = new JScrollPane(reportText);
-		reportDisplay.setPreferredSize(new Dimension(270,640));
-		reportPanel = new JPanel();
-		//do we need this?
-		//reportPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "report display", TitledBorder.CENTER, TitledBorder.TOP));
-		reportPanel.add(reportDisplay);
-		reportPanel.setPreferredSize(new Dimension(270,640));
-		
 		buttonPanel = new JPanel(new GridLayout(2,3,100,20));
-		buttonPanel.setSize(500,200);
+		buttonPanel.setSize(250,200);
 		for(JButton button : viewButtons){
 			button.setBackground(Color.black);
 			button.setForeground(Color.white);
 			button.setFont(fontOne);
 			buttonPanel.add(button);
 		}
-		//viewButtons[2].setVisible(false);
 		
-		add(invoiceScroller, BorderLayout.LINE_START);
+		
+		
+		
+		backPanel.add(invoiceScroller, BorderLayout.CENTER);
+		
 		//report
-		add(reportPanel, BorderLayout.CENTER);
-		add(checkPanel, BorderLayout.LINE_END);
-		add(buttonPanel, BorderLayout.PAGE_END);
+		backPanel.add(reportDisplay, BorderLayout.LINE_START);
+		backPanel.add(checkDisplay, BorderLayout.LINE_END);
+		backPanel.add(buttonPanel, BorderLayout.PAGE_END);
+		
+		add(backPanel, BorderLayout.CENTER);
 	}
 	
 	public void registerListener(ManagerController controller){
