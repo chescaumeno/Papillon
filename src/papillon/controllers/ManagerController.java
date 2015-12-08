@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import papillon.models.Check;
+import papillon.models.EndDayReport;
 import papillon.models.Manager;
+//import papillon.models.Server;
+import papillon.views.CheckPanel;
 import papillon.views.LoginView;
 import papillon.views.MainView;
 import papillon.views.ManagerView;
@@ -16,12 +19,15 @@ public class ManagerController implements ActionListener{
 	private LoginView loginView;
 	private ManagerView managerView;
 	private Manager manager;
+	//eod report
+	private EndDayReport report;
 	private boolean currentlyShowingOpenChecks;
 	
-	public ManagerController(LoginView loginView, ManagerView managerView, Manager manager){
+	public ManagerController(EndDayReport report, LoginView loginView, ManagerView managerView, Manager manager){
 		this.managerView = managerView;
 		this.loginView = loginView;
 		this.manager = manager;
+		this.report = report;
 		currentlyShowingOpenChecks = true;
 	}
 
@@ -39,6 +45,9 @@ public class ManagerController implements ActionListener{
 		}
 		if(command.equals("Display Check")){
 			this.displayCheck();
+		}
+		if(command.equals("View EOD Sales Report")){
+			this.viewReportEOD();
 		}
 		if(command.equals("Produce EOD Sales Report")){
 			this.reportEOD();
@@ -89,7 +98,12 @@ public class ManagerController implements ActionListener{
 			}
 		}		
 	}
-	
+	private void viewReportEOD(){
+		//String display = report.EndDayReport();
+		
+		System.out.print("report");
+		
+	}
 	private void reportEOD(){
 		
 	}
@@ -109,6 +123,7 @@ public class ManagerController implements ActionListener{
 		}else{
 			showClosedChecks();
 		}
+		
 	}
 	
 }

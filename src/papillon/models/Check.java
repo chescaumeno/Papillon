@@ -54,6 +54,7 @@ public class Check implements Serializable{
 	}
 	
 	public void removeCheckItem() {
+		
 		if(checkItems.size() > 0 && currentItem >= 0){
 			CheckItem checkItem = checkItems.get(currentItem);
 			subTotal -= checkItem.getSubtotal();
@@ -128,7 +129,6 @@ public class Check implements Serializable{
 			currentItem--;
 		}
 	}
-	
 	public int getCurrentItem(){
 		return currentItem;
 	}
