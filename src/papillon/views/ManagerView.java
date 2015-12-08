@@ -82,7 +82,10 @@ public class ManagerView extends JFrame{
 	}
 	
 	public int getSelectedInvoice(){
-		int item = invoiceList.getSelectedValue();
+		int item = -1;
+		if(invoiceList.getSelectedIndex() >= 0){
+			item = invoiceList.getSelectedValue();
+		}
 		return item;
 	}
 	

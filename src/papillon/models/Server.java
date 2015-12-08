@@ -81,7 +81,6 @@ public class Server {
 		Check newCheck = new Check(name, invoiceNumber());
 		openChecks.add(newCheck);
 		invoiceLookUpMap.put(newCheck.getInvoiceNumber(), newCheck);
-		System.out.println("Added invoice " + newCheck.getInvoiceNumber());
 		checkNum++;
 		currentCheck = checkNum - 1;
 	}
