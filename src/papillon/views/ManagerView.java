@@ -123,12 +123,21 @@ public class ManagerView extends JFrame{
 		return item;
 	}
 	
-	public void displayCheck(Check check){
-		checkText.setText(check.toString());
+	public void displayText(String text){
+		checkText.setText(text);
 	}
 	
 	//eod report
 	public void displayReprot(){
+		
+	}
+	
+	public void hideProduceReportButton(){
+		for(JButton button : viewButtons){
+			if(button.getText().equals("Produce EOD Sales Report")){
+				button.setVisible(false);
+			}
+		}
 	}
 	
 }

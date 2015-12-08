@@ -6,10 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 //store information for the manager
 import java.util.ArrayList;
 
-public class Manager {
+public class Manager implements Serializable{
 	
 	public static final String[] MANAGER_AND_ID = {"Mark Robinson", "8405"};
 	public static int FRAME_WIDTH = 1024; 
@@ -21,6 +22,8 @@ public class Manager {
 	private ArrayList<Check> closedChecks;
 	private int currentCheck; // check index in the list
 	private int checkNum;
+	
+	private final File eodFolder;
 
 	public Manager(String nm, String id) {
 		this.name = nm;
@@ -28,6 +31,7 @@ public class Manager {
 		closedChecks = new ArrayList<Check>();
 		currentCheck = -1;
 		checkNum = 0;
+		eodFolder = new File("src/papillon/resources/endDayReports");
 	}
 
 	public void nextCheck() {
@@ -51,45 +55,52 @@ public class Manager {
 		closedChecks.add(check);
 	}
 
-	public int writeCheckToFile(Check check) {
+	public int writeDayReportToFile(EndDayReport eodReport) {
 		FileOutputStream out = null;
 		ObjectOutputStream outStream = null;
-		int invoice = check.getInvoiceNumber();
-		String filePath = "src/papillon/resources/serializedChecks/";
-		String fileName = filePath + invoice + ".ser";
+		String eodName = eodReport.getReportName();
+		String filePath = eodFolder + "/";
+		String fileName = filePath + eodName + ".ser";
 		File file = new File(fileName);
 		try {
 			out = new FileOutputStream(file);
 			outStream = new ObjectOutputStream(new FileOutputStream(new File(fileName)));
-			outStream.writeObject(check);
+			outStream.writeObject(eodReport);
 			outStream.close();
 			out.close();
 			return (0);
 		} catch (IOException e) {
-			System.err.println("Error writing check object to file for check " + invoice);
+			System.err.println("Error writing report object to file for report " + eodName);
 			e.printStackTrace();
 		}
 		return (-1);
 	}
 
-	public Check loadCheckFromFile(int invoice) {
-		Check check = null;
+	public EndDayReport loadDayReportFromFile(String fileName) {
+		EndDayReport eodReport = null;
 		FileInputStream in = null;
 		ObjectInputStream inStream = null;
-		String filePath = "src/papillon/resources/serializedChecks/";
-		String fileName = filePath + invoice + ".ser";
 		try {
 			in = new FileInputStream(fileName);
 			inStream = new ObjectInputStream(in);
-			check = (Check) inStream.readObject();
+			eodReport = (EndDayReport) inStream.readObject();
 			inStream.close();
 			in.close();
 		} catch (IOException e) {
-			System.err.println("Error reading check object from file for check " + invoice);
+			System.err.println("Error reading report object from file for report file " + fileName);
 		} catch (ClassNotFoundException e) {
 			// Not sure how that would even happen...
 		}
-		return (check);
+		return (eodReport);
+	}
+	
+	public ArrayList<String> getEODFileNames(){
+		ArrayList<String> eodFileNames = new ArrayList<String>();
+		for (final File fileEntry : eodFolder.listFiles()) {
+	            System.out.println(fileEntry.getName());
+	            eodFileNames.add(fileEntry.getName());
+	    }
+		return(eodFileNames);
 	}
 
 	// getters and setters

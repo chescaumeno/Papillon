@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.JOptionPane;
+
 import papillon.models.Check;
 import papillon.models.EndDayReport;
 import papillon.models.Manager;
@@ -22,6 +24,7 @@ public class ManagerController implements ActionListener{
 	//eod report
 	private EndDayReport report;
 	private boolean currentlyShowingOpenChecks;
+	private boolean nextLogoutExits;
 	
 	public ManagerController(EndDayReport report, LoginView loginView, ManagerView managerView, Manager manager){
 		this.managerView = managerView;
@@ -29,6 +32,8 @@ public class ManagerController implements ActionListener{
 		this.manager = manager;
 		this.report = report;
 		currentlyShowingOpenChecks = true;
+		nextLogoutExits = false;
+		showEODReportFiles();
 	}
 
 	@Override
@@ -50,7 +55,11 @@ public class ManagerController implements ActionListener{
 			this.viewReportEOD();
 		}
 		if(command.equals("Produce EOD Sales Report")){
-			this.reportEOD();
+			int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to produce an end-of-day report",
+											"Confirmation", JOptionPane.YES_NO_OPTION);
+			if(response == JOptionPane.YES_OPTION){
+				this.produceReportEOD();
+			}
 		}
 		if(command.equals("Logout")){
 			this.logout();
@@ -89,26 +98,42 @@ public class ManagerController implements ActionListener{
 		if(currentlyShowingOpenChecks){
 			Check check = LoginController.getOpenCheck(invoice);
 			if(check != null){
-				managerView.displayCheck(check);
+				managerView.displayText(check.toString());
 			}
 		}else{
 			Check check = manager.getClosedCheck(invoice);
 			if(check != null){
-				managerView.displayCheck(check);
+				managerView.displayText(check.toString());
 			}
 		}		
 	}
+	
 	private void viewReportEOD(){
 		//String display = report.EndDayReport();
 		
 		System.out.print("report");
 		
 	}
-	private void reportEOD(){
-		
+	
+	private void produceReportEOD(){
+		ArrayList<Integer> invoiceList = LoginController.getOpenInvoices();
+		if(invoiceList.size() > 0){
+			JOptionPane.showMessageDialog(null, "Can not produce end-of-day report while check(s) currently open");
+		}else{
+			EndDayReport eodReport = new EndDayReport(manager);
+			if(manager.writeDayReportToFile(eodReport) == -1){
+				JOptionPane.showMessageDialog(null, "Error writing end-of-day report to file");
+			}
+			managerView.hideProduceReportButton();
+			nextLogoutExits = true;
+			managerView.displayText(eodReport.toString());
+		}
 	}
 	
 	private void logout(){
+		if(nextLogoutExits){
+			System.exit(0);
+		}
 		loginView.setVisible(true);
 		managerView.setVisible(false);
 	}
@@ -126,4 +151,7 @@ public class ManagerController implements ActionListener{
 		
 	}
 	
+	public void showEODReportFiles(){
+		ArrayList<String> eodFileNames = manager.getEODFileNames();
+	}
 }

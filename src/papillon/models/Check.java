@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
 
 public class Check implements Serializable{
 	private static final double TAX_RATE = 0.0825; 
-	static SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
+	private static SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
 	private String server; // server belongs to
 	private int invoiceNumber; // invoice number
