@@ -72,6 +72,10 @@ public class ItemPanel extends JPanel implements ActionListener {
         return tmp;
     }
 
+    /** 
+     * This methods checks if the event comes from a
+     * MenuItem button and then adds the item to the check  
+     */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Check if the event comes from a MenuItem button

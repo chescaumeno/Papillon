@@ -34,6 +34,8 @@ public class MenuPanel extends JPanel implements ActionListener {
 		categoryPanel = new CategoryPanel(menuCtrl, this);
 		
 		ArrayList<Category> categories = menuCtrl.getMenuCategories();
+		
+		
 		for (Category cat : categories) {
 			ItemPanel p = new ItemPanel(4, 4, cat.color, cat, menuCtrl, checkCtrl);
 			categoriesMap.put(cat, p);

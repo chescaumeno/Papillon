@@ -23,6 +23,7 @@ public class ManagerController implements ActionListener{
 	private Manager manager;
 	//eod report
 	private EndDayReport currentLoadedReport;
+
 	private boolean currentlyShowingOpenChecks;
 	private boolean currentlyShowingClosedChecks;
 	private boolean nextLogoutExits;

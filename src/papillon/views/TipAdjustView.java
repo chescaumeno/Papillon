@@ -67,7 +67,6 @@ public class TipAdjustView extends JFrame {
 		
 		setVisible(true);
 }
-	
 
 	public void registerListener(TipAdjustController controller){
 		

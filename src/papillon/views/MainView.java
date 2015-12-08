@@ -9,15 +9,19 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import papillon.controllers.CheckController;
-import papillon.controllers.LoginController;
 import papillon.controllers.MenuController;
 import papillon.controllers.PapillonController;
 import papillon.models.Manager;
@@ -29,7 +33,7 @@ import papillon.models.Server;
  * @author Matt New, Lymari Montijo
  *
  */
-public class MainView extends JFrame {
+public class MainView extends JFrame implements ActionListener {
     
     private JPanel leftPanel;
     private JPanel mainPanel;
@@ -39,9 +43,13 @@ public class MainView extends JFrame {
     private MenuPanel menuPanel; 
     private JButton buttonLogOff;
     private PapillonModel model;
+    private CheckController checkCtrl; 
     
     private MenuController menuCtrl; 
     private Server server;
+    private JMenuBar menuBar;  
+    private JMenu menu; 
+    
 
 
     /**
@@ -67,10 +75,21 @@ public class MainView extends JFrame {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(Color.white);
         
+        menuBar = new JMenuBar(); 
+        menu = new JMenu("File");
+        JMenuItem lunchMenu = new JMenuItem("Load Lunch Menu"); 
+        JMenuItem dinnerMenu = new JMenuItem("Load Dinner Menu"); 
+        menu.add(lunchMenu); 
+        menu.add(dinnerMenu); 
         
+        menuBar.add(menu); 
+        this.setJMenuBar(menuBar); 
+        lunchMenu.addActionListener(this);
+        dinnerMenu.addActionListener(this); 
+       
         // Adds CheckAction Panel
         
-        CheckController checkCtrl = new CheckController(server, manager); 
+        checkCtrl = new CheckController(server, manager); 
         checkActionPanel = checkCtrl.createCheckActionPanel(); //this creates an ActionPanel
         checkCtrl.update();
  
@@ -111,6 +130,24 @@ public class MainView extends JFrame {
 				button.addActionListener(controller);
 			}
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand(); 
+		if (cmd.equalsIgnoreCase("Load lunch menu")) {
+			menuCtrl.loadMenuFromFile(MenuController.LUNCH_MENU_PATH);
+		} else if(cmd.equalsIgnoreCase("Load Dinner Menu")) {
+			menuCtrl.loadMenuFromFile(MenuController.DINNER_MENU_PATH); 
+		}
+		
+		mainPanel.remove(menuPanel); 
+		menuPanel = new MenuPanel(menuCtrl, checkCtrl); 
+		mainPanel.add(menuPanel, BorderLayout.CENTER); 
+		mainPanel.validate();
+		mainPanel.repaint();
+	
+		
 	}
 
 }
