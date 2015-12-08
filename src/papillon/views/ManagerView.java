@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -24,6 +25,10 @@ public class ManagerView extends JFrame{
 	
 	private JPanel buttonPanel;
 	private JPanel topPanel;
+	private JPanel top1;
+	private JPanel top2;
+	private JPanel top3;
+	private JPanel top4;
 	private JList<String> reportList;
 	private JScrollPane reportDisplay;
 	
@@ -36,7 +41,7 @@ public class ManagerView extends JFrame{
 	
 	private JButton[] viewButtons = {new JButton("Open Checks"), new JButton("View EOD Sales Report"), new JButton("Display Check"),
 								     new JButton("Closed Checks"), new JButton("Produce EOD Sales Report"), new JButton("Logout")};	
-	
+	private JButton[] viewNames = {new JButton("one"), new JButton("two"), new JButton("three")};
 	public ManagerView(Manager manager){
 		super("Manager's View | " + manager.getName());
 		backPanel = new JPanel();
@@ -65,10 +70,21 @@ public class ManagerView extends JFrame{
 		checkDisplay = new JScrollPane(checkText);
 		checkDisplay.setPreferredSize(new Dimension(300,100));
 	
-		topPanel = new JPanel(new GridLayout(1,3));
-		topPanel.setSize(250,200);
-		
-
+		//topPanel = new JPanel(new GridLayout(1,3));
+		topPanel = new JPanel(new GridLayout(1,3,50,20));
+		topPanel.setSize(250,400);
+		for(JButton button : viewNames){
+			button.setBackground(Color.black);
+			button.setForeground(Color.white);
+			button.setFont(fontOne);
+			button.setPreferredSize(new Dimension(100,100));
+			topPanel.add(button);
+		}
+		/*
+		viewNames[0].setVisible(false);
+		viewNames[1].setVisible(false);
+		viewNames[2].setVisible(false);
+		*/
 		buttonPanel = new JPanel(new GridLayout(2,3,50,20));
 		buttonPanel.setSize(250,200);
 		for(JButton button : viewButtons){
@@ -77,12 +93,17 @@ public class ManagerView extends JFrame{
 			button.setFont(fontOne);
 			buttonPanel.add(button);
 		}
-		//Container topPanel = makeIt("Top", Component.TOP_ALIGNMENT);
+		
 		backPanel.add(invoiceScroller, BorderLayout.CENTER);
 		backPanel.add(topPanel, BorderLayout.PAGE_START);
 		backPanel.add(reportDisplay, BorderLayout.LINE_START);
 		backPanel.add(checkDisplay, BorderLayout.LINE_END);
 		backPanel.add(buttonPanel, BorderLayout.PAGE_END);
+		/*
+		topPanel.add(top1, BorderLayout.WEST);
+		topPanel.add(top2, BorderLayout.CENTER);
+		topPanel.add(top3, BorderLayout.EAST);
+		*/
 		add(backPanel, BorderLayout.CENTER);
 	}
 	
